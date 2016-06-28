@@ -1,1 +1,1 @@
-# bc_managed
+# Blueliner Cloud Managed WP
