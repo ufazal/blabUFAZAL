@@ -1,0 +1,414 @@
+/*
+Theme Name: SevenPillarsDigital
+Theme URI: http://sevenpillarsdigital.com
+Author: sevenpillars
+Author URI: http://themekraft.com/
+Description: Bootstrap3 framework
+
+*/
+
+/* Import the necessary TK Bootstrap WP CSS additions */
+@import url( includes/css/bootstrap-wp.css );
+
+
+
+/* My Minimal WordPress Styling comes here */
+
+/* This is a small security for too long strings titles */
+body {
+	word-wrap: break-word;
+}
+
+/* Alignment */
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: 1.5em;
+}
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: 1.5em;
+}
+.aligncenter {
+	clear: both;
+	display: block;
+	margin: 0 auto;
+}
+
+
+/* Images and wp-captions should always fit and be responsive */
+img {
+	display: inline-block;
+	height: auto;
+	max-width: 100%;
+}
+img[class*="wp-image-"] {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.wp-caption {
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	max-width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 0 10px;
+}
+.wp-caption.aligncenter {
+	margin-bottom: 10px;
+}
+.wp-caption img[class*="wp-image-"] {
+	display: block;
+}
+.wp-caption .wp-caption-text {
+	text-align: center;
+	margin-top: 10px;
+}
+
+/* WP Gallery */
+.gallery {
+	margin-bottom: 1.5em;
+}
+.gallery a img {
+	border: none;
+	height: auto;
+	max-width: 90%;
+}
+.gallery dd {
+	margin: 0;
+}
+
+
+/* Make sure embeds and iframes fit their containers */
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+
+/* Text meant only for screen readers */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+}
+.screen-reader-text:hover,
+.screen-reader-text:active,
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	color: #21759b;
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar */
+}
+
+
+/* Content */
+.main-content{ margin-top: 1.5em; }
+.main-content-inner {
+	padding-bottom: 1.5em;
+	
+}
+.hentry {
+	margin: 0 0 1.5em;
+}
+
+
+/* Clearing */
+.clear {
+	clear: both;
+}
+
+
+/* Here some needed widget styles
+ * Most widgets are adapted in the file bootstrap-wp.js - and REALLY easy to modify! ;) */
+.widget { margin-bottom: 0px; }
+.widget_nav_menu ul.sub-menu li, .widget_pages ul.children li { padding-left: 15px; }
+
+/* Hiding the search widget's button in widgets. thats just too old-skool. :) but if you want it back, just delete the next line.
+ * Note: you can change the whole appearance of the search_form() function in our searchform.php */
+.widget_search .search-form input[type="submit"] { display: none; }
+
+/* Make sure select elements fit in widgets */
+.widget select {
+	max-width: 100%;
+}
+
+/* Nested comments? They are threaded and nested already, you just need to add your own styling to finalize!
+ * For example with some margin, like the line below ;) Delete, modify, change classes in HTML if you desire another style */
+ .comment .children { margin-left: 1.5em; }
+
+/*
+ == Quick CSS styling tips ==
+
+ You can start off in a rough direction with some minimal styles.
+ See below for some tips. ;)
+
+
+ == Want to have the whole site wrapped? ==
+
+ Just fill the .container class with some background color to have a the whole site "wrapped".
+ This works so easy because every main part is wrapped only once into a container class by bootstrap.
+ Try out by decommenting the next line and go from there.
+
+ .container { background: #f9f9f9; border-right: 1px solid #eee; border-left: 1px solid #eee; }
+
+
+ == Want to wrap just the content and sidebar in Bootstrap style? ==
+
+ That one is a great example to show that some things are much cleaner and easier to do via just adding some HTML classes.
+ In this case, we will add just one CSS class "panel", look for example at the beginning in content.php!
+
+
+ == Infinite Scrolling by Jetpack ==
+ You can enable this cool feature by simply decommenting the lines below and make sure you use the same classes on the right place in your html..
+
+/* Globally hidden elements when Infinite Scroll is supported and in use.
+ * Older / Newer Posts Navigation (the pagination, must always be hidden), Theme Footer only when set to scrolling.. */
+
+/*
+.infinite-scroll .page-links,
+.infinite-scroll.neverending .site-footer {
+	display: none;
+}
+*/
+
+/* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before */
+
+/*
+.infinity-end.neverending .site-footer {
+	display: block;
+}
+*/
+
+/* Hey, if you don't need my comments anymore, just delete me! :)  */
+
+
+.navbar {
+	position: relative;
+	min-height: 50px;
+	margin-bottom: 0px;
+	border: 1px solid transparent;
+}
+
+.navbar-brand {
+	float: left;
+	height: 80px;
+	font-size: 18px;
+	line-height: 20px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+.navbar-nav > li > a {
+	padding-bottom: 10px;
+	line-height: 20px;
+	border-bottom-width: 5px;
+	border-bottom-style: solid;
+	border-bottom-color: #DDD;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #DDD;
+	padding-left: 30px;
+	font-weight: bold;
+}
+
+@media (min-width: 768px) {
+	.navbar-default {
+background-color: #FFFFFF;
+	border-color: #e7e7e7;
+	background-image: url(images/nav-back.png);
+	background-repeat: repeat-x;
+	background-position: bottom;
+}
+
+  .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+  .navbar-nav > li {
+    float: left;
+  }
+  .navbar-nav > li > a {
+    padding-top: 60px;
+    padding-bottom: 15px;
+  }
+  .navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+  }
+  
+  
+  
+  .navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+	color: #069;
+	background-color: transparent;
+	border-bottom-color: #069;	
+}
+  
+  
+}
+.nav > li > a:hover,
+.nav > li > a:focus {
+	text-decoration: none;
+	background-color: #FFF;
+	color: #CCC;
+}
+/*Custom styles*/
+
+.menu-footer-menu-container #footer-menu a { line-height: 12px; }
+/* Primary Sidebar */
+.sidebar{float:left;}	
+.sidebar .widget{padding: 10px 10px 20px 10px;}
+.sidebar .widget h3{text-transform: uppercase;font-weight:700;font-size: 14px;}
+.sidebar .widget a{ display:block; padding: 10px 15px;border-bottom: 1px solid #eee;}
+.sidebar .widget ul{padding:0;list-style-type: none;}
+.sidebar .widget ul li a{padding-left: 0;}
+
+	.sidebar .social{ float:left;margin: 20px 0 30px 0;width: 100%;}
+	.sidebar .social a{display: block;float:left;padding:10px;}
+
+	/* Tab */
+	.sidebar #myTab{margin-top:20px;}
+		.tab-spacer{padding:0 10px 0 10px;}
+		.tab-content{float:left;margin: 10px 0 60px 0; width:100%;}
+		.tab-content a{float:left;padding: 10px 0 0 0;min-height: 75px;width: 100%;border-bottom:1px solid #f0efef;text-decoration: none;}
+		.tab-content a:last-child{border:none;}
+		.tab-content img{float:left;margin:0 20px 10px  10px;padding:0; width:60px; height:60px;border:0; border-radius:50%;}
+		.tab-content .title{ margin: 5px 0 0 0;color:#000; text-transform: uppercase;font-weight: 400;font-size: 16px;}
+
+
+/* Secondary Sidebar */
+.sec-sidebar{float:right;margin: 0;padding:0;width:100%;}
+.sec-sidebar .widget{padding: 10px 10px 20px 10px;}
+.sec-sidebar .widget a{ display:block; padding: 10px 15px;border-bottom: 1px solid #eee;}
+.sec-sidebar .widget h3{text-transform: uppercase;font-weight:700;font-size: 14px;}
+.sec-sidebar .widget ul{padding:0;list-style-type: none;}
+.sec-sidebar .widget ul li a{padding-left: 0;}
+
+
+
+/* google fonts */
+h3.intro {
+	font-family: 'Source Sans Pro', 'sans-serif';
+	font-weight: bold;
+	text-align: center;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+h1, h2, h3 {
+	font-family: 'Source Sans Pro', 'sans-serif';
+	font-weight: bold;
+}
+
+/* frontpage */
+.bood {
+	border-bottom-width: 5px;
+	border-bottom-style: solid;
+	border-bottom-color: #069;
+	margin-bottom: 25px;
+}
+h1#catchphrase{
+	text-transform: uppercase;
+	color: #FFF;
+	text-align: center;
+	font-size: 54px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-weight: bold;
+	background-image: url(images/catchphrasetrans.png);
+	background-repeat: repeat;	
+	font-family: 'Source Sans Pro', 'sans-serif';
+}
+#homehead {
+	height: 360px;
+	margin: 0 auto;
+	width: 100%;
+	position: relative;
+	box-shadow: 0 0 10px rgba(0,0,0,0.4);
+	padding: 0 0;
+	background-image: url(images/7p-header.png);
+	background-position: 50% 0;
+	overflow: hidden;
+		}
+	
+#defaulthead {
+	height: auto;
+	margin: 0 auto;
+	width: 100%;
+	position: relative;
+	box-shadow: 0 0 10px rgba(0,0,0,0.4);
+	padding: 30px 0;
+	background-attachment: fixed;
+	background-image: url(images/defaultpic.jpg);
+	background-position: 50% 0;
+		}
+#defaulthead  h1#catchphrase{
+	text-transform: uppercase;
+	color: #FFF;
+	text-align: center;
+	font-size: 36px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-weight: bold;
+	background-image: url(images/catchphrasetrans.png);
+	background-repeat: repeat;	
+}
+#greyico {
+	background-attachment: fixed;
+	background-image: url(images/greyico.png);
+	background-position: 50% 0;
+	   box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+		}
+.site-footer{
+	background-color: #0A66B1;
+	
+}
+.site-info{
+	color: #428BCA;
+	padding-top: 15px;
+	padding-right: 10px;
+	padding-bottom: 15px;
+	padding-left: 10px;
+}
+.site-footer .social{ margin: 10px 0 10px 0;width: 100%;}
+.site-footer .social a{
+	display: block;
+	float:left;
+	padding:5px;
+	margin: 0px;
+}
+.site-footer .social a:hover{ color: #108BEF; 
+}	
+.accordion-hor ul li { background-color:#0A66B1 }
+.accordion-hor ul li div { background-color:#ffffff }
+.accordion-hor ul li h1 { color:#ffffff }
+.accordion-hor ul li i { color:#ffffff }
+.accordion-hor ul li i { font-size:43px }
+.accordion-hor ul li h1 { font-size:20px }
+.accordion-hor ul li { border-color:#ffffff }
+.accordion-hor ul li div span { padding:21px }
+.accordion-ver ul li { background-color:#0A66B1 }
+.accordion-ver ul li div { background-color:#ffffff }
+.accordion-ver ul li h1 { color:#ffffff }
+.accordion-ver ul li i { color:#ffffff }
+.accordion-ver ul li i { font-size:33px }
+.accordion-ver ul li h1 { font-size:19px }
+.accordion-ver ul li { border-color:#ffffff }
+.accordion-ver ul li { border-width:3px }
+

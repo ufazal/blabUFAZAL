@@ -1,0 +1,61 @@
+/* FORM STYLE */
+
+fieldset {clear: both;}
+
+legend {padding: 0 0 1.286em; font-size: 1.167em; font-weight: 700;}
+
+fieldset fieldset legend {padding: 0 0 1.5em; font-size: 1em;}
+
+* html legend {margin-left: -7px;} /* ie6 */
+
+*+html legend {margin-left: -7px;} /* ie7 */
+
+
+
+form .field, form .buttons {clear: both; margin: 0 0 0 0;border-top:0px solid #f0f0f0;padding:0em;}
+
+form .field label {display: block;}
+
+form ul.fields {margin: 0 0 1.5em; padding: 0;}
+
+form ul.fields li {list-style-type: none; margin: 0;}
+
+form ul.inline li, form ul.inline label {display: inline;}
+
+form ul.inline li {padding: 0 .75em 0 0;}
+
+
+
+input.radio, input.checkbox {vertical-align: top;}
+
+/*label, button, input.submit, input.image {cursor: pointer;}*/
+
+label {font-weight:bold;color:#666;}
+
+* html input.radio, * html input.checkbox {vertical-align: middle;} /* ie6 */
+
+*+html input.radio, *+html input.checkbox {vertical-align: middle;} /* ie7 */
+
+
+
+textarea {overflow: auto;width:350px;height:200px;}
+
+input.text, input.password, textarea, select {margin: 0; font: 1em/1.3 Helvetica, Arial, "Liberation Sans", "Bitstream Vera Sans", sans-serif; vertical-align: baseline;}
+
+input.text, input.password, textarea {border: 1px solid #444; padding: 2px;}
+
+
+
+/* horizontal layout */
+
+form.horizontal .field {padding-left: 150px;}
+
+form.horizontal .field label {display: inline; float: left; width: 140px; margin-left: -150px;}
+
+
+
+.form-error {color:#d33;font-weight:bold;font-size:0.8em;}
+
+[icon ^="warning"] {padding: 3px 8px 3px 25px; background: transparent url(img/warning.png) no-repeat center left; color:#ffffff}
+
+[icon ^="accept"] {padding: 3px 8px 3px 25px; background: transparent url(img/accept.png) no-repeat center left;}
