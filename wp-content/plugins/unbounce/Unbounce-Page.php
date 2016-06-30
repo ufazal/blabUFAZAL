@@ -3,7 +3,7 @@
 Plugin Name: Unbounce Landing Pages
 Plugin URI: http://unbounce.com
 Description: Unbounce is the most powerful standalone landing page builder available.
-Version: 1.0.22
+Version: 1.0.23
 Author: Unbounce
 Author URI: http://unbounce.com
 License: GPLv2
@@ -16,7 +16,7 @@ require_once dirname(__FILE__) . '/UBConfig.php';
 require_once dirname(__FILE__) . '/UBLogger.php';
 require_once dirname(__FILE__) . '/UBHTTP.php';
 require_once dirname(__FILE__) . '/UBIcon.php';
-require_once dirname(__FILE__).'/UBWPListTable.php';
+require_once dirname(__FILE__) . '/UBWPListTable.php';
 require_once dirname(__FILE__) . '/UBPageTable.php';
 require_once dirname(__FILE__) . '/UBEvents.php';
 require_once dirname(__FILE__) . '/UBTemplate.php';
@@ -41,6 +41,7 @@ register_activation_hook(__FILE__, function() {
   add_option(UBConfig::UB_DOMAIN_ID_KEY, '');
   add_option(UBConfig::UB_CLIENT_ID_KEY, '');
   add_option(UBConfig::UB_PROXY_ERROR_MESSAGE_KEY, '');
+  add_option(UBConfig::UB_ALLOW_PUBLIC_ADDRESS_X_FORWARDED_FOR, 0);
 });
 
 register_deactivation_hook(__FILE__, function() {

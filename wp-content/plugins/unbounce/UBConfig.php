@@ -4,8 +4,8 @@ class UBConfig {
 
   const UB_PLUGIN_NAME           = 'ub-wordpress';
   const UB_CACHE_TIMEOUT_ENV_KEY = 'UB_WP_ROUTES_CACHE_EXP';
-  const UB_USER_AGENT            = 'Unbounce WP Plugin 1.0.22';
-  const UB_VERSION               = '1.0.22';
+  const UB_USER_AGENT            = 'Unbounce WP Plugin 1.0.23';
+  const UB_VERSION               = '1.0.23';
 
   // Option keys
   const UB_ROUTES_CACHE_KEY        = 'ub-route-cache';
@@ -21,6 +21,7 @@ class UBConfig {
   const UB_DOMAIN_ID_KEY           = 'ub-domain-id';
   const UB_CLIENT_ID_KEY           = 'ub-client-id';
   const UB_PROXY_ERROR_MESSAGE_KEY = 'ub-proxy-error-message';
+  const UB_ALLOW_PUBLIC_ADDRESS_X_FORWARDED_FOR = 'ub-allow-public-address-x-forwarded-for';
 
   const UB_LOCK_NAME               = 'ub-sql-lock';
 
@@ -114,6 +115,10 @@ class UBConfig {
 
   public static function remote_debug_logging_enabled() {
     return get_option(UBConfig::UB_REMOTE_DEBUG_KEY, 0) == 1;
+  }
+
+  public static function allow_public_address_x_forwarded_for() {
+    return get_option(UBConfig::UB_ALLOW_PUBLIC_ADDRESS_X_FORWARDED_FOR, 0) == 1;
   }
 
   public static function create_none_response() {

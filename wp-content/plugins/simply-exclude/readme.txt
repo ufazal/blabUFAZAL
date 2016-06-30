@@ -1,10 +1,12 @@
 === Simply Exclude ===
-Contributors: Paul Menard
+Contributors: pmenard
 Donate link: http://www.codehooligans.com
 Tags: admin, posts, pages, categories, tags, Post Type, Taxonomy, exclude, include, is_front, is_archive, is_search, is_feed, is_author
-Requires at least: 3.2
-Tested up to: 3.3.1
-Stable tag: 2.0.4Beta2
+Requires at least: 3.9
+Tested up to: 4.2
+Stable tag: 2.0.6.6
+License: GPLv2
+License URI: http://www.opensource.org/licenses/GPL-2.0
 
 == Description ==
 
@@ -47,6 +49,32 @@ At the time (version 1.6.1) the plugin only effects Pages included in the tradit
 3. New Help section to answer some of your questions.
 
 == Changelog == 
+
+= 2.0.6.6 =
+- Corrected bug introduced via 2.0.6.4 and 2.0.6.5
+
+= 2.0.6.5 =
+- DO NOT USE. 
+
+= 2.0.6.4 =
+- Corrected issue reported related to Missing argument 2 for SimplyExclude::se_widget_getarchives_where()
+- Added a filter 'se_filters_priority' to allow control the priority of the se_filter hook. This can also be set via a define in wp-config.php or functions.php as define('SE_FILTERS_PRIORITY', 99); 
+
+= 2.0.6.3 =
+- Updated logic such that excluding posts for Archive will also automatically exclude post from Archive Widget. This way you don't get links showing from the widget that cause 404 errors. See support thread https://wordpress.org/support/topic/archive-month-shows-when-all-posts-in-month-are-excluded-giving-404-error
+
+= 2.0.6.2 =
+- Corrected reported issue related to undefined 'action' settings in the widget hooks. Thanks Arnold. 
+- Cleanup some of the CSS related to settings used within the dashboard area.
+
+= 2.0.6.1 =
+Corrected issue with reported PHP 5.4 related code.
+Changes settings screen to split Taxonomies, Post Types and Users into tabbed screen. Better than one long screen.
+Fixed issue with excluding categories on Home and Archive where it effects the pager. Note this is only for the default WordPress paging. Custom pagers may still have issue. 
+
+= 2.0.6 =
+2013-03-20
+Bug fixes for Illegal string offset 'action' PHP Warnings.
 
 = 2.0.5 =
 2012-05-16

@@ -28,7 +28,7 @@ class UBDiagnostics {
     return array(
       'PHP Version'             => phpversion(),
       'WordPress Version'       => UBDiagnostics::wordpress_version(),
-      'Unbounce Plugin Version' => '1.0.22',
+      'Unbounce Plugin Version' => '1.0.23',
       'Permalink Structure'     => get_option('permalink_structure', ''),
       'Domain'                  => $domain,
       'Domain Authorized'       => print_r(UBConfig::is_authorized_domain($domain), true),

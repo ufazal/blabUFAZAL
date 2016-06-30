@@ -1,19 +1,15 @@
-=== Plugin Name ===
+﻿=== Plugin Name ===
 Contributors: smartredfox
 Tags: file download link, pdf, doc, xls, zip, file links
 Requires at least: 3.0.0
-Tested up to: 3.3.2
-Stable tag: 0.7
+Tested up to: 3.5.2
+Stable tag: 0.9
 
-The Pretty file links plugin makes your links to files look great without you having to do any work.
+The Pretty file links plugin makes your links to files look great without you having to do any work. It's designed to be very easy to use, and even comes with built in styles for different set ups. You can see examples of Pretty File Links at [www.SmartRedFox.com](http://www.smartredfox.com/pretty-file-links-wordpress-plugin/).
 
 == Description ==
 
-The Pretty file links plugin is designed to be very easy to use, and even comes with built in styles for different set ups. You can see examples of Pretty File Links at [www.SmartRedFox.com](http://www.smartredfox.com/pretty-file-links-wordpress-plugin/).
-
-The plugin adds an extra option to the media uploader to make links inserted into the content look a lot more attractive. It can also be used as a straight shortcode, and can easily be extended with additional styles just by dropping the css files into your theme directory.
-
-If you want even more styles for the plugin these can be purchased [here](http://www.smartredfox.com/pretty-file-links-wordpress-plugin/style-pack-for-pretty-file-links/).
+The Pretty File Links plugin adds an extra option to the media uploader to make links inserted into the content look a lot more attractive. It can also be used as a straight shortcode, and can easily be extended with additional styles just by dropping the css files in to the plugin directory. You can see examples of Pretty File Links at [www.SmartRedFox.com](http://www.smartredfox.com/pretty-file-links-wordpress-plugin/).
 
 == Installation ==
 
@@ -36,7 +32,7 @@ If you want even more styles for the plugin these can be purchased [here](http:/
 2. Before clicking insert into post choose the "Make pretty link option".
 3. Click insert into post or page.
 
-Alternatively
+== Alternatively ==
 
 Copy and past the shortcode directly into your page - [prettyfilelink src="http://www.smartredfox.com" type="pdf" newwindow="false"]The link text[/prettyfilelink]
 
@@ -60,6 +56,12 @@ Copy and past the shortcode directly into your page - [prettyfilelink src="http:
 = 0.7 =
 * Added option to make links open in new window.
 * Added two new file types - mp3 and video.
+= 0.8 =
+* Added file size to listed items - with option to turn off in settings.
+* Changed to single text box for new media uploader.
+* Added xslx, pptx, doc, and rar support.
+= 0.9 =
+* Changed incorrectly labelled option Open in new window to Show file size.
 
 == Upgrade Notice ==
 

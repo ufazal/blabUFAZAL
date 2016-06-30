@@ -18,4 +18,4 @@ $refresh_button = get_submit_button('refreshing the Published Pages list', 'seco
   Check out our knowledge base.
 </a>
 <br/><a class="ub-diagnostics-link" href="<?php echo $diagnostics_url ?>">Click here for troubleshooting and plugin diagnostics</a>
-<p class="ub-version">Unbounce Version 1.0.22</p>
+<p class="ub-version">Unbounce Version 1.0.23</p>

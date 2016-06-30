@@ -51,7 +51,9 @@ class UBHTTP {
   public static function get_proxied_for_header($out_headers,
                                                 $forwarded_for,
                                                 $current_ip) {
-    if($forwarded_for !== null && UBHTTP::is_private_ip_address($current_ip)) {
+    if($forwarded_for !== null &&
+       (UBConfig::allow_public_address_x_forwarded_for() ||
+        UBHTTP::is_private_ip_address($current_ip))) {
       $proxied_for = $forwarded_for;
     } else {
       $proxied_for = $current_ip;
