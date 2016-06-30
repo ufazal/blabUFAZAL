@@ -1,0 +1,312 @@
+body {
+	background-color:#CFD3D8;
+	color:#333;
+	background-image: url(../images/background.png);
+	background-repeat: repeat-x;
+	background-position: left top;
+}
+
+/* links Default */
+a, a:visited{
+	color:#143387;
+	text-decoration:none;
+	font-weight:normal;
+}
+a:hover{color:#2b2b2b; text-decoration:underline;}
+
+/* Frame image */
+.imgborder{ background-color:#f6f6f6; border:1px solid #eaeaea; padding:4px;}
+
+/* Top Navigation */
+#topnav a, #topnav li li a  {
+	color:#FFF;
+}
+#topnav li a:hover{
+	color: #333333;
+}
+#topnav li li a:hover{
+	color: #FF9900;
+}
+
+/* Line at menu top */
+#topnav li.back {border-top:2px solid #424951;}
+
+/* bg color dropdown menu*/
+#topnav li ul{	background-color:#424951;border-top:2px solid #424951;}
+
+/* bg color container */
+#container{	background-color:#fff; }
+
+/* bg color footer*/
+#footer{min-height:115px}
+#footer .widget-title{color:#003399;}
+/* Headings */
+#content h1, #content h2, #content h3, #content h4, #content h5, #content h6{color:#424951}
+#content .entry-content h2,#content h2, .posttitle a, .posttitle a:visited{
+	color: #003399;
+}
+/* Sidebar Color and Links */
+#side, #side ul li a, #side ul li a:visited{color:#143387;}
+#side li li a:hover,
+#side .widget-latestpost li a, 
+#side li.current a{
+	text-decoration:none;
+	color:#143387;
+}
+
+#side .widget-title{
+	color:#143387;
+}
+/* Font Color Footer*/
+#footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6{color:#303030;}
+#footer{ color:#666;}
+#footer ul li a, #footer ul li a:visited, #copyright a, #copyright a:visited{
+	color:#6699CC;
+}
+
+/* client box home*/
+.homeclientbox{
+	margin-bottom: 15px;
+	background-image: url(../images/client_horz_bg.png);
+	background-repeat: repeat-y;
+	background-position: left top;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+
+}
+.homeclient_thumb{
+	float: left;
+	width: 125px;
+	margin: 0px;
+	padding: 15px;
+}
+.homeclient_item{
+	padding-top: 15px;
+	padding-right: 20px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	float: right;
+	width: 400px;	
+}
+/* client box*/
+.clientbox .post{
+	margin-bottom: 0px;
+	background-image: none;
+	padding-bottom: 10px;
+}
+.clientbox .entry-content{
+	font-size: 12px;
+}
+.clientbox {
+	width:150px;
+	float:left;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	background-color: #E9F0FB;
+	margin-right: 40px;
+	margin-left: 0px;
+	position: relative;
+	-moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, .2);
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, .2);
+	background-image: url(../images/client_vert_bg.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding-top: 25px;
+	padding-right: 25px;
+	padding-bottom: 15px;
+	padding-left: 25px;
+	
+}
+.clientbox.last {
+	margin-right: 0px;
+	
+}
+
+.clientbox .info { clear: both; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; }
+.clientbox img {
+	padding:0px;
+	margin-top: 0px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+	margin-left: 5px;
+	text-align: center;
+}
+.clientbox a img {
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+	margin-left: 5px;
+}
+
+.clientbox .title { font-weight:bold; margin-top: 0px; margin-right: 0px; margin-bottom: 5px; margin-left: 0px; display: block; padding-top: 0px; padding-right: 0px; padding-bottom: 5px; padding-left: 0px; }
+.clientbox .clientboxReadmore { background-color: #333; position: absolute; height: 20px; width: 90px; right: 0px; bottom: 5px; }
+.clientbox .clientboxReadmore a{ background-color: #333; height: 20px; width: 90px; color: #eeeeee; text-align: center; display: block; line-height: 20px; margin: 0px; padding: 0px; font-size: 11px; font-weight: bold; font-family: Arial, Helvetica, sans-serif; }
+/* dropshaow only */
+
+
+a.css3button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #ffffff;
+	text-shadow:
+		0px -1px 1px rgba(000,000,000,0.2),
+		1px 1px 0px rgba(37,56,105,0.4);
+	padding: 8px;
+	
+	display: block;
+}
+
+/* for the WP-PageNavi  disable Plugins default  */
+/* WP-PageNavi  Plugin  */
+.wp-pagenavi {vertical-align:middle; clear:both; padding:20px 0; }
+.wp-pagenavi a, .wp-pagenavi a:visited{
+	color:#F90 !important;
+	padding:5px 7px !important;
+	margin-right:8px !important;
+	border:0px !important;
+	-moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, .2);
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, .2);
+	background-color: #FFF;
+}
+
+.wp-pagenavi a:hover{
+	color:#646464 !important;
+	padding:5px 7px !important;
+	margin-right:8px !important;
+	border:0px !important;
+	background-color: #CCC;
+}
+
+.wp-pagenavi span.current{
+	color:#FFF !important;
+	padding:5px 7px !important;
+	margin-right:8px !important;
+	border:0px !important;
+	font-weight:normal !important;
+	background-color:#F90;
+	-moz-box-shadow: 3px 3px 3px rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, .2);
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, .2);
+	}
+	
+.wp-pagenavi .pages, .wp-pagenavi .extend {
+	color:#F90 !important;
+	padding:5px 7px 5px 0 !important;
+	margin-right:8px !important;
+	border:0px !important;
+}
+/*whitepaper widget*/
+
+
+li.t1 a{
+	color: #69C;
+}
+
+/*Set icons*/
+
+a.whitepaper{
+	background-color: transparent;
+	background-image: url(../images/whitepaper.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	margin-top: 10px;
+	padding-left: 20px;
+	clear: both;
+	float: left;
+}
+
+h2.schedule-title{margin-bottom:15px; font-size:30px; line-height:32px;}
+
+
+/*sidebar contact nudge */
+#side .wpcf7-form textarea {
+	height: 90px;
+}
+
+/* sidebar mailchimp*/
+#side-bubble-chimp {
+	background-color: #D9DCDF;
+	background-image: url(../images/side_bubble.png);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	width: 270px;
+	padding-top: 15px;
+	padding-right: 15px;
+	padding-bottom: 40px;
+	padding-left: 15px;
+	margin-bottom: 20px;
+}
+#mc_embed_signup{ clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+/* MailChimp Form Embed Code - Classic - 08/17/2011 */
+#mc_embed_signup form {display:block; position:relative; text-align:left; padding:10px 0 10px 3%}
+#mc_embed_signup h2 {font-weight:bold; padding:0; margin:15px 0; font-size:1.4em;}
+#mc_embed_signup input {border:1px solid #999; -webkit-appearance:none;}
+#mc_embed_signup input[type=checkbox]{-webkit-appearance:checkbox;}
+#mc_embed_signup input[type=radio]{-webkit-appearance:radio;}
+#mc_embed_signup input:focus {border-color:#333;}
+#mc_embed_signup .button {
+	border:1px solid #999999;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	text-align:center;
+	color:#333 !important;
+	cursor:pointer;
+	font-size:14px;
+	display:inline-block;
+	background-repeat:repeat-x;
+	background-color: #FFF;
+	padding-top: 5px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	line-height: 28px;
+	height: 28px;
+	float: right;
+	margin-right: 15px;
+}
+#mc_embed_signup .button:hover {
+	
+	background-color: #CCC;
+}
+#mc_embed_signup .small-meta {font-size: 12px;}
+#mc_embed_signup .nowrap {white-space:nowrap;}
+
+#mc_embed_signup .mc-field-group {clear:left; position:relative; width:96%; padding-bottom:3%; min-height:50px;}
+#mc_embed_signup .size1of2 {clear:none; float:left; display:inline-block; width:46%; margin-right:4%;}
+* html #mc_embed_signup .size1of2 {margin-right:2%; /* Fix for IE6 double margins. */}
+#mc_embed_signup .mc-field-group label {display:block; margin-bottom:3px;}
+#mc_embed_signup .mc-field-group input {display:block; width:100%; padding:8px 0; text-indent:2%;}
+#mc_embed_signup .mc-field-group select {display:inline-block; width:99%; padding:5px 0; margin-bottom:2px;}
+
+#mc_embed_signup .datefield, #mc_embed_signup .phonefield-us{padding:5px 0;}
+#mc_embed_signup .datefield input, #mc_embed_signup .phonefield-us input{display:inline; width:60px; margin:0 2px; letter-spacing:1px; text-align:center; padding:5px 0 2px 0;}
+#mc_embed_signup .phonefield-us .phonearea input, #mc_embed_signup .phonefield-us .phonedetail1 input{width:40px;}
+#mc_embed_signup .datefield .monthfield input, #mc_embed_signup .datefield .dayfield input{width:30px;}
+#mc_embed_signup .datefield label, #mc_embed_signup .phonefield-us label{display:none;}
+
+#mc_embed_signup .indicates-required {text-align:left; font-size:11px; margin-left:4%;}
+#mc_embed_signup .asterisk {color:#c60; font-size:200%;}
+#mc_embed_signup .mc-field-group .asterisk {position:absolute; top:25px; right:10px;}        
+#mc_embed_signup .clear {clear:both;}
+
+#mc_embed_signup .mc-field-group.input-group ul {margin:0; padding:5px 0; list-style:none;}
+#mc_embed_signup .mc-field-group.input-group ul li {display:block; padding:3px 0; margin:0;}
+#mc_embed_signup .mc-field-group.input-group label {display:inline;}
+#mc_embed_signup .mc-field-group.input-group input {display:inline; width:auto; border:none;}
+
+#mc_embed_signup div#mce-responses {float:left; top:-1.4em; padding:0em .5em 0em .5em; overflow:hidden; width:90%;margin: 0 5%; clear: both;}
+#mc_embed_signup div.response {margin:1em 0; padding:1em .5em .5em 0; font-weight:bold; float:left; top:-1.5em; z-index:1; width:80%;}
+#mc_embed_signup #mce-error-response {display:none;}
+#mc_embed_signup #mce-success-response {color:#529214; display:none;}
+#mc_embed_signup label.error {display:block; float:none; width:auto; margin-left:1.05em; text-align:left; padding:.5em 0;}
+
+#mc-embedded-subscribe {clear:both; width:auto; display:block; margin:1em 0 1em 5%;}
+#mc_embed_signup #num-subscribers {font-size:1.1em;}
+#mc_embed_signup #num-subscribers span {padding:.5em; border:1px solid #ccc; margin-right:.5em; font-weight:bold;}
+

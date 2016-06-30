@@ -1,0 +1,60 @@
+div.ft-title{
+	width:910px;
+	padding:18px 10px 10px 20px;
+	height:53px;
+	font-family:"Century Gothic", Arial, Verdana;
+}
+div.ft-title h1{
+	filter: alpha(opacity=100); /* here you can set the opacity of box with text */
+  	opacity: 1; /* here you can set the opacity of box with text */
+	color:#ffffff;
+	margin-bottom:0px;
+	font-size:18px;
+}
+
+#slideshowHolder{
+	margin-top:0px;
+}
+
+#slideshowHolder a, #slideshowHolder a:visited{color:#fff; text-decoration:underline}
+#slideshowHolder a:hover{text-decoration:none;}
+
+#slideshowHolder img{
+	display:none;
+}
+
+a#ft-prev-slideshowHolder{
+	display:block;
+	width:42px;
+	height:42px;
+	left:10px !important;
+	background-image:url(images/prev-ft-nav.png);
+	background-repeat:no-repeat;
+	background-position:0px -42px;
+	font-size:0px;
+	
+}
+
+
+a#ft-next-slideshowHolder{
+	display:block;
+	width:42px;
+	height:42px;
+	right:10px !important;
+	background-image:url(images/next-ft-nav.png);
+	background-repeat:no-repeat;
+	background-position:0px -42px;
+	font-size:0px;
+}
+
+a#ft-prev-slideshowHolder:hover, a#ft-next-slideshowHolder:hover{
+	background-position:0px 0px;
+}
+
+#ft-buttons-slideshowHolder{
+	display:none;
+}
+
+.clear {
+   clear: both;
+} 

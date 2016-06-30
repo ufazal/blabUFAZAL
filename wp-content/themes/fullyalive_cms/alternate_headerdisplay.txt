@@ -1,0 +1,41 @@
+<?php if(is_page()){?>
+
+  <?php $featured_image_post = get_featured_recursive($post); if ($featured_image_post != null) : $featured_image_src = wp_get_attachment_image_src(get_post_thumbnail_id($featured_image_post), 'page-header-image'); ?>
+ <div id="header-wrap" style="background-image:url(<?php  echo $featured_image_src['0'];  ?>)"> 
+  <?php else : { ?>
+<div id="header-wrap" style="background-image:url(<?php echo get_stylesheet_directory_uri() . "/images/default_header.jpg" ?>)"> 
+  <?php } ?>
+  </div>
+ 
+  <?php endif; ?>
+
+<?php } ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="header-wrap">
+<?php if(is_page()){?>
+
+  <?php $featured_image_post = get_featured_recursive($post); if ($featured_image_post != null) : $featured_image_src = wp_get_attachment_image_src(get_post_thumbnail_id($featured_image_post), 'page-header-image'); ?>
+ <div id="header" style="background-image:url(<?php  echo $featured_image_src['0'];  ?>)"> 
+  <?php else : { ?>
+<div id="header" style="background-image:url(<?php echo get_stylesheet_directory_uri() . "/images/default_header.jpg" ?>)"> 
+  <?php } ?>
+  </div>
+ 
+  <?php endif; ?>
+
+<?php } ?>
+</div>

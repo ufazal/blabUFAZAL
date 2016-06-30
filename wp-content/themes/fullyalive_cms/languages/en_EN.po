@@ -1,0 +1,559 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Megacorp\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-06-20 14:04+0700\n"
+"PO-Revision-Date: 2011-06-20 14:06+0700\n"
+"Last-Translator: iyut <luthfi@klikmart.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+
+#: 404.php:15
+#: loop.php:25
+msgid "Not Found"
+msgstr ""
+
+#: 404.php:18
+msgid "Apologies, but the page you requested could not be found. Perhaps searching will help."
+msgstr ""
+
+#: archive.php:23
+#, php-format
+msgid "Daily Archives <span>%s</span>"
+msgstr ""
+
+#: archive.php:25
+#, php-format
+msgid "Monthly Archives <span>%s</span>"
+msgstr ""
+
+#: archive.php:27
+#, php-format
+msgid "Yearly Archives <span>%s</span>"
+msgstr ""
+
+#: archive.php:29
+#, php-format
+msgid "%s"
+msgstr ""
+
+#: attachment.php:16
+#, php-format
+msgid "Return to %s"
+msgstr ""
+
+#: attachment.php:18
+#, php-format
+msgid "<span class=\"meta-nav\">&larr;</span> %s"
+msgstr ""
+
+#: attachment.php:32
+#, php-format
+msgid "<span class=\"%1$s\">By</span> %2$s"
+msgstr ""
+
+#: attachment.php:43
+#, php-format
+msgid "<span class=\"%1$s\">Published</span> %2$s"
+msgstr ""
+
+#: attachment.php:53
+#, php-format
+msgid "Full size is %s pixels"
+msgstr ""
+
+#: attachment.php:56
+msgid "Link to full-size image"
+msgstr ""
+
+#: attachment.php:63
+#: attachment.php:111
+#: loop.php:53
+#: loop.php:59
+#: page-blog-alternate.php:71
+#: page-nosidebar.php:34
+#: page.php:34
+msgid "Edit"
+msgstr ""
+
+#: attachment.php:103
+msgid "Read More <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: attachment.php:104
+#: loop.php:67
+#: page-blog-alternate.php:76
+#: page-nosidebar.php:32
+#: page.php:33
+msgid "Pages:"
+msgstr ""
+
+#: author.php:15
+#, php-format
+msgid "Author Archives %s"
+msgstr ""
+
+#: author.php:36
+#, php-format
+msgid "About %s"
+msgstr ""
+
+#: comments.php:18
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr ""
+
+#: comments.php:41
+#: comments.php:60
+msgid "<span class=\"meta-nav\">&larr;</span> Older Comments"
+msgstr ""
+
+#: comments.php:42
+#: comments.php:61
+msgid "Newer Comments <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: comments.php:72
+msgid "Comments are closed."
+msgstr ""
+
+#: comments.php:78
+msgid "Leave a Comment"
+msgstr ""
+
+#: comments.php:79
+msgid "Submit"
+msgstr ""
+
+#: footer.php:26
+msgid "Copyright"
+msgstr ""
+
+#: footer.php:42
+msgid "All rights reserved."
+msgstr ""
+
+#: header.php:32
+#, php-format
+msgid "Page %s"
+msgstr ""
+
+#: header.php:239
+#: header.php:241
+msgid "Click for Home"
+msgstr ""
+
+#: loop.php:27
+msgid "Apologies, but no results were found for the requested archive. Perhaps searching will help find a related post."
+msgstr ""
+
+#: loop.php:53
+#: page-blog-alternate.php:71
+msgid "No Comments"
+msgstr ""
+
+#: loop.php:53
+#: page-blog-alternate.php:71
+msgid "1 Comments"
+msgstr ""
+
+#: loop.php:53
+#: page-blog-alternate.php:71
+msgid "% Comments"
+msgstr ""
+
+#: loop.php:66
+#: page-blog-alternate.php:75
+msgid "Permanent Link to"
+msgstr ""
+
+#: loop.php:66
+#: page-blog-alternate.php:75
+#: page-nosidebar.php:31
+#: page.php:32
+msgid "Read More"
+msgstr ""
+
+#: loop.php:85
+#: page-blog-alternate.php:90
+msgid "<span class=\"meta-nav\">&laquo;</span> Older"
+msgstr ""
+
+#: loop.php:86
+#: page-blog-alternate.php:91
+msgid "Newer <span class=\"meta-nav\">&raquo;</span>"
+msgstr ""
+
+#: search.php:14
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: single.php:34
+msgid "Read More &rarr;"
+msgstr ""
+
+#: title.php:2
+msgid "Our Blog"
+msgstr ""
+
+#: admin/admin-options.php:57
+msgid "Header Settings"
+msgstr ""
+
+#: admin/admin-options.php:62
+msgid "Logo Type"
+msgstr ""
+
+#: admin/admin-options.php:63
+msgid "If text-based logo is activated, enter the sitename and tagline in the fields below."
+msgstr ""
+
+#: admin/admin-options.php:70
+msgid "Site name"
+msgstr ""
+
+#: admin/admin-options.php:77
+msgid "Tagline"
+msgstr ""
+
+#: admin/admin-options.php:84
+msgid "Logo Image URL"
+msgstr ""
+
+#: admin/admin-options.php:85
+msgid "If image logo is activated, enter the logo image url (http://www.fullurl.com/logo.png)."
+msgstr ""
+
+#: admin/admin-options.php:90
+msgid "Favicon URL"
+msgstr ""
+
+#: admin/admin-options.php:91
+msgid "Enter the favicon image url (http://www.fullurl.com/favicon.ico)."
+msgstr ""
+
+#: admin/admin-options.php:97
+msgid "Footer Settings"
+msgstr ""
+
+#: admin/admin-options.php:102
+msgid "Footer Text"
+msgstr ""
+
+#: admin/admin-options.php:103
+msgid "You can use html tag in here."
+msgstr ""
+
+#: admin/admin-options.php:107
+msgid "Tracking Code"
+msgstr ""
+
+#: admin/admin-options.php:108
+msgid "Enter your tracking code here."
+msgstr ""
+
+#: admin/admin-options.php:121
+msgid "Theme Color Settings"
+msgstr ""
+
+#: admin/admin-options.php:126
+msgid "Color Styles"
+msgstr ""
+
+#: admin/admin-options.php:127
+msgid "Choose the color you want."
+msgstr ""
+
+#: admin/admin-options.php:134
+msgid "Heading Title Color"
+msgstr ""
+
+#: admin/admin-options.php:141
+msgid "Background Color"
+msgstr ""
+
+#: admin/admin-options.php:148
+msgid "Style Switcher"
+msgstr ""
+
+#: admin/admin-options.php:155
+msgid "Background Patern Settings"
+msgstr ""
+
+#: admin/admin-options.php:159
+msgid "Background Pattern"
+msgstr ""
+
+#: admin/admin-options.php:160
+msgid "Choose the background you want."
+msgstr ""
+
+#: admin/admin-options.php:166
+msgid "Background Pattern URL"
+msgstr ""
+
+#: admin/admin-options.php:167
+msgid "enter the background image url (http://www.fullurl.com/yourbg.png)."
+msgstr ""
+
+#: admin/admin-options.php:179
+msgid "Slider Settings"
+msgstr ""
+
+#: admin/admin-options.php:183
+msgid "Arrange Slider Post"
+msgstr ""
+
+#: admin/admin-options.php:184
+msgid "Select arrange."
+msgstr ""
+
+#: admin/admin-options.php:190
+msgid "Cycle Slider Settings"
+msgstr ""
+
+#: admin/admin-options.php:194
+msgid "Slider Effect"
+msgstr ""
+
+#: admin/admin-options.php:195
+msgid "Please enter name of transition effect (or comma separated names, ex: fade,scrollUp,shuffle). Default is (fade). <br>for more effects visit <a href=\"http://jquery.malsup.com/cycle/browser.html\">http://jquery.malsup.com/cycle/browser.html</a>"
+msgstr ""
+
+#: admin/admin-options.php:200
+msgid "Slider Timeout"
+msgstr ""
+
+#: admin/admin-options.php:201
+msgid "Please enter number for default slider timeout(transition time). Default is 5000"
+msgstr ""
+
+#: admin/admin-options.php:206
+msgid "Disable Slider Text"
+msgstr ""
+
+#: admin/admin-options.php:207
+msgid "Select this checkbox to disable the slider text."
+msgstr ""
+
+#: admin/admin-options.php:212
+msgid "Disable Slider Navigation"
+msgstr ""
+
+#: admin/admin-options.php:213
+msgid "Select this checkbox to disable the slider navigation."
+msgstr ""
+
+#: admin/admin-options.php:218
+msgid "Disable Slider Effect"
+msgstr ""
+
+#: admin/admin-options.php:219
+msgid "Select this checkbox to disable the slider effect and this will automatic disable slider text and slider navigation "
+msgstr ""
+
+#: admin/admin-options.php:265
+msgid "Options"
+msgstr ""
+
+#: admin/admin-options.php:299
+msgid "General"
+msgstr ""
+
+#: admin/admin-options.php:300
+msgid "Style"
+msgstr ""
+
+#: admin/admin-options.php:301
+#: includes/theme-init.php:42
+msgid "Slider"
+msgstr ""
+
+#: admin/admin-options.php:494
+msgid "Restore Defaults"
+msgstr ""
+
+#: admin/admin-options.php:494
+msgid "Click OK to reset. Any theme settings will be lost!"
+msgstr ""
+
+#: includes/sidebar-init.php:4
+msgid "Post Sidebar"
+msgstr ""
+
+#: includes/sidebar-init.php:6
+msgid "Located at the right side of archives, single and search."
+msgstr ""
+
+#: includes/sidebar-init.php:14
+msgid "Page Sidebar"
+msgstr ""
+
+#: includes/sidebar-init.php:16
+msgid "Located at the right side of page templates."
+msgstr ""
+
+#: includes/sidebar-init.php:24
+msgid "Footer1 Sidebar"
+msgstr ""
+
+#: includes/sidebar-init.php:26
+msgid "Located at the footer column 1."
+msgstr ""
+
+#: includes/sidebar-init.php:34
+msgid "Footer2 Sidebar"
+msgstr ""
+
+#: includes/sidebar-init.php:36
+msgid "Located at the footer column 2."
+msgstr ""
+
+#: includes/sidebar-init.php:44
+msgid "Footer3 Sidebar"
+msgstr ""
+
+#: includes/sidebar-init.php:46
+msgid "Located at the footer column 3."
+msgstr ""
+
+#: includes/theme-function.php:64
+#, php-format
+msgid "%s "
+msgstr ""
+
+#: includes/theme-function.php:69
+#, php-format
+msgid "%1$s %2$s"
+msgstr ""
+
+#: includes/theme-function.php:70
+#: includes/theme-function.php:89
+msgid "(Edit)"
+msgstr ""
+
+#: includes/theme-function.php:74
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: includes/theme-function.php:89
+msgid "Pingback:"
+msgstr ""
+
+#: includes/theme-function.php:102
+#, php-format
+msgid "Posted in %1$s and tagged %2$s. Bookmark the <a href=\"%3$s\" title=\"Permalink to %4$s\" rel=\"bookmark\">permalink</a>."
+msgstr ""
+
+#: includes/theme-function.php:104
+#, php-format
+msgid "Posted in %1$s. Bookmark the <a href=\"%3$s\" title=\"Permalink to %4$s\" rel=\"bookmark\">permalink</a>."
+msgstr ""
+
+#: includes/theme-function.php:106
+#, php-format
+msgid "Bookmark the <a href=\"%3$s\" title=\"Permalink to %4$s\" rel=\"bookmark\">permalink</a>."
+msgstr ""
+
+#: includes/theme-function.php:138
+msgid "Home"
+msgstr ""
+
+#: includes/theme-init.php:27
+msgid "Main Menu"
+msgstr ""
+
+#: includes/shortcodes/portfolio.php:292
+#: includes/shortcodes/portfolio.php:504
+#: includes/shortcodes/recentportfolio.php:42
+msgid "Permanent Link to "
+msgstr ""
+
+#: includes/shortcodes/portfolio.php:312
+#: includes/shortcodes/portfolio.php:519
+msgid "Permalink to "
+msgstr ""
+
+#: includes/shortcodes/portfolio.php:358
+#: includes/shortcodes/testimonial.php:294
+msgid "<span class=\"prev\"><span class=\"meta-nav\">&laquo;</span> Prev</span>"
+msgstr ""
+
+#: includes/shortcodes/portfolio.php:359
+#: includes/shortcodes/testimonial.php:295
+msgid "<span class=\"prev\">Next <span class=\"meta-nav\">&raquo;</span></span>"
+msgstr ""
+
+#: includes/shortcodes/portfolio.php:372
+msgid "Portfolio"
+msgstr ""
+
+#: includes/shortcodes/portfolio.php:388
+msgid "Portfolio Categories"
+msgstr ""
+
+#: includes/shortcodes/testimonial.php:308
+msgid "Testimonial"
+msgstr ""
+
+#: includes/shortcodes/testimonial.php:323
+msgid "Testimonial Categories"
+msgstr ""
+
+#: includes/widgets/ts-post-cycle.php:6
+#: includes/widgets/ts-post-cycle.php:7
+msgid "TS - Post Cycle"
+msgstr ""
+
+#: includes/widgets/ts-post-cycle.php:140
+#: includes/widgets/ts-recent-posts.php:59
+msgid "Title:"
+msgstr ""
+
+#: includes/widgets/ts-post-cycle.php:143
+msgid "Limit Text:"
+msgstr ""
+
+#: includes/widgets/ts-post-cycle.php:146
+msgid "Post Type:"
+msgstr ""
+
+#: includes/widgets/ts-post-cycle.php:151
+msgid "Default"
+msgstr ""
+
+#: includes/widgets/ts-post-cycle.php:155
+#: includes/widgets/ts-recent-posts.php:61
+msgid "Category:"
+msgstr ""
+
+#: includes/widgets/ts-post-cycle.php:158
+msgid "Effect:"
+msgstr ""
+
+#: includes/widgets/ts-recent-comment.php:6
+#: includes/widgets/ts-recent-comment.php:7
+msgid "TS - Recent Comments"
+msgstr ""
+
+#: includes/widgets/ts-recent-comment.php:14
+msgid "TS Recent Comments"
+msgstr ""
+
+#: includes/widgets/ts-recent-comment.php:40
+msgid "by"
+msgstr ""
+
+#: includes/widgets/ts-recent-posts.php:7
+#: includes/widgets/ts-recent-posts.php:8
+msgid "TS - Recent Posts"
+msgstr ""
+
+#: includes/widgets/ts-recent-posts.php:15
+msgid "TS Recent Posts"
+msgstr ""
+
