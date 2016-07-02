@@ -1,0 +1,565 @@
+<?php
+
+/**
+ * Plugin Name: WP-Simple-Contact-Form-with-Captcha
+ * Plugin URI: http://www.payema.se/wp-simple-contact-form-plugin/
+ * Description: Developed to provide a simple contact for with spam protection.
+ * Author: Jesper Knutsson
+ * Author URI: http://www.payema.se
+ * Version: 0.9.2
+ */
+
+$plugin_dir =  ABSPATH . 'wp-content/plugins/wp-simple-contact-form/';
+if(file_exists($plugin_dir.WPLANG.'.php')) include_once($plugin_dir.WPLANG.'.php');
+if (!session_id()) session_start();
+
+function message_remove_malicious($input) {
+	if (empty($input)) return;
+	$bad_inputs=array("\r", "mime-version", "content-type", "cc:", "to:");
+	$input = str_replace($bad_inputs,"",$input);
+	return $input;
+}
+
+function __e($phrase) {
+	global $language_array,$wpdb;
+	if(!is_array($language_array)) $language_array = array();
+	$phrase = mysql_real_escape_string($phrase);
+	if (!array_key_exists($phrase,$language_array)) {
+		$translation = $phrase;
+	} else {
+		$translation  = $language_array[$phrase];
+	}	
+	return $translation;
+}
+function calculate($budget){
+
+	if($budget==1){
+		$str="\$10,000 - \$25,000";
+	}else if($budget==101){
+		$str="\$30,000 - \$60,000";
+	}else if($budget==251){
+		$str="\$75,000 - \$150,000";
+	}else if($budget==501){
+		$str="\$160,000 - \$300,000";
+	}else if($budget==601){
+		$str="\$350,000 - \$500,000";
+	}else if($budget==701){
+		$str="\$600,000 - \$800,000";
+	}
+	else if($budget==1001){
+		$str="\$1,000,000+";
+	}else{
+		$str="";
+	}
+	return $str;
+}
+/*function calculate($budget){
+  if($budget==1){
+  $str="\$0 - \$100,000";
+  }else if($budget==101){
+  $str="\$100,000 - \$100,000";
+  }else if($budget==251){
+  $str="\$251,000 - \$500,000";
+  }else if($budget==501){
+  $str="\$501,000 - \$1000,000";
+  }else if($budget==1001){
+  $str="\$1000,000+";
+  }else{
+  $str="";
+  }
+  return $str;
+  }*/
+
+function convertReadable($giefTime) {
+
+	$days = 0; $hrs = 0; $mins = 0;
+
+	while($giefTime > 86400) {
+
+		$days++;
+
+		$giefTime -= 86400;
+
+	}
+
+	while($giefTime > 3600) {
+
+		$hrs++;
+
+		$giefTime -= 3600;
+
+	}
+
+	while($giefTime > 59) {
+
+		$mins++;
+
+		$giefTime -= 60;
+
+	}
+
+	return $days." day(s), ".$hrs." hour(s), ".$mins." minute(s) and ".$giefTime." second(s).";
+
+}
+
+function wp_simple_contact_form() {
+	global $wpdb;
+
+	$plugin_path = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
+	$plugin_dir =  ABSPATH . 'wp-content/plugins/wp-simple-contact-form/';	
+	$page_url = get_permalink($post->ID);
+	$ip = $_SERVER['REMOTE_ADDR'];
+
+	if(isset($_GET[msg])) {
+		$output .= '<p icon="accept">'.__e(urldecode($_GET[msg])).'</p>';
+	}
+
+	//Process form
+	if(isset($_POST[submit])) {
+
+
+		foreach($_POST as $vblname => $value) {$postcontent[$vblname] = mysql_real_escape_string($value);}
+		$validate = TRUE;
+		preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.([a-zA-Z]{2,4})$/', $_POST['contact_email'], $useremail);
+
+		if($_POST['captcha'] != $_SESSION['captcha_code'] OR empty($_POST['captcha'])) {
+			$validate = FALSE;
+			$errormsg[5] = '<span class="form-error" icon="warning">'.__e('The entered letters did not match the control').'</span>';
+		}		
+		$_SESSION['captcha_code'] = '';
+		if(empty($postcontent['contact_fname'])) {
+			$validate = FALSE;
+			$errormsg[0] = '<span class="form-error" icon="warning">'.__e('Please enter your first name').'</span>';		
+		}
+		if(empty($postcontent['contact_lname'])) {
+			$validate = FALSE;
+			$errormsg[1] = '<span class="form-error" icon="warning">'.__e('Please enter your last name').'</span>';		
+		}
+
+		if(empty($useremail)) {
+			$validate = FALSE;
+			if ($postcontent['contact_email'] != $useremail) {
+				$errormsg[2] = '<span class="form-error" icon="warning">'.__e('Please enter a valid email adress!').'</span>';
+			} else {
+				$errormsg[2] = '<span class="form-error" icon="warning">'.__e('Please enter an email adress!').'</span>';
+			}		
+		}
+		if(empty($postcontent['contact_phone'])) {
+			$validate = FALSE;
+			$errormsg[3] = '<span class="form-error" icon="warning">'.__e('Please enter your phone number').'</span>';		
+		}
+		if(empty($postcontent['contact_company'])) {
+			$validate = FALSE;
+			$errormsg[4] = '<span class="form-error" icon="warning">'.__e('Please enter your company name').'</span>';		
+		}
+
+		if($validate) {
+
+
+			$recipient = get_option('scf_send_to_email');
+
+			$contact_fname= $postcontent['contact_fname'];
+			$contact_lname= $postcontent['contact_lname'];
+			$contact_email = $postcontent['contact_email'];
+			$contact_phone= $postcontent['contact_phone'];
+			$contact_company= $postcontent['contact_company'];
+
+			$str="<font color='#333366'><h2>Blueliner Marketing Contact Request</h2></font>";
+			$str=$str."<hr width='100%'/>";
+			$str=$str."<b>First Name : </b>".$postcontent['contact_fname']."<br/>";
+			$str=$str."<b>Last Name : </b>".$postcontent['contact_lname']."<br/>";
+			$str=$str."<b>Company: </b>".$postcontent['contact_company']."<br/>";
+			$str=$str."<b>Phone : </b>".$postcontent['contact_phone']."<br/>";
+			$str=$str."<b>Email : </b>".$postcontent['contact_email']."<br/>";
+			$str=$str."<b>Website : </b>".$postcontent['contact_url']."<br/>";
+
+			$str=$str."<b>Interests:</b><br/>";
+			$str=$str."<b>7 Pillars of Digital Strategy</b><br/><i>";
+
+			if($postcontent['contact_1_dd']=="checked"){$str=$str."Web Design & Development<br/>";}
+			if($postcontent['contact_1_se']=="checked"){$str=$str."SEO<br/>";}
+			if($postcontent['contact_1_oa']=="checked"){$str=$str."Online Advertising<br/>";}
+			if($postcontent['contact_1_em']=="checked"){$str=$str."CRM(Email Marketing)<br/>";}
+			if($postcontent['contact_1_sm']=="checked"){$str=$str."Social Media<br/>";}
+			if($postcontent['contact_1_mo']=="checked"){$str=$str."Mobile<br/>";}
+			if($postcontent['contact_1_wa']=="checked"){$str=$str."Web Analytics<br/>";}
+
+			$str=$str."</i><b>Video & Content </b><br/><i>";
+
+			if($postcontent['contact_2_vp']=="checked"){$str=$str."Commercial/Video Production<br/>";}
+			if($postcontent['contact_2_lp']=="checked"){$str=$str."Product/Lifestyle Photography<br/>";}
+			if($postcontent['contact_2_cp']=="checked"){$str=$str."Copywriting/Blogging<br/>";}
+
+			$str=$str."</i><b>Business Strategy</b><br/><i>";
+			if($postcontent['contact_3_bd']=="checked"){$str=$str."Business Plan Development<br/>";}
+			if($postcontent['contact_3_md']=="checked"){$str=$str."Marketing Plan Development<br/>";}
+			if($postcontent['contact_3_pd']=="checked"){$str=$str."Product Development<br/>";}
+			if($postcontent['contact_3_oei']=="checked"){$str=$str."Offshore Expansion(India)<br/>";}
+			if($postcontent['contact_3_oee']=="checked"){$str=$str."Offshore Expansion(Europe)<br/>";}
+			if($postcontent['contact_3_oel']=="checked"){$str=$str."Offshore Expansion(Latin America)<br/>";}
+
+			$str=$str."</i><b>Smartsite : </b>".$postcontent['contact_smartsite']."<br/>";
+			$budget = calculate($postcontent['contact_budget']);
+			$str=$str."<b>budget : </b>".$budget."<br/>";
+			if (isset($_POST['subscribe_newsletter']))
+			{
+				$str=$str."<b>Subscribe to Blueliner&quot;s Newsletter  : </b> Yes <br/>";
+			}else 
+			{
+				$str=$str."<b>Subscribe to Blueliner&quot;s Newsletter  : </b> No <br/>";
+			}
+
+			$contact_referrer = unserialize(base64_decode($_COOKIE['contact_referrer']));
+			$iplocation_api_key 	= '2359bc7ea1cdd951b519bd370849c1005f1494ccce6c0d401294227c83385be4';
+			$iplocation 			= @simplexml_load_file('http://api.ipinfodb.com/v2/ip_query.php?key='.$iplocation_api_key.'&ip='.$_SERVER['REMOTE_ADDR'].'&timezone=false');
+			//$iplocation = @simplexml_load_file('http://ipinfodb.com/ip_query.php?ip='.$_SERVER['REMOTE_ADDR'].'&timezone=false');
+
+			if ($contact_referrer['search_engine']!='')
+			{
+				$str=$str."<b>Referral : </b>".$contact_referrer['search_engine']."<br/>";
+			}else 
+			{
+				$str=$str."<b>Referral : </b>"."Direct "."<br/>";
+			}
+			$str=$str."<b>Search Keywords : </b>".$contact_referrer['keywords']."<br/>";
+
+			$str=$str."<b>Last Visited : </b>".$contact_referrer['last_visited']."<br/>";
+
+			$str=$str."<b>Visited : </b>".@implode(" <br/>", $contact_referrer['visited'])."<br/>";
+
+			$str=$str."<b>Time on Site : </b>".convertReadable($_COOKIE['mystaytime'])."<br/>";
+
+			$str=$str."<b>IP location : </b>".$iplocation->City.', '.$iplocation->RegionName.', ('.$iplocation->CountryName.")<br/>";
+
+					$str=$str."<hr width='100%'/>";
+
+					$headers = "MIME-Version: 1.0\r\n";
+					$headers .= "From: Blueliner Marketing <info@bluelinerny.com>\r\n";
+					$headers .= "Content-Type: text/html; charset=\"".get_settings('blog_charset')."\"\r\n";
+
+					$fullmsg .= wordwrap($str, 80, "\n")."\n\n";
+					$fullmsg .= "IP: ".$_SERVER['REMOTE_ADDR'];
+
+
+					$fullmsg = message_remove_malicious($fullmsg);
+
+					$mail_success = wp_mail($recipient, get_option('scf_mail_subject'), $fullmsg, $headers);
+					
+
+
+					require_once ABSPATH.'server/mailchimp/MCAPI.class.php';
+					require_once ABSPATH.'server/mailchimp/config.inc.php'; //contains apikey
+
+					//to subscribe email addresses used in the examples:
+					//$email = 'sukhon@bluelinerbangla.com';
+					$api = new MCAPI($apikey);
+
+					$interest_group 		=	$groupName['web_lead'];
+					// mailchimp subscription
+					$subscribe_newsletter = $_POST['subscribe_newsletter'];
+					if($subscribe_newsletter) {
+
+						$interest_group .= ','.$groupName['newsletter'];
+						// By default this sends a confirmation email - you will not see new members
+						// until the link contained in it is clicked!
+
+					}
+
+
+					$merge_vars = array('FNAME'=>$contact_fname, 'LNAME'=>$contact_lname, 'COMPINFO'=>$contact_company, 'INTERESTS'=>$interest_group);
+
+					$retval = $api->listSubscribe( $listId, $contact_email, $merge_vars );
+
+
+					// end mailchimp subscription
+
+					// web service
+					include(ABSPATH.'server/class/Xmlrpc.php');
+					include(ABSPATH.'server/class/Xmlrpcs.php');
+					include(ABSPATH.'server/class/otpts.php');
+
+					$otpts = new OTPTS();
+					$xmlrpc = new webservice_xmlrpc();
+					$data = $xmlrpc->postall();
+					unset($data['submit']);
+					//print_r($data);
+					$serializedata = serialize($data);
+					$key = "bLuESeCreT";
+					// EnDecrypt & OTPTS (custom encryption)
+					$encdata = base64_encode($otpts->cipher_OTP_TS($key, $serializedata));
+					$request = array($encdata, md5($key), preg_replace('/www./', '', $_SERVER['HTTP_HOST']), $_SERVER['REMOTE_ADDR']);
+					$responsedata = $xmlrpc->service_xmlrpc($request); // XML_RPC
+					// end web service
+					if($mail_success){
+
+						$page_next			=	get_page_by_title('contact_thankyou');
+						$page_url_thanks 	=  get_permalink($page_next->ID);
+						//setcookie("contact_thanks-fname",$postcontent['contact_fname']); 
+						//header('Location: '.$page_url_thanks);
+						echo "<script type='text/javascript'> window.location.href='".$page_url_thanks ."'</script>";
+						exit();
+
+
+
+					} else {
+						$output .= '<p icon="accept">'.__e('There was a problem sending your message, please try again!').'</p>';
+					}
+					if($mail_success) return $output;
+		}	
+	}
+
+	//Generate form
+	$output .= '<form method="POST" action="'.$page_url.'" class="horizontal" id="contact_form">'."\n";
+	$output .= '<div id="error_container"></div>';
+	$output .= '<table width="500" border="0" cellpadding="4" cellspacing="0" class="contactus">
+		<tr>
+		<td colspan="4"><p><strong>Tell us about yourself!</strong></p></td>
+		</tr>
+		<tr>
+		<td width="90" valign="top">* First Name </td>
+		<td width="138" valign="top"><input name="contact_fname" id="contact_fname" value="'.$_POST['contact_fname'].'" type="text" size="20" />'.$errormsg[0].'</td>
+		<td width="90" valign="top">* Last Name </td>
+		<td width="130" valign="top"><input name="contact_lname" id="contact_lname" value="'.$_POST['contact_lname'].'" type="text" size="20" />'.$errormsg[1].'</td>
+		</tr>
+		<tr>
+		<td valign="top">* Email Address </td>
+		<td valign="top"><input name="contact_email" id="contact_email" value="'.$_POST['contact_email'].'" type="text" size="20" />'.$errormsg[2].'</td>
+		<td width="120" valign="top">* Phone Number</td>
+		<td valign="top"><input name="contact_phone" id="contact_phone" value="'.$_POST['contact_phone'].'" type="text" size="20" />'.$errormsg[3].'</td>
+		</tr>
+		<tr>
+		<td width="138">* Company Name </td>
+		<td><input name="contact_company" id="contact_company" value="'.$_POST['contact_company'].'" type="text" size="40" />'.$errormsg[4].'</td>
+		<td>Website URL </td>
+		<td colspan="3"><input name="contact_url" value="'.$_POST['contact_url'].'" type="text" size="40" /></td>
+		</tr>
+
+		<tr>
+		<td colspan="4">&nbsp;</td>
+		</tr>
+		</table>
+		<br>
+		<table width="680" style="padding-top: 35px;" border="0" cellspacing="0" cellpadding="2">
+		<tr>
+		<td colspan="6"><h2>Areas of Interest </h2></td>
+		</tr>
+		<tr>
+		<td colspan="2"><center>
+		<strong>7 Pillars of Digital Strategy</strong>
+		</center></td>
+		<td colspan="2"><center>
+		<strong>Content Creation</strong>
+		</center></td>
+		<td colspan="2"><center>
+		<strong>Business Planning</strong>
+		</center></td>
+		</tr>
+		<tr>		
+
+		<td width="20"><input type="checkbox" name="contact_1_dd" value="checked" '.$_POST['contact_1_dd'] .' /></td>
+		<td width="141">Web Design & Development</td>
+		<td><input type="checkbox" name="contact_2_vp" value="checked" '.$_POST['contact_2_vp'] .' /></td>
+		<td>Commercial/Video Production</td>
+		<td><input type="checkbox" name="contact_3_bd" value="checked" '.$_POST['contact_3_bd'] .' /></td>
+		<td>Business Plan Development</td>	  
+
+		</tr>
+
+		<tr> 
+		<td width="20"><input type="checkbox" name="contact_1_seo" value="checked" '.$_POST['contact_1_seo'] .' /></td>
+		<td width="141">SEO</td>
+		<td><input type="checkbox" name="contact_2_lp" value="checked" '.$_POST['contact_2_lp'] .' /></td>
+		<td>Product/Lifestyle Photography</td>
+		<td><input type="checkbox" name="contact_3_md" value="checked" '.$_POST['contact_3_md'] .' /></td>
+		<td>Marketing Plan Development </td>
+		</tr>
+
+		<tr>
+		<td width="20"><input type="checkbox" name="contact_1_oa" value="checked" '.$_POST['contact_1_oa'] .' /></td>
+		<td width="141">Online Advertising</td>
+		<td><input type="checkbox" name="contact_2_cp" value="checked" '.$_POST['contact_2_cp'] .' /></td>
+		<td>Copywriting/Blogging</td>
+		<td><input type="checkbox" name="contact_3_pd" value="checked" '.$_POST['contact_3_pd'] .' /></td>
+		<td>Product Development </td>
+		</tr>
+		<tr>
+		<td width="20"><input type="checkbox" name="contact_1_em" value="checked" '.$_POST['contact_1_em'] .' /></td>
+		<td width="130">CRM(Email Marketing)</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td><input type="checkbox" name="contact_3_oei" value="checked" '.$_POST['contact_3_oei'] .' /></td>
+		<td>Offshore Expansion(India) </td>
+
+		</tr>
+		<tr>
+		<td width="20"><input type="checkbox" name="contact_1_sm" value="checked" '.$_POST['contact_1_sm'] .' /></td>
+		<td width="119">Social Media</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td><input type="checkbox" name="contact_3_oee" value="checked" '.$_POST['contact_3_oee'] .' /></td>
+		<td>Offshore Expansion(Europe) </td>
+		</tr>
+
+
+		<tr>
+
+		<td width="20"><input type="checkbox" name="contact_1_mo" value="checked" '.$_POST['contact_1_mo'] .' /></td>
+		<td width="119">Mobile</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td><input type="checkbox" name="contact_3_oel" value="checked" '.$_POST['contact_3_oel'] .' /></td>
+		<td>Offshore Expansion(Latin America) </td>
+		</tr>
+		<tr> 
+		<td width="20"><input type="checkbox" name="contact_1_wa" value="checked" '.$_POST['contact_1_wa'] .' /></td>
+		<td width="119">Web Analytics</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		</tr>
+
+		</table>
+		<table width="480" border="0" cellspacing="0" cellpadding="4" class= "contactus">
+		<tr>
+		<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+		<td width="271"><div><strong>What is  your annual marketing budget?</strong></div></td>
+		<td width="171" style="padding-left:55px;"><select name="contact_budget">
+		<option value="0" '.(($_POST['contact_budget']=='0')? ' selected':'').'>select</option>
+		<option value="1" '.(($_POST['contact_budget']=='1')? ' selected':'').'>$10,000 &ndash; $25,000</option>
+		<option value="101" '.(($_POST['contact_budget']=='101')? ' selected':'').'>$30,000 &ndash; $60,000</option>
+		<option value="251" '.(($_POST['contact_budget']=='251')? ' selected':'').'>$75,000 &ndash; $150,000</option>
+		<option value="501" '.(($_POST['contact_budget']=='501')? ' selected':'').'>$160,000 &ndash; $300,000</option>
+		<option value="601" '.(($_POST['contact_budget']=='601')? ' selected':'').'>$350,000 &ndash; $500,000</option>
+		<option value="701" '.(($_POST['contact_budget']=='701')? ' selected':'').'>$600,000 &ndash; $800,000</option>
+		<option value="1001" '.(($_POST['contact_budget']=='1001')? ' selected':'').'>$1,000,000+</option>
+		</select></td>
+		</tr>
+		<tr>
+		<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+		<td><div ><strong>Are you interested in a free <a href="http://www.bluelinerny.com/wp-content/themes/bluelinerny_cms/global_assets/callouts/contact_smartsiteinfo.php?iframe=true" rel="wp-prettyPhoto">Smartsite Report</a>?</strong></div></td>
+		<td style="padding-left:55px;"><select name="contact_smartsite">
+		<option value="no" '.(($_POST['contact_smartsite']=='no')? ' selected':'').'>no</option>
+		<option value="yes" '.(($_POST['contact_smartsite']=='yes')? ' selected':'').'>yes</option>
+
+		</select></td>
+		</tr>
+		<tr>
+		<td ><span style="font-weight: bold"> Subscribe me to Blueliner\'s Newsletter </span></td>
+		<td style="text-align:left"><input name="subscribe_newsletter" type="checkbox" id="subscribe_newsletter" value="1" checked="checked" style="border:none;" /></td>
+		</tr>
+		</table>';
+
+
+
+	//Set number of letters to user with captcha
+	$num_letters = get_option('scf_captcha_num_letters');
+	if($num_letters<1) $num_letters = 5; //If not set by admin, set to 5
+
+	$output .= '<table width="500" border="0" cellspacing="0" cellpadding="10">
+		<tr>
+		<td width="240"><center>
+		<img src="'.get_option('siteurl').'/server/captcha/captcha.php" alt=""><br />
+		Enter the text shown in the above image into this textbox <input type="text" name="captcha" value=""> '.$errormsg[5].'
+		</center></td>
+		<td width="220" align="center"><input type="submit" name="submit" value="Submit" /></td>
+		</tr>
+		</table>';
+
+	$output .='</form>'."\n";
+
+	return $output;
+}
+
+function scf_add_admin_page() {
+	add_options_page('Simple Contact Form options', 'Simple Contact Form options', 8, __FILE__, 'wp_simple_contact_form_admin_page');
+}
+
+function wp_simple_contact_form_admin_page() { 
+	$base_name = plugin_basename('useronline/useronline-options.php');
+	$base_page = 'admin.php?page='.$base_name;
+
+	if(!current_user_can('edit_themes')) {
+		die('Access Denied');
+	}
+
+	if(isset($_POST[submit])) {
+		foreach($_POST as $vblname => $value) {$postcontent[$vblname] = mysql_real_escape_string($value); }
+
+		update_option('scf_send_to_email', $postcontent[send_to_email]);
+		update_option('scf_captcha_num_letters', $postcontent[captcha_num_letters]);
+		update_option('scf_mail_subject', $postcontent[scf_mail_subject]);
+
+		$ui_feedback = 'Your changes were saved';
+	}
+
+
+	?>
+
+		<div class="wrap">
+		<?php if(!empty($ui_feedback)) echo '<div id="message" class="updated fade"><p>'.$ui_feedback.'</p></div>'; ?>
+		<h2>Simple Contact Form options</h2>
+		<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
+		<fieldset class="options">
+		<legend></legend>
+		<table width="50%"  border="0" cellspacing="3" cellpadding="3">
+
+		<tr valign="top">
+		<th align="left">Send completed form to</th>
+		<td align="left">
+		<input type="text" name="send_to_email" value="<?php echo get_option('scf_send_to_email'); ?>" size="40" />
+		</td>
+		</tr>
+
+		<tr valign="top">
+		<th align="left">Subject heading of mail</th>
+		<td align="left">
+		<input type="text" name="scf_mail_subject" value="<?php echo get_option('scf_mail_subject'); ?>" size="40" />
+		</td>
+		</tr>
+
+		<tr valign="top">
+		<th align="left">Number of letters in capcha</th>
+		<td align="left">
+		<input type="text" name="captcha_num_letters" value="<?php echo get_option('scf_captcha_num_letters'); ?>" size="10" />
+		</td>
+		</tr>
+
+		</table>
+		<input type="submit" name="submit" value="Submit" />
+		</fieldset>
+		</form>
+		<h2>Usage</h2>
+		To use WP Simple Contact Form, simply add a page with the following text:
+		<code>[wp_simple_contact_form]</code>
+		<h2>Localization</h2>
+		If you wish to localize the contact form, open the original language file in the plugin folder (sv_SE.php), add your translations and save the file as <code>language_code.php</code>, as defined by WPLANG in wp-config.php (for your setup we suggest <code><?php echo WPLANG; ?>.php</code>.
+
+				</div>
+
+				<?php
+
+				}
+
+
+				add_action('admin_menu', 'scf_add_admin_page');
+
+				add_filter('the_content', 'place_wp_simple_contact_form', '7');
+
+				function place_wp_simple_contact_form($content){
+				$output = wp_simple_contact_form();
+				$content = str_replace( '[wp_simple_contact_form]', $output, $content); 
+				return $content;
+				}
+
+				function writeCSS() {
+				$path = WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__));
+				echo ( '<link rel="stylesheet" type="text/css" href="'. $path . 'form.css"> <!-- Added by the WP Simple contact form plugin --> ' ); 
+				}
+add_action('wp_head', 'writeCSS');
+
+?>

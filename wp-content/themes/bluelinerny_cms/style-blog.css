@@ -1,0 +1,483 @@
+#main-blog {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 18px;
+	color: #666666;
+}
+#main-blog h2, #main-blog h3 {
+	font-size:18px;
+	line-height:20px;
+	color:#00749E;
+	margin:0;
+	padding:0;
+}
+#main-blog .h2 {
+	font-family:Arial, Helvetica, sans-serif;
+	line-height:18px;
+	font-size:12px;
+	color:#312E2E;
+	font-weight:700;
+}
+#main-blog a:link, #main-blog a:visited, #main-blog a:active {
+	color:#00749E;
+	text-decoration:none;
+}
+#main-blog a:hover {
+	color:#000;
+	text-decoration:underline;
+}
+/*---------------------
+
+  ---------------------
+
+content area
+
+--------------------
+
+--------------------*/
+
+
+
+
+#main-blog {
+	width:960px;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+	padding-top: 0;
+	padding-right: 10;
+	padding-bottom: 0;
+	padding-left: 10;
+}
+#main-blog #content {
+	float:left;
+	width:670px;
+	padding:0;
+	margin: 0;
+}
+#main-blog .entry {
+	float:left;
+	border:1px solid #dadada;
+	background:#fff url(images/box.gif) repeat-x left top;
+	padding:15px;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 10px;
+	margin-left: 0;
+	width: 640px;
+}
+#main-blog .entry ul { 
+	list-style-type: disc; 	
+}
+#main-blog .entry img {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	padding: 5px;
+}
+#main-blog #sidebar {
+	float:right;
+	width:270px;
+	padding:0px;
+	margin: 0;
+}
+#main-blog .rsidebar {
+	float:right;
+	width:250px;
+	border:1px solid #dadada;
+	background:#fff url(images/box.gif) repeat-x left top;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 10px;
+	margin-left: 0;
+	padding-top: 10px;
+	padding-right: 9px;
+	padding-bottom: 10px;
+	padding-left: 9px;
+}
+#main-blog .rsidebar h2 {
+	font-size:12px;
+	border-bottom:#eee 1px solid;
+	margin:0 0 5px;
+	padding:0;
+}
+#main-blog .rsidebar ul {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+#main-blog .rsidebar ul li {
+	list-style-type:none;
+	margin:0 0 10px;
+	padding:0;
+}
+#main-blog .rsidebar ul li ul {
+	list-style-type:square;
+	margin:0;
+	padding:0 3px;
+}
+#main-blog .rsidebar ul li ul li {
+	list-style-type:none;
+	background:transparent url(images/li.gif) no-repeat;
+	border:0;
+	margin:0;
+	padding:0 0 5px 20px;
+}
+#main-blog .navigation {
+	width:600px;
+	float:left;
+	color:#666;
+}
+#main-blog .alignright {
+	float:right;
+	margin-top:10px;
+}
+#main-blog .alignleft {
+	float:left;
+	margin-top:10px;
+}
+#main-blog span.cmt {
+	background:transparent url(images/comment.gif) no-repeat;
+	border:0;
+	margin:0;
+	padding:0 0 5px 20px;
+}
+#main-blog span.cty {
+	background:transparent url(images/category.gif) no-repeat;
+	border:0;
+	margin:0;
+	padding:0 0 5px 20px;
+}
+#main-blog span.next {
+	background:transparent url(images/next.gif) no-repeat;
+	border:0;
+	margin:0;
+	padding:0 0 5px 20px;
+}
+#main-blog span.prev {
+	background:transparent url(images/prev.gif) no-repeat;
+	border:0;
+	margin:0;
+	padding:0 0 5px 20px;
+}
+#main-blog .postmetadata {
+	border-top:1px #eee solid;
+	font-size:11px;
+	margin:0;
+	padding:5px;
+}
+#main-blog .boxcomments {
+	border-top:5px solid #ddd;
+	border-bottom:5px solid #ddd;
+	margin-bottom:20px;
+	width:600px;
+}
+#main-blog #commentform {
+	border-top:1px solid #eee;
+	margin:0;
+	padding:15px 15px 1px;
+}
+#main-blog #commentform label {
+	display:block;
+	margin:0;
+}
+#main-blog #commentform input {
+	width:170px;
+	margin:0 5px 10px 0;
+	padding:1px;
+}
+#main-blog #commentform textarea {
+	width:400px;
+	margin:0 0 10px;
+	padding:0;
+}
+#main-blog #commentform #submit {
+	margin:0 0 20px;
+}
+#main-blog #commentform p {
+	margin:5px 0;
+}
+#main-blog ol.commentlist {
+	margin:0 0 1px;
+	padding:0;
+}
+#main-blog ol.commentlist :hover {
+	background:#eee;
+}
+#main-blog ol.commentlist li {
+	border-top:1px solid #eee;
+	display:block;
+	list-style:none;
+	margin:0;
+	padding:15px 15px 1px;
+}
+#main-blog ol.commentlist li :hover {
+	background:none;
+}
+#main-blog ol.commentlist li.commenthead {
+	display:block;
+	list-style:none;
+	margin:0;
+	padding:5px 15px;
+}
+#main-blog ol.commentlist li.commenthead h2 {
+	margin:0;
+}
+#main-blog ol.tblist {
+	border-top:1px solid #fff;
+	list-style:none;
+	margin:0 0 1px;
+	padding:15px;
+}
+#main-blog ol.tblist li {
+	display:block;
+	list-style:none;
+	background:transparent url(images/c.gif) 0 2px no-repeat;
+	padding-left:15px;
+	margin:0 0 5px;
+}
+/*altnav */
+
+ul.nav {
+	list-style:none;
+	background-color: #dddddd;
+	margin: 0px;
+	padding: 0px;
+	height: 50px;
+	line-height: 15px;
+	position: absolute;
+	bottom: 5px;
+	top: 100px;
+	left: 10px;
+}
+.nav li {
+	float:left;
+	display:block;
+	width:135px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #eeeeee;
+	margin: 0px;
+	padding: 0px;
+}
+.nav li a {
+	font-size:11px;
+	outline:none;
+	color:#333;
+	text-decoration:none;
+	display:block;
+	width:130px;
+	text-transform:uppercase;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-right: 0;
+	padding-bottom: 15px;
+	padding-left: 5px;
+}
+.nav li a span { font-size:11px; color:#777; text-transform:lowercase; font-weight: normal; }
+.nav li a:hover {
+	color:#FFFFFF!important;
+	width:130px;
+	background-color: #00588F;
+}
+.nav li a:hover span {
+	color:#eeeeee!important;
+	width:130px;
+	background-color: #00588F;
+}
+* html .nav li a:hover {
+	width:129px;
+	background-color: #00588F;
+}
+/* long lables in altnav */
+.nav li.longpillar {
+	float:left;
+	display:block;
+	width:154px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #eeeeee;
+	margin: 0px;
+	padding: 0px;
+}
+.nav li.longpillar a {
+	font-size:11px;
+	outline:none;
+	color:#333;
+	text-decoration:none;
+	display:block;
+	width:149px;
+	text-transform:uppercase;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-right: 0;
+	padding-bottom: 15px;
+	padding-left: 5px;
+}
+.nav li.longpillar a span { font-size:11px; color:#777; text-transform:lowercase; font-weight: normal; }
+.nav li.longpillar a:hover {
+	color:#FFFFFF!important;
+	width:149px;
+	background-color: #00588F;
+}
+.nav li.longpillar a:hover span {
+	color:#eeeeee!important;
+	width:149px;
+	background-color: #00588F;
+}
+* html .nav li.longpillar a:hover {
+	width:148px;
+	background-color: #00588F;
+}
+/* last lables in altnav */
+.nav li.lastpillar {
+	float:left;
+	display:block;
+	width:135px;
+	border-right-width: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#blognavhead_wrap {
+	background-image: url(global_assets/main_layout/body_wraps_mid.jpg);
+	background-repeat: repeat-y;
+	background-position: center top;
+	height: 160px;
+	display: block;
+	width: 100%;
+}
+#blognavhead {
+	width: 990px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 0px;
+	background-image: url(global_assets/main_layout/7pillars_blogheader.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+	position: relative;
+	height: 160px;
+	display: block;
+	padding: 0px;
+	margin-top: 0px;
+}
+#blognavhead h1.blogtitle {
+	font-family:Arial, Helvetica, sans-serif;
+	margin:0px;
+	padding:0px;
+	line-height: 25px;
+	color: #FFFFFF;
+	font-size: 14px;
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+#blognavhead h1.blogtitle a {
+	color: #FFFFFF;
+}
+#blognavhead p.desc {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	margin:0;
+	padding:0;
+	line-height: 20px;
+	color: #eeeeee;
+	position: absolute;
+	top: 40px;
+	right: 20px;
+}
+#search input {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin: 2px;
+	background-color: #dddddd;
+	padding: 2px;
+	border: 1px solid #006699;
+}
+#search input#s {
+	border: 1px solid #006699;
+	background-color: #FFFFFF;
+	width: 155px;
+}
+#searchpage {
+	padding: 5px;
+	margin: 5px;
+}
+#searchpage input {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin: 2px;
+	background-color: #dddddd;
+	padding: 2px;
+	border: 1px solid #006699;
+}
+#searchpage input#s {
+	border: 1px solid #006699;
+	background-color: #FFFFFF;
+	width: 155px;
+}
+/*---------------------
+
+  ---------------------
+
+The Clear Fix for main layout blocks
+
+--------------------
+
+--------------------*/
+
+.clearfix {
+	display:block
+}
+.clearfix:after {
+	clear:both;
+	content:".";
+	display:block;
+	height:0;
+	visibility:hidden
+}
+.clearfloat {
+	clear: both;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+}
+.entry {
+	font-size: 12px;
+}
+abbr {
+	font-size: 11px;
+}
+
+
+
+.postheadtable {  }
+td.postheadauthor img { border: 1px solid #EEE; }
+
+img.avatar { border: 1px solid #EEE; }
+
+.social4in {
+	float: left;
+	padding:0px;
+	margin:0px;
+	height:20px;
+}
+.s4plusone{
+	float:left;
+	padding:0px;
+	width:80px;
+}
+.s4twitter {
+	float:left;
+	padding:0px;
+}
+.s4fblike {
+	float:left;
+	padding:0px;
+	margin:0px;
+	margin-left:-25px;
+}

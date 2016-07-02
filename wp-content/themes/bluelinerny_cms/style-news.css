@@ -1,0 +1,287 @@
+/*---------------------
+  ---------------------
+blog specific
+--------------------
+--------------------*/
+
+img#headertext {
+	margin-bottom: 10px;
+	display: block;
+	padding: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+#breadcrumbNews{
+	height: 28px;
+	width: 340px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	text-align: right;
+	margin: 0px;
+	padding: 0px;
+	display: block;
+}
+#breadcrumbNews ul {
+	margin: 0px;
+	padding: 0px;
+	text-align: right;
+}
+#breadcrumbNews ul li{
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+	float: left;
+	list-style-type: none;
+}
+#breadcrumbNews ul li a:link, #breadcrumbNews ul li a:visited{
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 28px;
+	padding-right: 4px;
+	padding-left: 10px;
+	text-decoration: none;
+	color: #00588F;
+	padding-top: 8px;
+}
+
+#breadcrumbNews ul li a.current{
+	background-image: url(images_news/breadcrumb_current.png);
+	background-repeat: no-repeat;
+	background-position: center bottom;
+}
+
+#breadcrumbNews ul li.current-cat a{
+	background-image: url(images_news/breadcrumb_current.png);
+	background-repeat: no-repeat;
+	background-position: center bottom;
+}
+
+/*  in the news */
+.post_title_icon {
+	background-image: url(images_news/file.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding-left: 20px;
+}
+.line-seperator {
+	height: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #dddddd;
+}
+.inthenews_date{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #999999;
+}
+/**********************************/
+/* Sidebar                        */
+/**********************************/
+#sidebar {
+	margin: 0px;
+	padding: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 14px;
+}
+#sidebar a {text-decoration:none; color: #666666;}
+#sidebar a:hover {text-decoration:none; color: #666666;}
+#sidebar h2 {
+	color:#00588F;
+	;
+	margin:0;
+	padding:0;
+	padding-left: 20px;
+	border-bottom: 1px solid #eee;
+font-family:"Times New Roman", Times, serif;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+#sidebar h2.about {background: transparent url(img/user.png) no-repeat top left;}
+#sidebar h2.cats {background: transparent url(img/folder.png) no-repeat top left;}
+#sidebar h2.cal {background: transparent url(img/cal.png) no-repeat top left;}
+#sidebar h2.search {background: transparent url(img/search.png) no-repeat top left;}
+#sidebar h2.calendar {
+	background-color: transparent;
+	background-image: url(images_news/calendar.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	color: #00588F;
+	font-size: 16px;
+	line-height: 24px;
+}
+#sidebar h2.meta {background: transparent url(img/meta.png) no-repeat top left;}
+#sidebar h2.blogroll {background: transparent url(img/link.png) no-repeat top left;}
+#sidebar h2.comment {background: transparent url(img/comment.png) no-repeat top left;}
+#sidebar ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+#sidebar ul li {
+	padding-left:16px;
+	background-image: url(images_news/arrow2_e.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+	line-height: 16px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+/*---------------------
+  ---------------------
+rss subscribe callout
+--------------------
+--------------------*/
+#multi_subscribe_form {
+	clear: both;
+	width: 240px;
+	display: block;
+	overflow: hidden;
+	background-color: #CCCCCC;
+	margin-bottom: 10px;
+	color: #333333;
+	font-size: 10px;
+	background-image: url(global_assets/callouts/multi_subscribe_bg.jpg);
+	background-repeat: no-repeat;
+	background-position: left top;
+	height: 160px;
+	margin-right: auto;
+	margin-left: auto;
+}
+p.label_checkbox_pair {
+	clear: both;
+	float: none;
+	position: relative;
+	line-height: 18px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	padding: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 5px;
+	margin-left: 0px;
+	color: #333333;
+}
+p.label_checkbox_pair input {
+	left: 97px;
+	position: absolute;
+	top: 0px;
+
+}
+p.label_checkbox_pair label {
+display: block;
+margin-left: 122px;
+width: 140px;
+}
+p.label_field_pair {
+	clear: both;
+	float: none;
+	margin-top: 35px;
+	margin-bottom: 5px;
+	position: relative;
+	width: 240px;
+	height: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #333333;
+}
+p.label_field_pair label {
+clear: left;
+display: block;
+float: left;
+text-align: right;
+width: 60px;
+}
+p.label_field_pair input {
+	clear: right;
+	float: left;
+	margin-left: 10px;
+	width: 140px;
+	font-size: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+p.go_button{
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	height: 30px;
+	width: 240px;
+}
+p.go_button input{
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	height: 30px;
+	width: 40px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #00588F;
+	line-height: 30px;
+	display: block;
+	background-image: url(global_assets/callouts/multi_subscribe_go_button.jpg);
+	background-repeat: no-repeat;
+	background-position: left 0px;
+}
+p.go_button input:hover{
+	color: #FFFFFF;
+	border-top-color: #A5D8ED;
+	border-right-color: #4FB0DB;
+	border-bottom-color: #4FB0DB;
+	border-left-color: #A5D8ED;
+	background-image: url(global_assets/callouts/multi_subscribe_go_button.jpg);
+	background-repeat: no-repeat;
+	background-position: left -30px;
+}
+#page p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 18px;
+	padding: 0px;
+	margin-top: 15px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+#page a{
+	text-decoration: none;
+	color: #00588F;
+}
+
+#page ul li {
+	line-height: 16px;
+	margin: 0px;
+	padding: 0px;
+}
+#page ul li a{
+	font-weight: bold;
+
+}
+.makerelative {
+	position: relative;
+}
+
+.post.news h2 a { 	font-family:Arial, Helvetica, sans-serif;
+	line-height:18px;
+	font-size:14px;
+	color:#312E2E;
+	font-weight:700;}
+	
+.post a img { border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; }

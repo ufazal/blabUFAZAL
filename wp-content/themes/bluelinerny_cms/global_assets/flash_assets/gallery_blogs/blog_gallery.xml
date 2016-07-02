@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simpleviewerGallery maxImageHeight="480" maxImageWidth="680" textColor="0xFFFFFF" frameColor="0xffffff" frameWidth="20" stagePadding="10" thumbnailColumns="2" thumbnailRows="3" navPosition="left" title="Blog Gallery" enableRightClickOpen="true" backgroundImagePath="" thumbPath="global_assets/flash_assets/gallery_blogs/thumbnails/" imagePath="global_assets/flash_assets/gallery_blogs/images/" >
+<image>
+
+	<filename>evolutionshift.jpg</filename>
+
+	<caption>evolutionshift</caption>
+
+</image><image>
+
+	<filename>redclay.jpg</filename>
+
+	<caption>redclaymedia</caption>
+
+</image><image>
+
+	<filename>whitespace.jpg</filename>
+
+	<caption>whitespace</caption>
+
+</image><image>
+
+	<filename>sogo.jpg</filename>
+
+	<caption>sogo invest</caption>
+
+</image><image>
+
+	<filename>completelybare.jpg</filename>
+
+	<caption>completelybare</caption>
+
+</image><image>
+
+	<filename>401kid.jpg</filename>
+
+	<caption>401kid</caption>
+
+</image>
+</simpleviewerGallery>

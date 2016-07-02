@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simpleviewerGallery maxImageHeight="480" maxImageWidth="680" textColor="0xFFFFFF" frameColor="0xffffff" frameWidth="20" stagePadding="10" thumbnailColumns="2" thumbnailRows="3" navPosition="left" title="EmailGallery" enableRightClickOpen="true" backgroundImagePath="" thumbPath="global_assets/flash_assets/gallery_email/thumbnails/" imagePath="global_assets/flash_assets/gallery_email/images/" >
+<image>
+
+	<filename>up_amnik2.jpg</filename>
+
+	<caption>Urban Prestige</caption>
+
+</image><image>
+
+	<filename>up_tara2.jpg</filename>
+
+	<caption>Tara </caption>
+
+</image><image>
+
+	<filename>401kid_newsletter_2.jpg</filename>
+
+	<caption>401kid newsletter</caption>
+
+</image><image>
+
+	<filename>sogoemail.jpg</filename>
+
+	<caption>sogo invest email</caption>
+
+</image><image>
+
+	<filename>up_newyear.jpg</filename>
+
+	<caption>new years promo</caption>
+
+</image><image>
+
+	<filename>redclay_staystrong.jpg</filename>
+
+	<caption>redclaymedia </caption>
+
+</image>
+</simpleviewerGallery>

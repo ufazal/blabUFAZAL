@@ -1,0 +1,115 @@
+/** 
+ * @package WP_Referrers
+ * wp-referrers.css - stylesheet for WP-Referrers plugin
+ */
+
+.column-rank {
+	width: 50px;
+	text-align: right;
+}
+
+.column-hits, .column-time {
+	width: 150px;
+}
+
+.column-search {
+	width: 150px;
+}
+
+.column-domain, column-referrer {
+	width: 100%;
+}
+
+.row-domain, .row-referrer {
+	cursor: pointer;
+}
+
+.domain-name {
+	font-weight: bold;
+}
+
+.collapse-holder {
+	padding: 0px !important;
+	background-color: #333;
+	border: 0px !important;
+}
+
+.collapse-div {
+	display: none;
+}
+
+.collapse-div .column-hits {
+	width: 147px !important;
+	min-width: 147px;
+}
+
+.collapse-table {
+	width: 100%;
+	margin: 0px;
+	border: 0px;
+	padding: 5px 0px !important;
+	background-color: #333;
+}
+
+.collapse-cell {
+	color: #fff;
+	margin: 0px;
+	padding: 1px 10px 1px 60px !important;
+	border: 0px !important;
+}
+
+.collapse-cell A {
+	color: #fff;
+}
+
+
+.column-keywords-headword {
+	margin: 0px;
+	padding: 0px 0px 0px 10px !important;
+	border: 0px !important;
+	width: 60px;
+}
+
+.column-keywords-headword .keywords {
+	font-family: Arial;
+	color: #fff;
+	margin: 0px;
+	border: 0px !important;
+}
+
+.column-keywords {
+	color: #fff;
+	background-color: #333;
+	margin: 0px;
+	padding: 0px 0px 0px 0px !important;
+	border: 0px !important;
+}
+
+.row-collapse {
+	background-color: #333;
+}
+
+.row-collapse:hover {
+	background-color: #666;
+}
+
+#icon-referrer-manager {
+	background-image: url(wp-referrers32.png);
+	background-repeat: no-repeat;
+	background-position: 2px 2px;
+}
+
+#referrer-keywords-list li {
+	display: inline-block;
+	list-style-type: none;
+	padding: 1px 5px;
+	margin: 1px 2px;
+	background-color: #eff2f7;
+	border: 1px solid #6d84b4;
+	color: #000;
+	font-size: 100%;
+	font-family: Arial;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
