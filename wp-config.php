@@ -67,7 +67,7 @@ define('NONCE_SALT',       'xM}-+u5ut<u}g@(RPBj`QP,tkFH+05yDUV}[_FDj|vC:KCwD,F9-
 define('WP_ALLOW_MULTISITE', true );
 define('MULTISITE', true);
 define('SUBDOMAIN_INSTALL', true);
-define('DOMAIN_CURRENT_SITE', 'local.managed.bluelinerny.com');
+define('DOMAIN_CURRENT_SITE', getenv("WPMU_CURRENT_SITE"));
 define('PATH_CURRENT_SITE', '/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
