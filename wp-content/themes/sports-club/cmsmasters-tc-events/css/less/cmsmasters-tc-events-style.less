@@ -1,0 +1,893 @@
+/**
+ * @package 	WordPress
+ * @subpackage 	Sports Club
+ * @version 	1.0.0
+ * 
+ * TC Events CSS Rules
+ * Created by CMSMasters
+ * 
+ */
+
+
+
+/*-------------------------------------------------------------------------
+
+	0.	LESS Variables + Functions
+	1. 	Globally Events Styles
+	2. 	Events Page
+	3. 	Single Event
+	4. 	Cart
+	5. 	Payment
+	6. 	Order
+	7. 	Widgets
+	8.	CSS3 Animations
+
+-------------------------------------------------------------------------*/
+
+
+
+/*-------------------------------------------------------------------------*/
+/*	0.	LESS Variables & Functions	*/
+/*-------------------------------------------------------------------------*/
+
+/***************** Variables ******************/
+
+@input_pad: 8px;
+
+@line_height_pad: 20px;
+@blocks_hor_pad: 20px;
+@cont_vert_pad: 30px;
+
+@col_mar: 1.4%;
+
+@resp_blocks_pad: 62%;
+
+@preloader_events_pad: 47.2%;
+
+
+/***************** Functions ******************/
+.fl () {
+	float:left;
+}
+
+.fr () {
+	float:right;
+}
+
+.dn () {
+	display:none;
+}
+
+.db () {
+	display:block;
+}
+
+.tal () {
+	text-align:left;
+}
+
+.tac () {
+	text-align:center;
+}
+
+.tar () {
+	text-align:right;
+}
+
+.cl () {
+	clear:both;
+}
+
+.ovh () {
+	overflow:hidden;
+}
+
+.m0a () {
+	margin:0 auto;
+}
+
+.bd (@w:1px; @t:solid) {
+	border-width:@w;
+	border-style:@t;
+}
+
+.bdt (@w:1px; @t:solid) {
+	border-top-width:@w;
+	border-top-style:@t;
+}
+
+.bdb (@w:1px; @t:solid) {
+	border-bottom-width:@w;
+	border-bottom-style:@t;
+}
+
+.bdr (@w:1px; @t:solid) {
+	border-right-width:@w;
+	border-right-style:@t;
+}
+
+.bdl (@w:1px; @t:solid) {
+	border-left-width:@w;
+	border-left-style:@t;
+}
+
+.color_white_opacity (@op:.5) {
+	color:rgba(255, 255, 255, @op);
+}
+
+.bg_white_opacity (@op:.5) {
+	background-color:rgba(255, 255, 255, @op);
+}
+
+.fullwidth_in_block () {
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+.op (@op:.5) {
+	opacity:@op;
+}
+
+.cl_after () {
+	content:'.';
+	.db;
+	.cl;
+	height:0;
+	visibility:hidden;
+	.ovh;
+}
+
+.pos_abs (@w:1em; @h:1em; @l:0; @r:0; @t:0; @b:0) {
+	width:@w;
+	height:@h;
+	margin:auto !important;
+	position:absolute;
+	left:@l;
+	right:@r;
+	top:@t;
+	bottom:@b;
+}
+
+.bdbx () {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+.ctbx () {
+	-webkit-box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	box-sizing:content-box;
+}
+
+.bdrs (@radius:5px) {
+	-webkit-border-radius:@radius;
+	border-radius:@radius;
+}
+
+.bxsh (@x:0; @y:0; @blur:5px; @spred:0; @alpha:.05) {
+	-webkit-box-shadow:@x @y @blur @spred rgba(0, 0, 0, @alpha);
+	box-shadow:@x @y @blur @spred rgba(0, 0, 0, @alpha);
+}
+
+.bxshi (@x:0; @y:0; @blur:5px; @spred:0; @alpha:.05) {
+	-webkit-box-shadow:inset @x @y @blur @spred rgba(0, 0, 0, @alpha);
+	box-shadow:inset @x @y @blur @spred rgba(0, 0, 0, @alpha);
+}
+
+.bxsh_none () {
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+
+.trans(@trans:0) when not (@trans = 0) {
+    -webkit-transition:@trans;
+    -moz-transition:@trans;
+    -ms-transition:@trans;
+    -o-transition:@trans;
+    transition:@trans;
+}
+
+.arrow_top (@h:5px; @w:5px) {
+	border-top:0 solid transparent !important;
+	border-left:@w solid transparent !important;
+	border-right:@w solid transparent !important;
+	border-bottom-width:@h;
+	border-bottom-style:solid;
+}
+
+.arrow_bottom (@h:5px; @w:5px) {
+	border-bottom:0 solid transparent !important;
+	border-left:@w solid transparent !important;
+	border-right:@w solid transparent !important;
+	border-top-width:@h;
+	border-top-style:solid;
+}
+
+.arrow_left (@h:5px; @w:5px) {
+	border-left:0 solid transparent !important;
+	border-top:@w solid transparent !important;
+	border-bottom:@w solid transparent !important;
+	border-right-width:@h;
+	border-right-style:solid;
+}
+
+.arrow_right (@h:5px; @w:5px) {
+	border-right:0 solid transparent !important;
+	border-top:@w solid transparent !important;
+	border-bottom:@w solid transparent !important;
+	border-left-width:@h;
+	border-left-style:solid;
+}
+
+.arrow_top_left (@h:5px; @w:5px) {
+	border-right:@w solid transparent !important;
+	border-left:0 solid transparent !important;
+	border-bottom:0 solid transparent !important;
+	border-top-width:@h;
+	border-top-style:solid;
+}
+
+.arrow_top_right (@h:5px; @w:5px) {
+	border-bottom:@h solid transparent !important;
+	border-top:0 solid transparent !important;
+	border-left:0 solid transparent !important;
+	border-right-width:@w;
+	border-right-style:solid;
+}
+
+.arrow_bottom_left (@h:5px; @w:5px) {
+	border-top:@h solid transparent !important;
+	border-right:0 solid transparent !important;
+	border-bottom:0 solid transparent !important;
+	border-left-width:@w;
+	border-left-style:solid;
+}
+
+.arrow_bottom_right (@h:5px; @w:5px) {
+	border-left:@w solid transparent !important;
+	border-top:0 solid transparent !important;
+	border-right:0 solid transparent !important;
+	border-bottom-width:@h;
+	border-bottom-style:solid;
+}
+
+
+
+/*-------------------------------------------------------------------------*/
+/*	1. Globally Events Styles */
+/*-------------------------------------------------------------------------*/
+
+#tickera_cart {
+	.middle_content > & {
+		padding:80px 0;
+	}
+	
+	p {
+		margin:0;
+		padding:0;
+	}
+}
+
+
+/***************** Event Icons ******************/
+.cmsmasters_theme_icon_tc_time:before { content: '\e8ae'; }
+.cmsmasters_theme_icon_tc_location:before { content: '\e881'; }
+
+
+/***************** Event Tickets ******************/
+.event_tickets {
+	border-spacing:0;
+	border-collapse:separate;
+	width:100%;
+	position:relative;
+	.ovh;
+	
+	th, 
+	td {
+		width:25%;
+		padding:0 25px;
+		vertical-align:middle;
+		position:relative;
+		.tal;
+		.ovh;
+	}
+	
+	th {
+		padding-top:4px;
+		padding-bottom:4px;
+		.bdb(5px);
+	}
+	
+	td {
+		padding-top:20px;
+		padding-bottom:20px;
+		.bdb(1px, dashed);
+	}
+	
+	select {
+		width:auto;
+		min-width:1px;
+	}
+}
+
+
+/***************** Event Errors ******************/
+.tc_cart_errors {
+	.middle_content > & {
+		margin:60px 0 0;
+	}
+	
+	> ul {
+		margin:0 0 40px;
+		padding:20px 30px;
+		.bdb(1px, dashed);
+		
+		li {
+			&:before {
+				content:none;
+			}
+		}
+	}
+}
+
+
+
+
+/*-------------------------------------------------------------------------*/
+/*	2. Events Page */
+/*-------------------------------------------------------------------------*/
+
+.cmsmasters_tc_events {
+	position:relative;
+}
+
+.cmsmasters_tc_event {
+	padding:0 0 50px;
+	position:relative;
+	.ovh;
+	
+	&:last-child {
+		padding-bottom:0;
+	}
+	
+	.cmsmasters_tc_event_img {
+		outline:none;
+	}
+	
+	.preloader {
+		display:block;
+		padding-bottom:@preloader_events_pad;
+		
+		&.highImg {
+			height:auto;
+			padding:0;
+		}
+	}
+	
+	.cmsmasters_tc_event_cont {
+		padding:30px 30px 40px;
+		position:relative;
+		.bdb(1px, dashed);
+		.ovh;
+	}
+	
+	.cmsmasters_tc_event_header {
+		padding:0;
+	}
+	
+	.cmsmasters_tc_event_title {
+		margin:0;
+	}
+	
+	.cmsmasters_tc_event_category {
+		padding:7px 0 0;
+		.ovh;
+		
+		a {
+			display:inline-block;
+			margin:0 0 0 5px;
+			padding:0 3px;
+			
+			&:first-child {
+				margin-left:0;
+				margin-right:0;
+			}
+		}
+	}
+	
+	.cmsmasters_tc_event_info {
+		padding:15px 0 0;
+		position:relative;
+		.ovh;
+		
+		span {
+			display:block;
+			margin-top:-3px;
+			padding:0 0 0 25px;
+			position:relative;
+			
+			&:before {
+				font-size:16px;
+				line-height:14px;
+				.pos_abs(1em, 1em, 0, auto);
+			}
+		}
+	}
+	
+	.cmsmasters_tc_event_content {
+		padding:17px 0 0;
+		position:relative;
+		.ovh;
+		
+		&:empty {
+			.dn;
+		}
+		
+		p {
+			margin:0;
+			padding:0;
+		}
+	}
+	
+	.cmsmasters_tc_event_ticket {
+		padding:25px 0 0;
+		position:relative;
+		.ovh;
+	}
+}
+
+
+
+/*-------------------------------------------------------------------------*/
+/*	3. Single Event */
+/*-------------------------------------------------------------------------*/
+
+.cmsmasters_open_tc_event {
+	position:relative;
+	.ovh;
+	
+	.preloader {
+		display:block;
+		padding-bottom:@preloader_events_pad;
+		
+		&.highImg {
+			height:auto;
+			padding:0;
+		}
+	}
+	
+	.cmsmasters_tc_event_cont {
+		position:relative;
+		.bdb(1px, dashed);
+		.ovh;
+	}
+	
+	.cmsmasters_tc_event_header_wrap {
+		padding:35px;
+	}
+	
+	.cmsmasters_tc_event_header {
+		padding:0;
+	}
+	
+	.cmsmasters_tc_event_title {
+		margin:0;
+	}
+	
+	.cmsmasters_tc_event_category {
+		padding:10px 0 0;
+		.ovh;
+		
+		a {
+			display:inline-block;
+			margin:0 0 0 5px;
+			padding:0 3px;
+			
+			&:first-child {
+				margin-left:0;
+				margin-right:0;
+			}
+		}
+	}
+	
+	.cmsmasters_tc_event_info {
+		padding:15px 0 0;
+		position:relative;
+		.ovh;
+		
+		span {
+			display:block;
+			margin-top:-3px;
+			padding:0 0 0 25px;
+			position:relative;
+			
+			&:before {
+				font-size:16px;
+				line-height:14px;
+				.pos_abs(1em, 1em, 0, auto);
+			}
+		}
+	}
+	
+	.cmsmasters_tc_event_img {
+		padding:30px 35px;
+		position:relative;
+		.bdt(1px, dashed);
+		.ovh;
+	}
+	
+	.cmsmasters_tc_event_content {
+		padding:20px 35px 30px;
+		position:relative;
+		.bdt(1px, dashed);
+		.ovh;
+		
+		&:empty {
+			.dn;
+		}
+		
+		> *:last-child {
+			margin:0;
+			padding:0;
+		}
+	}
+	
+	.cmsmasters_tc_event_ticket {
+		padding:50px 0 40px;
+		position:relative;
+		.ovh;
+	}
+}
+
+
+
+/*-------------------------------------------------------------------------*/
+/*	4. Cart */
+/*-------------------------------------------------------------------------*/
+
+.tickera_table {
+	border-spacing:0;
+	border-collapse:separate;
+	width:100%;
+	margin:0 0 60px;
+	position:relative;
+	.ovh;
+	
+	th, 
+	td {
+		width:20%;
+		padding:0 25px;
+		vertical-align:middle;
+		position:relative;
+		.tal;
+		.ovh;
+		
+		&:last-child {
+			.tar;
+		}
+	}
+	
+	th {
+		padding-top:4px;
+		padding-bottom:4px;
+		.bdb(5px);
+	}
+	
+	td {
+		padding-top:20px;
+		padding-bottom:20px;
+		.bdb(1px, dashed);
+	}
+	
+	.ticket_total, 
+	.cart_total_price_title, 
+	.cart_total_price {
+		font-weight:bold;
+	}
+	
+	.ticket-quantity {
+		white-space:nowrap;
+		
+		input[type=text] {
+			display:inline-block;
+			width:40px;
+			margin:0 5px;
+			.tac;
+		}
+		
+		.minus, 
+		.plus {
+			background-color:transparent;
+			font-family:Arial, Helvetica, sans-serif;
+			font-size:18px;
+			line-height:1em;
+			display:inline-block;
+			width:1em;
+			height:1em;
+			padding:0;
+			.bd(0);
+		}
+	}
+	
+	.ticket-total-all {
+		padding-bottom:35px;
+		outline:none;
+		
+		.total_item_title {
+			display:inline-block;
+			width:200px;
+			padding-top:15px;
+			padding-left:0;
+			padding-right:10px;
+			.tal;
+		}
+		
+		.total_item_amount {
+			display:inline-block;
+			width:80px;
+			padding-top:15px;
+			.tar;
+		}
+	}
+	
+	.actions {
+		background-color:transparent;
+		padding:45px 0 0;
+		.bd(0);
+		
+		.coupon-code {
+			margin-left:0;
+			margin-right:5px;
+			.fl;
+		}
+		
+		.tickera-button {
+			padding-left:15px;
+			padding-right:15px;
+			padding-top:5px;
+			padding-bottom:5px;
+			
+			&.apply_coupon {
+				.fl;
+			}
+		}
+	}
+}
+
+.owner-info-wrap {
+	margin:0 -@col_mar;
+	.ovh;
+	
+	> p {
+		.dn;
+	}
+}
+
+.fields-wrap  {
+	width:round((100% / 3) - (@col_mar * 2), 2);
+	margin:0 @col_mar 40px;
+	position:relative;
+	.ovh;
+	.fl;
+	
+	label {
+		display:block;
+		
+		span {
+			display:block;
+			padding:0 0 10px;
+		}
+	}
+}
+
+.tickera_buyer_info {
+	margin:0 -@col_mar;
+	padding:0 0 20px;
+	.ovh;
+	
+	> p {
+		.dn;
+	}
+	
+	> h3 {
+		padding:0 0 40px;
+		margin:0 @col_mar;
+	}
+}
+
+.tickera_owner_info {
+	padding:0 0 30px;
+	
+	> h2 {
+		margin:0 0 40px;
+	}
+	
+	> h5 {
+		margin:0 0 30px;
+	}
+}
+
+
+
+/*-------------------------------------------------------------------------*/
+/*	5. Payment */
+/*-------------------------------------------------------------------------*/
+
+#tc_payment_form {
+	padding:35px 30px;
+	position:relative;
+	.bdb(1px, dashed);
+	.ovh;
+	
+	.middle_content & {
+		margin:80px 0;
+	}
+}
+
+.tickera-payment-gateways {
+	padding:5px 0;
+	position:relative;
+	
+	.plugin-title {
+		margin:0;
+		padding:0;
+		overflow:visible;
+		
+		label {
+			display:inline-block;
+		}
+		
+		input {
+			margin-left:0;
+			margin-right:10px;
+			position:relative;
+			top:-1px;
+		}
+		
+		img {
+			margin-left:10px;
+			margin-right:0;
+			position:relative;
+			top:-3px;
+		}
+	}
+	
+	.tc_gateway_form {
+		padding:0 0 20px;
+		.dn;
+		.ovh;
+		
+		&.tickera-height {
+			display:block;
+		}
+		
+		> p:last-child {
+			margin:0;
+			padding:0;
+		}
+	}
+	
+	.tc_cart_direct_checkout {
+		.dn;
+	}
+	
+	.tc_redirect_message {
+		padding:25px 0 15px;
+	}
+}
+
+
+
+/*-------------------------------------------------------------------------*/
+/*	6. Order */
+/*-------------------------------------------------------------------------*/
+
+.tickera {
+	> p {
+		margin:80px 0 0;
+		padding:35px 30px 25px;
+		
+		&:empty {
+			.dn;
+		}
+		
+		> label {
+			display:block;
+			margin:15px 0 0;
+			
+			&:first-child {
+				margin-top:0;
+			}
+		}
+		
+		> br {
+			.dn;
+		}
+	}
+	
+	> label {
+		display:block;
+		margin:0 0 80px;
+		padding:25px 30px;
+		.bdb(1px, dashed);
+	}
+	
+	> hr {
+		margin:0;
+		padding:0;
+	}
+	
+	.order_details_title {
+		font-weight:bold;
+		text-transform:uppercase;
+		display:inline-block;
+		width:210px;
+	}
+}
+
+
+
+/*-------------------------------------------------------------------------*/
+/*	7. Widgets */
+/*-------------------------------------------------------------------------*/
+
+.tc_cart_widget {
+	position:relative;
+	.ovh;
+	
+	.tc_cart_contents {
+		padding:0 0 20px;
+	}
+	
+	.tc_cart_ul {
+		list-style:none;
+		margin:0;
+		padding:0;
+		
+		li {
+			margin:0;
+			padding:25px 20px;
+			.bdb(1px, dashed);
+			
+			&:first-child {
+				.bdt(1px, dashed);
+			}
+			
+			&:before {
+				content:none;
+			}
+		}
+	}
+	
+	.tc_widget_cart_button {
+		padding-left:15px;
+		padding-right:15px;
+		.fr;
+	}
+}
+
+
+
+/*-------------------------------------------------------------------------*/
+/*	8. CSS3 Animations */
+/*-------------------------------------------------------------------------*/
+
+html.csstransitions {
+	.tc_events_color {
+		.trans(~'color .3s ease-in-out');
+	}
+	
+	.cmsmasters_tc_event .cmsmasters_tc_event_category a, 
+	.cmsmasters_open_tc_event .cmsmasters_tc_event_category a {
+		.trans(~'color .3s ease-in-out, background-color .3s ease-in-out');
+	}
+	
+	.cmsmasters_tc_event .cmsmasters_tc_event_title a {
+		.trans(~'text-shadow .3s ease-in-out');
+	}
+}
+

@@ -1,0 +1,19 @@
+<wpml-config>
+    <admin-texts>
+        <key name="cmsmasters_options_sport_style_header">
+            <key name="sport_header_top_line_short_info" />
+        </key>
+        <key name="cmsmasters_options_sport_style_footer">
+            <key name="sport_footer_html" />
+            <key name="sport_footer_copyright" />
+        </key>
+        <key name="cmsmasters_options_sport_single_project">
+            <key name="sport_portfolio_project_details_title" />
+        </key>
+        <key name="cmsmasters_options_sport_single_profile">
+            <key name="sport_profile_post_details_title" />
+        </key>
+    </admin-texts>
+</wpml-config>
+
+

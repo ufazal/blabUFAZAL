@@ -1,0 +1,411 @@
+/**
+ * @package 	WordPress
+ * @subpackage 	Sports Club
+ * @version 	1.0.0
+ * 
+ * Responsive TC Events CSS Rules
+ * Created by CMSMasters
+ * 
+ */
+
+
+
+/*-------------------------------------------------------------------------
+
+	0.	LESS Variables + Functions
+	1.	Medium Monitor
+	2.	Tablet Monitor
+	3.	Small Tablet Monitor
+	4.	Tablet Monitor 600
+	5.	Phone Monitor
+
+-------------------------------------------------------------------------*/
+
+
+
+/*-------------------------------------------------------------------------*/
+/*	0.	LESS Variables & Functions	*/
+/*-------------------------------------------------------------------------*/
+
+/***************** Variables ******************/
+@line_height_pad: 20px;
+@blocks_hor_pad: 20px;
+@cont_vert_pad: 30px;
+
+@input_pad:8px;
+
+@col_mar: 1.4%;
+
+
+@monitor_large: ~'(min-width: 1440px)';
+@monitor_medium: ~'(min-width: 1025px)';
+@monitor_tablet: ~'(max-width: 1024px)';
+@monitor_tablet_950: ~'(max-width: 950px)';
+@monitor_tablet_small: ~'(max-width: 768px)';
+@monitor_tablet_600: ~'(max-width: 600px)';
+@monitor_phone: ~'(max-width: 540px)';
+@monitor_phone_small: ~'(max-width: 320px)';
+
+
+/***************** Functions ******************/
+.fl () {
+	float:left;
+}
+
+.fr () {
+	float:right;
+}
+
+.dn () {
+	display:none;
+}
+
+.db () {
+	display:block;
+}
+
+.tal () {
+	text-align:left;
+}
+
+.tac () {
+	text-align:center;
+}
+
+.tar () {
+	text-align:right;
+}
+
+.cl () {
+	clear:both;
+}
+
+.ovh () {
+	overflow:hidden;
+}
+
+.m0a () {
+	margin:0 auto;
+}
+
+.bd (@w:1px; @t:solid) {
+	border-width:@w;
+	border-style:@t;
+}
+
+.bdt (@w:1px; @t:solid) {
+	border-top-width:@w;
+	border-top-style:@t;
+}
+
+.bdb (@w:1px; @t:solid) {
+	border-bottom-width:@w;
+	border-bottom-style:@t;
+}
+
+.bdr (@w:1px; @t:solid) {
+	border-right-width:@w;
+	border-right-style:@t;
+}
+
+.bdl (@w:1px; @t:solid) {
+	border-left-width:@w;
+	border-left-style:@t;
+}
+
+.color_white_opacity (@op:.5) {
+	color:rgba(255, 255, 255, @op);
+}
+
+.bg_white_opacity (@op:.5) {
+	background-color:rgba(255, 255, 255, @op);
+}
+
+.fullwidth_in_block () {
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+.op (@op:.5) {
+	opacity:@op;
+}
+
+.cl_after () {
+	content:'.';
+	.db;
+	.cl;
+	height:0;
+	visibility:hidden;
+	.ovh;
+}
+
+.pos_abs (@w:1em; @h:1em; @l:0; @r:0; @t:0; @b:0) {
+	width:@w;
+	height:@h;
+	margin:auto !important;
+	position:absolute;
+	left:@l;
+	right:@r;
+	top:@t;
+	bottom:@b;
+}
+
+.bdbx () {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+.ctbx () {
+	-webkit-box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	box-sizing:content-box;
+}
+
+.bdrs (@radius:5px) {
+	-webkit-border-radius:@radius;
+	border-radius:@radius;
+}
+
+.bxsh (@x:0; @y:0; @blur:5px; @spred:0; @alpha:.05) {
+	-webkit-box-shadow:@x @y @blur @spred rgba(0, 0, 0, @alpha);
+	box-shadow:@x @y @blur @spred rgba(0, 0, 0, @alpha);
+}
+
+.bxshi (@x:0; @y:0; @blur:5px; @spred:0; @alpha:.05) {
+	-webkit-box-shadow:inset @x @y @blur @spred rgba(0, 0, 0, @alpha);
+	box-shadow:inset @x @y @blur @spred rgba(0, 0, 0, @alpha);
+}
+
+.bxsh_none () {
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+
+.trans(@trans:0) when not (@trans = 0) {
+    -webkit-transition:@trans;
+    -moz-transition:@trans;
+    -ms-transition:@trans;
+    -o-transition:@trans;
+    transition:@trans;
+}
+
+.arrow_top (@h:5px; @w:5px) {
+	border-top:0 solid transparent !important;
+	border-left:@w solid transparent !important;
+	border-right:@w solid transparent !important;
+	border-bottom-width:@h;
+	border-bottom-style:solid;
+}
+
+.arrow_bottom (@h:5px; @w:5px) {
+	border-bottom:0 solid transparent !important;
+	border-left:@w solid transparent !important;
+	border-right:@w solid transparent !important;
+	border-top-width:@h;
+	border-top-style:solid;
+}
+
+.arrow_left (@h:5px; @w:5px) {
+	border-left:0 solid transparent !important;
+	border-top:@w solid transparent !important;
+	border-bottom:@w solid transparent !important;
+	border-right-width:@h;
+	border-right-style:solid;
+}
+
+.arrow_right (@h:5px; @w:5px) {
+	border-right:0 solid transparent !important;
+	border-top:@w solid transparent !important;
+	border-bottom:@w solid transparent !important;
+	border-left-width:@h;
+	border-left-style:solid;
+}
+
+.arrow_top_left (@h:5px; @w:5px) {
+	border-right:@w solid transparent !important;
+	border-left:0 solid transparent !important;
+	border-bottom:0 solid transparent !important;
+	border-top-width:@h;
+	border-top-style:solid;
+}
+
+.arrow_top_right (@h:5px; @w:5px) {
+	border-bottom:@h solid transparent !important;
+	border-top:0 solid transparent !important;
+	border-left:0 solid transparent !important;
+	border-right-width:@w;
+	border-right-style:solid;
+}
+
+.arrow_bottom_left (@h:5px; @w:5px) {
+	border-top:@h solid transparent !important;
+	border-right:0 solid transparent !important;
+	border-bottom:0 solid transparent !important;
+	border-left-width:@w;
+	border-left-style:solid;
+}
+
+.arrow_bottom_right (@h:5px; @w:5px) {
+	border-left:@w solid transparent !important;
+	border-top:0 solid transparent !important;
+	border-right:0 solid transparent !important;
+	border-bottom-width:@h;
+	border-bottom-style:solid;
+}
+
+
+
+@media only screen {
+	/*-------------------------------------------------------------------------*/
+	/*	1. Medium Monitor
+	/*-------------------------------------------------------------------------*/
+	@media @monitor_medium {
+		.tickera_table {
+			outline:none;
+		}
+	}
+	
+	
+	
+	/*-------------------------------------------------------------------------*/
+	/*	2.	Tablet Monitor
+	/*-------------------------------------------------------------------------*/
+	@media @monitor_tablet {
+		.tickera_table {
+			outline:none;
+		}
+	}
+	
+	
+	
+	/*-------------------------------------------------------------------------*/
+	/*	3.	Small Tablet Monitor
+	/*-------------------------------------------------------------------------*/	
+	@media @monitor_tablet_small {		
+		.tickera_table {
+			display:block;
+			width:auto;
+			
+			thead {
+				.dn;
+			}
+			
+			tbody, 
+			tr, 
+			th, 
+			td {
+				display:block;
+				width:auto;
+			}
+			
+			tr {
+				margin:0 0 30px;
+				.ovh;
+				
+				&:last-child {
+					margin-bottom:0;
+				}
+			}
+			
+			td, 
+			td.ticket-total, 
+			td.ticket-total-all {
+				.tac;
+			}
+		}
+		
+		.tickera_table {
+			.actions {
+				&:last-child {
+					.tac;
+				}
+				
+				.coupon-code {
+					display:block;
+					float:none;
+					margin:0 0 10px;
+				}
+				
+				.tickera-button {
+					&.apply_coupon {
+						float:none;
+						.cl;
+					}
+				}
+				
+				.coupon-code-message {
+					display:block;
+					margin:15px 0;
+				}
+			}
+		}
+	}
+	
+	
+	
+	/*-------------------------------------------------------------------------*/
+	/*	4.	Tablet Monitor 600
+	/*-------------------------------------------------------------------------*/	
+	@media @monitor_tablet_600 {		
+		.event_tickets {
+			display:block;
+			width:auto;
+			
+			tbody, 
+			tr {
+				display:block;
+				width:auto;
+			}
+			
+			tr {
+				margin:0 0 30px;
+				
+				&:first-child, 
+				&:last-child {
+					margin-bottom:0;
+				}
+			}
+			
+			th {
+				.dn;
+			}
+			
+			td {
+				display:block;
+				width:auto;
+				.tac;
+			}
+		}
+	}
+	
+	
+	
+	/*-------------------------------------------------------------------------*/
+	/*	5.	Phone Monitor
+	/*-------------------------------------------------------------------------*/
+	@media @monitor_phone {
+		.tickera_table {
+			.ticket-total-all {
+				.total_item_title {
+					width:50%;
+				}
+				
+				.total_item_amount {
+					width:50%;
+				}
+			}
+		}
+		
+		.fields-wrap  {
+			width:round(100% - (@col_mar * 2), 2);
+			float:none;
+			.cl;
+		}
+	}
+}
+
+

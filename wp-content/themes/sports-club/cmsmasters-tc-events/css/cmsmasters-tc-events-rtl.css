@@ -1,0 +1,131 @@
+/**
+ * @package 	WordPress
+ * @subpackage 	Sports Club
+ * @version 	1.0.0
+ * 
+ * TC Events RTL Rules
+ * Created by CMSMasters
+ * 
+ */
+
+
+.event_tickets th,
+.event_tickets td {
+	text-align: right;
+}
+
+.cmsmasters_tc_event .cmsmasters_tc_event_category a {
+	margin-left: 0;
+	margin-right: 5px;
+}
+
+.cmsmasters_tc_event .cmsmasters_tc_event_info span {
+	padding-left: 0;
+	padding-right: 25px;
+}
+
+.cmsmasters_tc_event .cmsmasters_tc_event_info span:before {
+	left: auto;
+	right: 0;
+}
+
+.cmsmasters_open_tc_event .cmsmasters_tc_event_category a {
+	margin-left: 0;
+	margin-right: 5px;
+}
+
+.cmsmasters_open_tc_event .cmsmasters_tc_event_info span {
+	padding-left: 0;
+	padding-right: 25px;
+}
+
+.cmsmasters_open_tc_event .cmsmasters_tc_event_info span:before {
+	left: auto;
+	right: 0;
+}
+
+.tickera_table th,
+.tickera_table td {
+	text-align: right;
+}
+
+.tickera_table th:last-child,
+.tickera_table td:last-child {
+	text-align: left;
+}
+
+.tickera_table .ticket-quantity input[type=text] {
+	text-align: center;
+}
+
+.tickera_table .ticket-total-all .total_item_title {
+	padding-left: 10px;
+	padding-right: 0;
+	text-align: right;
+}
+
+.tickera_table .ticket-total-all .total_item_amount {
+	text-align: left;
+}
+
+.tickera_table .actions .coupon-code {
+	margin-left: 5px;
+	margin-right: 0;
+	float: right;
+}
+
+.tickera_table .actions .tickera-button.apply_coupon {
+	float: right;
+}
+
+.fields-wrap {
+	float: right;
+}
+
+.tickera-payment-gateways .plugin-title input {
+	margin-left: 10px;
+	margin-right: 0;
+}
+
+.tickera-payment-gateways .plugin-title img {
+	margin-left: 0;
+	margin-right: 10px;
+}
+
+.tc_cart_widget .tc_widget_cart_button {
+	float: left;
+}
+
+
+@media only screen and (max-width: 768px) {
+	.tickera_table td,
+	.tickera_table td.ticket-total,
+	.tickera_table td.ticket-total-all {
+		text-align: center;
+	}
+
+	.tickera_table .actions:last-child {
+		text-align: center;
+	}
+
+	.tickera_table .actions .coupon-code {
+		float: none;
+	}
+
+	.tickera_table .actions .tickera-button.apply_coupon {
+		float: none;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.event_tickets td {
+		text-align: center;
+	}
+}
+
+@media only screen and (max-width: 540px) {
+	.fields-wrap {
+		float: none;
+	}
+}
+
