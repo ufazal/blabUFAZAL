@@ -1,0 +1,407 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Thinker\n"
+"POT-Creation-Date: 2014-12-03 12:04+0100\n"
+"PO-Revision-Date: 2014-12-03 12:04+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.9\n"
+"X-Poedit-Basepath: ../\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;_nx\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../thinker/404.php:20
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: ../thinker/404.php:30
+msgid ""
+"It looks like nothing was found at this location. Maybe try one of the links "
+"below or a search?"
+msgstr ""
+
+#: ../thinker/404.php:36
+msgid "Most Used Categories"
+msgstr ""
+
+#. translators: %1$s: smiley
+#: ../thinker/404.php:52
+#, php-format
+msgid "Try looking in the monthly archives. %1$s"
+msgstr ""
+
+#: ../thinker/archive.php:29
+#, php-format
+msgid "Author: %s"
+msgstr ""
+
+#: ../thinker/archive.php:31
+#, php-format
+msgid "Day: %s"
+msgstr ""
+
+#: ../thinker/archive.php:33
+#, php-format
+msgid "Month: %s"
+msgstr ""
+
+#: ../thinker/archive.php:35
+#, php-format
+msgid "Year: %s"
+msgstr ""
+
+#: ../thinker/archive.php:37
+msgid "Asides"
+msgstr ""
+
+#: ../thinker/archive.php:39
+msgid "Galleries"
+msgstr ""
+
+#: ../thinker/archive.php:41
+msgid "Images"
+msgstr ""
+
+#: ../thinker/archive.php:43
+msgid "Videos"
+msgstr ""
+
+#: ../thinker/archive.php:45
+msgid "Quotes"
+msgstr ""
+
+#: ../thinker/archive.php:47
+msgid "Links"
+msgstr ""
+
+#: ../thinker/archive.php:49
+msgid "Statuses"
+msgstr ""
+
+#: ../thinker/archive.php:51
+msgid "Audios"
+msgstr ""
+
+#: ../thinker/archive.php:53
+msgid "Chats"
+msgstr ""
+
+#: ../thinker/archive.php:55
+msgid "Archives"
+msgstr ""
+
+#: ../thinker/comments.php:26
+#, php-format
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgstr ""
+
+#: ../thinker/comments.php:32 ../thinker/comments.php:50
+msgid "Comment navigation"
+msgstr ""
+
+#: ../thinker/comments.php:33 ../thinker/comments.php:51
+msgid "<span class=\"meta-nav\">&larr;</span> Older Comments"
+msgstr ""
+
+#: ../thinker/comments.php:34 ../thinker/comments.php:52
+msgid "Newer Comments <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: ../thinker/comments.php:60
+msgid "Comments are closed."
+msgstr ""
+
+#: ../thinker/content-archive.php:15 ../thinker/content-aside.php:16
+#: ../thinker/content-image.php:27 ../thinker/content-quote.php:17
+#: ../thinker/content-single.php:17 ../thinker/content-video.php:29
+#: ../thinker/content.php:27
+#, php-format
+msgid "All %s posts"
+msgstr ""
+
+#: ../thinker/content-archive.php:17 ../thinker/content-archive.php:65
+#: ../thinker/content-aside.php:18 ../thinker/content-frontgrid.php:27
+#: ../thinker/content-grid.php:25 ../thinker/content-image.php:29
+#: ../thinker/content-page.php:20 ../thinker/content-quote.php:20
+#: ../thinker/content-single.php:19 ../thinker/content-single.php:68
+#: ../thinker/content-video.php:31 ../thinker/content.php:29
+#: ../thinker/inc/template-tags.php:77 ../thinker/inc/template-tags.php:107
+#: ../thinker/page-templates/portfolio-page.php:43
+msgid "Edit"
+msgstr ""
+
+#: ../thinker/content-archive.php:20 ../thinker/content-aside.php:21
+#: ../thinker/content-image.php:32 ../thinker/content-portfolio-single.php:31
+#: ../thinker/content-quote.php:22 ../thinker/content-single.php:22
+#: ../thinker/content-video.php:34 ../thinker/content.php:32
+msgid "Leave a comment"
+msgstr ""
+
+#: ../thinker/content-archive.php:20 ../thinker/content-aside.php:21
+#: ../thinker/content-image.php:32 ../thinker/content-portfolio-single.php:31
+#: ../thinker/content-quote.php:22 ../thinker/content-single.php:22
+#: ../thinker/content-video.php:34 ../thinker/content.php:32
+msgid "1 Comment"
+msgstr ""
+
+#: ../thinker/content-archive.php:20 ../thinker/content-aside.php:21
+#: ../thinker/content-image.php:32 ../thinker/content-portfolio-single.php:31
+#: ../thinker/content-quote.php:22 ../thinker/content-single.php:22
+#: ../thinker/content-video.php:34 ../thinker/content.php:32
+msgid "% Comments"
+msgstr ""
+
+#: ../thinker/content-archive.php:32 ../thinker/content-aside.php:32
+#: ../thinker/content-image.php:44 ../thinker/content-page.php:13
+#: ../thinker/content-quote.php:27 ../thinker/content-single.php:34
+#: ../thinker/content-video.php:46 ../thinker/content.php:44
+#: ../thinker/page-templates/portfolio-page.php:36
+msgid "Pages:"
+msgstr ""
+
+#. translators: used between list items, there is a space after the comma
+#: ../thinker/content-archive.php:40 ../thinker/content-archive.php:42
+#: ../thinker/content-single.php:43 ../thinker/content-single.php:45
+msgid ", "
+msgstr ""
+
+#: ../thinker/content-archive.php:46 ../thinker/content-single.php:49
+#, php-format
+msgid ""
+"This entry was tagged %2$s. Bookmark the <a href=\"%3$s\" rel=\"bookmark"
+"\">permalink</a>."
+msgstr ""
+
+#: ../thinker/content-archive.php:48 ../thinker/content-single.php:51
+#, php-format
+msgid "Bookmark the <a href=\"%3$s\" rel=\"bookmark\">permalink</a>."
+msgstr ""
+
+#: ../thinker/content-archive.php:53 ../thinker/content-single.php:56
+#, php-format
+msgid ""
+"This entry was posted in %1$s and tagged %2$s. Bookmark the <a href=\"%3$s\" "
+"rel=\"bookmark\">permalink</a>."
+msgstr ""
+
+#: ../thinker/content-archive.php:55 ../thinker/content-single.php:58
+#, php-format
+msgid ""
+"This entry was posted in %1$s. Bookmark the <a href=\"%3$s\" rel=\"bookmark"
+"\">permalink</a>."
+msgstr ""
+
+#: ../thinker/content-aside.php:13 ../thinker/content-image.php:41
+#: ../thinker/content-quote.php:13 ../thinker/content-video.php:43
+#: ../thinker/content.php:41 ../thinker/functions.php:224
+msgid "Read More"
+msgstr ""
+
+#: ../thinker/content-single.php:74
+msgid "by "
+msgstr ""
+
+#: ../thinker/functions.php:60
+msgid "Primary Menu"
+msgstr ""
+
+#: ../thinker/functions.php:61
+msgid "Social"
+msgstr ""
+
+#: ../thinker/functions.php:75
+msgid "Sidebar"
+msgstr ""
+
+#: ../thinker/functions.php:83
+msgid "Footer Widget Area"
+msgstr ""
+
+#: ../thinker/functions.php:91
+msgid "Front Page"
+msgstr ""
+
+#: ../thinker/functions.php:196
+msgid "&hellip;"
+msgstr ""
+
+#: ../thinker/header.php:28
+msgid "Menu"
+msgstr ""
+
+#: ../thinker/header.php:30
+msgid "Skip to content"
+msgstr ""
+
+#: ../thinker/inc/customizer.php:19
+msgid "Theme Options"
+msgstr ""
+
+#: ../thinker/inc/customizer.php:29
+msgid "Front Page: Featured Page One"
+msgstr ""
+
+#: ../thinker/inc/customizer.php:41
+msgid "Front Page: Featured Page Two"
+msgstr ""
+
+#: ../thinker/inc/customizer.php:53
+msgid "Front Page: Featured Page Three"
+msgstr ""
+
+#: ../thinker/inc/customizer.php:62 ../thinker/inc/customizer.php:70
+msgid "Logo"
+msgstr ""
+
+#: ../thinker/inc/customizer.php:118 ../thinker/inc/customizer.php:129
+msgid "Favicon"
+msgstr ""
+
+#: ../thinker/inc/customizer.php:141
+msgid ""
+"Change color of the white background elements like footer,header background "
+"etc."
+msgstr ""
+
+#: ../thinker/inc/customizer.php:151
+msgid ""
+"Change color of the light gray background and border elements like buttons "
+"and borders etc."
+msgstr ""
+
+#: ../thinker/inc/extras.php:66
+#, php-format
+msgid "Page %s"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:34
+msgid "Post navigation"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:38
+msgid "<span class=\"meta-nav\">Previous testimonial</span>"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:39
+msgid "Next testimonial"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:42
+msgid "<span class=\"meta-nav\">View the post</span>"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:45
+msgid "<span class=\"meta-nav\">Previous post</span>"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:46
+msgid "Next post"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:51
+msgid "Older posts"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:56
+msgid "Newer posts"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:77
+msgid "Pingback:"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:93
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:124
+#, php-format
+msgid ""
+"<span class=\"sticky-post\">Sticky</span><span class=\"byline\"><span class="
+"\"author vcard\"><a class=\"url fn n\" href=\"%1$s\" title=\"%2$s\" rel="
+"\"author\">%3$s</a></span></span>"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:126 ../thinker/inc/template-tags.php:136
+#, php-format
+msgid "View all posts by %s"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:130
+#, php-format
+msgid ""
+"<span class=\"entry-date\"><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark"
+"\"><time class=\"entry-date\" datetime=\"%3$s\">%4$s</time></a></span> <span "
+"class=\"byline\"><span class=\"author vcard\"><a class=\"url fn n\" href="
+"\"%5$s\" title=\"%6$s\" rel=\"author\">%7$s</a></span></span>"
+msgstr ""
+
+#: ../thinker/inc/template-tags.php:220
+#, php-format
+msgid "View <span class=\"screen-reader-text\">%1s</span>"
+msgstr ""
+
+#: ../thinker/inc/widgets.php:15
+msgid "3 Column Recents Posts Widget."
+msgstr ""
+
+#: ../thinker/inc/widgets.php:16
+msgid "Thinker Front Page: 3 Column Recent Posts"
+msgstr ""
+
+#: ../thinker/inc/widgets.php:42 ../thinker/inc/widgets.php:46
+#, php-format
+msgid "Permalink to %s"
+msgstr ""
+
+#: ../thinker/inc/widgets.php:69
+msgid "Title:"
+msgstr ""
+
+#: ../thinker/inc/widgets.php:71
+msgid "Number of posts to show:"
+msgstr ""
+
+#: ../thinker/inc/widgets.php:73
+msgid "Category slug (optional, separate multiple categories by comma):"
+msgstr ""
+
+#: ../thinker/no-results.php:13
+#: ../thinker/page-templates/portfolio-page.php:73 ../thinker/search.php:24
+msgid "Nothing Found"
+msgstr ""
+
+#: ../thinker/no-results.php:18
+#, php-format
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: ../thinker/no-results.php:20
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: ../thinker/no-results.php:23
+#: ../thinker/page-templates/portfolio-page.php:79
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: ../thinker/page-templates/portfolio-page.php:77
+#, php-format
+msgid ""
+"Ready to publish your first project? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: ../thinker/search.php:22
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
