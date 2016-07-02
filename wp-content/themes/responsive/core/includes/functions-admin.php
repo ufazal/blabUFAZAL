@@ -1,4 +1,4 @@
-<?php  ?><?php?><?php
+<?php
 
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) {
@@ -39,8 +39,13 @@ function responsive_upgrade_bar() {
 					style="border:none; overflow:hidden; width:200px; height:21px;" allowTransparency="true"></iframe>
 			</div>
 		</div>
+		
+	
 	</div>
-
+	<div class="updated">
+		<p><strong><?php _e('<a href="http://cyberchimps.com/store/responsivepro/" target="_blank" title="Responsive Pro">Responsive Pro</a> allows you to create Sliders using 13 Dynamic Sources like YouTube, Vimeo, Pinterest and more.
+Upgrade to <a href="http://cyberchimps.com/store/responsivepro/" target="_blank" title="Responsive Pro">Responsive Pro</a> Today.','responsive'); ?></strong></p>
+	</div>
 <?php
 }
 
@@ -88,28 +93,8 @@ function responsive_install_plugins() {
 			'required' => false
 		),
 		array(
-			'name'     => 'Clef', // The plugin name
-			'slug'     => 'wpclef', // The plugin slug (typically the folder name)
-			'required' => false
-		),
-		array(
-			'name'     => 'FooBox Image Lightbox', // The plugin name
-			'slug'     => 'foobox-image-lightbox', // The plugin slug (typically the folder name)
-			'required' => false
-		),
-		array(
 			'name'     => 'iFeature Slider', // The plugin name
 			'slug'     => 'ifeature-slider', // The plugin slug (typically the folder name)
-			'required' => false
-		),
-		array(
-			'name'     => 'Wp Product Review', // The plugin name
-			'slug'     => 'wp-product-review', // The plugin slug (typically the folder name)
-			'required' => false
-		),
-		array(
-			'name'     => 'Tweet Old Post', // The plugin name
-			'slug'     => 'tweet-old-post', // The plugin slug (typically the folder name)
 			'required' => false
 		)
 	);

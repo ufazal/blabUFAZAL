@@ -35,6 +35,14 @@ jQuery('.'+args).html('');
         return false;
        }
        });
+
+        $('#counter_enable_options_y').click(function(){
+            $('.apss-counter-api-options').show();
+        });
+         $('#counter_enable_options_n').click(function(){
+            $('.apss-counter-api-options').hide();
+        });
+
     });//document.ready close
 
 }(jQuery));

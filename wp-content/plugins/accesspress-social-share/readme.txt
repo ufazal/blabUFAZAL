@@ -1,10 +1,10 @@
-﻿=== AccessPress Social Share ===
+﻿=== Social Share WordPress Plugin - AccessPress Social Share ===
 Contributors: Access Keys
 Tags: social share counter, social share, social media share, social network share, social media, social network, share counter, social share count, social url share, social icons
 Donate link: http://accesspressthemes.com/donation/
 Requires at least: 3.8
-Tested up to: 4.3
-Stable tag: 4.0.1
+Tested up to: 4.5
+Stable tag: 4.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,6 +131,48 @@ Yes. You can use the AccessPress social share by using shortcode anywhere you wa
 6. Backend Miscellaneous Settings Section
 
 == Changelog ==
+= 4.1.3 =
+* Removed unnecessary codes from count shortcode.
+* Done the bug fixings for the popup share issue for facebook and linkedin.
+
+= 4.1.2 =
+* Changed the priority of the_content filter to make the plugin compactible with "Advanced Ads" plugin.
+* Updated the 'apss_count' shortcode to support multiple networks. Please see "how to use" tab for more information.
+
+= 4.1.1 =
+* Added options to disable the cache for the url share counts.
+* Added an option to enable the social share in popup window.
+
+= 4.1.0 =
+* Done the addition of additional parameter custom_share_link in the shortcode for apss_share.
+* Added the note section for the available parameters in email settings.
+
+= 4.0.9 =
+* Done the bug fixing for the backend options.
+
+= 4.0.8 =
+* Done the bug fixing for the issue related to the_content filter hook for Yoast SEO plugin.
+
+= 4.0.7 =
+* Removal of unnecessary codes for the twitter share counts using third party API.
+* Addition of language file for fr_CA
+
+= 4.0.6 =
+* Addition of note section for the new twitter share count options.
+
+= 4.0.5 =
+* Fixed small bug for the twitter counter api selection issue.
+* Fixed undefined index issue for the twitter counter.
+
+= 4.0.4 =
+* Addition of options to enable OpenShareCount and NewShareCounts for fetching the twitter share counts.
+
+= 4.0.3 =
+* Removal of unncessary commented codes from twitter share.
+
+= 4.0.2 =
+* Addition of the new shortcodes to replace apss-share to apss_share and apss-count to apss_count. Both shortcodes can be used but in the future updates will remove the shortcodes with hyphen as it is not recommened.
+
 = 4.0.1 =
 * Removal of the twitter share count as twitter depreceate the url share count.
 

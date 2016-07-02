@@ -196,7 +196,7 @@
 
                         // Tell the modal to show only images.
                         library: {
-                            type: $$.data('library').split(',').map(function(v){ return v.trim() })
+                            type: $$.data('library').split(',').map(function(v){ return v.trim(); })
                         },
 
                         // Customize the submit button.
@@ -351,10 +351,12 @@
                         container.append(icon);
 
                         if( $v.val() === family + '-' + i ) {
-                            if( !icon.hasClass('siteorigin-widget-active') ) {
-                                // This is becoming active, so simulate a click
-                                icon.click();
-                            }
+							// Add selected icon to the button.
+							$b.find('span')
+								.show()
+								.attr( 'data-sow-icon', icon.attr('data-sow-icon') )
+								.attr( 'class', '' )
+								.addClass( 'sow-icon-' + family );
                             icon.addClass('siteorigin-widget-active');
                         }
                     }
@@ -367,6 +369,13 @@
                 var changeIconFamily = function(){
                     // Fetch the family icons from the server
                     var family = $is.find('select.siteorigin-widget-icon-family').val();
+
+	                var dataIcons = $is.find('select.siteorigin-widget-icon-family option:selected' ).data('icons');
+	                if( dataIcons !== null ) {
+		                iconWidgetCache[family] = dataIcons;
+	                }
+
+
                     if(typeof family === 'undefined' || family === '') {
                         return;
                     }
@@ -454,7 +463,7 @@
                 // Toggle display of the existing content
                 $$.find('.select-content-button, .button-close').click( function(e) {
                     e.preventDefault();
-                    
+
                     $(this).blur();
                     var $s = $$.find('.existing-content-selector');
                     $s.toggle();
@@ -484,6 +493,15 @@
                     }, 500);
                 } );
             } );
+
+	        ///////////////////////////////////////
+	        // Setup the Builder fields
+	        if( typeof jQuery.fn.soPanelsSetupBuilderWidget !== 'undefined' ) {
+		        $fields.filter( '.siteorigin-widget-field-type-builder' ).each( function(){
+			        var $$ = $(this);
+			        $$.find('> .siteorigin-page-builder-field' ).soPanelsSetupBuilderWidget();
+		        } );
+	        }
 
             ///////////////////////////////////////
             // Now lets handle the state emitters
@@ -742,9 +760,11 @@
                     });
             } );
 
-            $el.find('> .siteorigin-widget-field-repeater-top > .siteorigin-widget-field-repeater-expend').click( function(e){
+            $el.find('> .siteorigin-widget-field-repeater-top > .siteorigin-widget-field-repeater-expand').click( function(e){
                 e.preventDefault();
-                $el.closest('.siteorigin-widget-field-repeater').find('> .siteorigin-widget-field-repeater-items').slideToggle('fast');
+                $el.closest('.siteorigin-widget-field-repeater').find('> .siteorigin-widget-field-repeateritems-').slideToggle('fast', function() {
+					$(window).resize();
+				});
             } );
         } );
     };
@@ -834,6 +854,7 @@
                     }
                     e.preventDefault();
                     $(this).closest('.siteorigin-widget-field-repeater-item').find('.siteorigin-widget-field-repeater-item-form').eq(0).slideToggle('fast', function () {
+						$(window).resize();
                         if($(this).is(':visible')) {
                             $(this).trigger('slideToggleOpenComplete');
                         }

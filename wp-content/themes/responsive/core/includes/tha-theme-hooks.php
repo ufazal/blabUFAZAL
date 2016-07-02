@@ -1,4 +1,4 @@
-<?php  ?><?php?><?php
+<?php
 /**
  * Theme Hook Alliance hook stub list.
  *

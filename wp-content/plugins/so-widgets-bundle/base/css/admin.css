@@ -24,6 +24,12 @@
 .siteorigin-widget-form .siteorigin-widget-field label.siteorigin-widget-field-label {
   font-weight: bold;
 }
+.siteorigin-widget-form .siteorigin-widget-field label.so-checkbox-label {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 .siteorigin-widget-form .siteorigin-widget-field .siteorigin-widget-field-description {
   font-size: 0.9em;
   margin-top: 0.2em;
@@ -143,7 +149,7 @@
   color: #999999;
 }
 .siteorigin-widget-form .siteorigin-widget-field-repeater .siteorigin-widget-field-expand {
-  right: 12px;
+  right: 48px;
 }
 .siteorigin-widget-form .siteorigin-widget-field-repeater .siteorigin-widget-field-expand:before {
   content: "\f140";
@@ -161,7 +167,7 @@
   color: #50575D;
 }
 .siteorigin-widget-form .siteorigin-widget-field-repeater .siteorigin-widget-field-remove {
-  right: 48px;
+  right: 12px;
 }
 .siteorigin-widget-form .siteorigin-widget-field-repeater .siteorigin-widget-field-remove:before {
   content: '\f158';
@@ -452,7 +458,7 @@
 }
 .siteorigin-widget-form .siteorigin-widget-field-type-link .existing-content-selector .posts.loading {
   min-height: 40px;
-  background: #ffffff url("img/wpspin_light.gif") center center no-repeat;
+  background: #FFFFFF url("img/wpspin_light.gif") center center no-repeat;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .siteorigin-widget-form .siteorigin-widget-field-type-link .existing-content-selector .posts.loading {
@@ -604,6 +610,10 @@
 .siteorigin-widgets-query-builder .query-builder-content .query-builder-form-field input[type="number"] {
   width: 150px;
 }
+.siteorigin-widgets-query-builder .query-builder-content .query-builder-form-field input[type="date"] {
+  width: 150px;
+  margin: 0 10px;
+}
 .siteorigin-widgets-query-builder .query-builder-content .query-builder-form-field .sow-order-button {
   display: inline-block;
   width: 19px;
@@ -659,7 +669,7 @@
   text-align: center;
 }
 .siteorigin-widgets-query-builder .sow-post-selector-summary.sow-post-loading .sow-thumbnail {
-  background: url(img/loading.gif) center center no-repeat #eeeeee;
+  background: url(img/loading.gif) center center no-repeat #EEEEEE;
 }
 .siteorigin-widgets-query-builder .sow-post-selector-summary.sow-post-loading .sow-thumbnail img {
   display: none;
@@ -722,6 +732,23 @@
   display: table;
   clear: both;
 }
+.siteorigin-widgets-query-builder .media-modal-close .media-modal-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-decoration: none;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  color: #666666;
+  text-align: center;
+}
+.siteorigin-widgets-query-builder .media-modal-close .media-modal-icon:before {
+  font: 400 20px/1em dashicons;
+  top: 7px;
+  left: 13px;
+}
 .siteorigin-widget-preview {
   display: block !important;
 }
@@ -753,7 +780,7 @@
   top: 30px;
   height: 50px;
   background: #fafafa;
-  border-bottom: 1px solid #d8d8d8;
+  border-bottom: 1px solid #D8D8D8;
 }
 .siteorigin-widget-preview-dialog .so-widget-toolbar h3 {
   margin: 15px 0 15px 20px;
@@ -799,7 +826,7 @@
   left: 30px;
   right: 30px;
   bottom: 30px;
-  background: #ffffff url("img/wpspin_light.gif") center center no-repeat;
+  background: #FFFFFF url("img/wpspin_light.gif") center center no-repeat;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .siteorigin-widget-preview-dialog .so-widget-iframe {

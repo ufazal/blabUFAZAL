@@ -91,7 +91,7 @@
 
 					<p><input type="checkbox" id="apss_front_page" value="front_page" name="apss_share_settings[share_options][]" <?php if ( in_array( "front_page", $options['share_options'] ) ) {
 	echo "checked='checked'";
-} ?> ><label for="apss_front_page"><?php _e( 'Front Page', 'accesspress-social-share' ); ?></label></p>		
+} ?> ><label for="apss_front_page"><?php _e( 'Front Page', 'accesspress-social-share' ); ?></label></p>
 					<p><input type="checkbox" id="apss_archives" value="archives" name="apss_share_settings[share_options][]" <?php if ( in_array( "archives", $options['share_options'] ) ) {
 	echo "checked='checked'";
 } ?> ><label for="apss_archives"><?php _e( 'Archives', 'accesspress-social-share' ); ?></label></p>
@@ -175,6 +175,32 @@
 } ?> /><label for="counter_enable_options_y"><?php _e( 'Yes', 'accesspress-social-share' ); ?></label></div>
 					</div>
 
+					<div class="apss-counter-api-options apss-counter-settings clearfix" style="<?php if(isset($options['counter_enable_options']) && $options['counter_enable_options'] == '1'){ echo 'display:block'; }else{ echo 'display:none'; } ?>">
+						<div class='apss-counter-api'>
+							<input type="radio" id='apss_twitter_counter_option' name="apss_share_settings[twitter_counter_api]" value="1" <?php if(isset($options['twitter_counter_api'])){ if($options['twitter_counter_api'] == '1') {
+							echo "checked='checked'";
+							} } ?> />
+							<label for="apss_twitter_counter_option"><?php _e( "Don't show Twitter share counts", 'accesspress-social-share' ); ?></label>
+							<div class="apss_notes_cache_settings"> Please select this option if you don't want to show twitter share counts.</div>
+						</div>
+
+						<div class='apss-counter-api'>
+							<input type="radio" id='apss_twitter_counter_option_1' name="apss_share_settings[twitter_counter_api]" value="2" <?php if(isset($options['twitter_counter_api'])){ if($options['twitter_counter_api'] == '2') {
+							echo "checked='checked'";
+							} } ?> />
+							<label for="apss_twitter_counter_option_1"><?php _e( 'Use', 'accesspress-social-share'); ?> <a href='http://newsharecounts.com' target='_blank'>NewShareCounts</a><?php _e( ' to show Twitter share counts', 'accesspress-social-share' ); ?></label>
+							<div class="apss_notes_cache_settings"> To use newsharecount public API, you have to enter your website url <?php echo site_url(); ?> and sign in using Twitter at their <a href='http://newsharecounts.com/' target='_blank'>website</a>.</div>
+						</div>
+
+						<div class='apss-counter-api'>
+							<input type="radio" id='apss_twitter_counter_option_2' name="apss_share_settings[twitter_counter_api]" value="3" <?php if(isset($options['twitter_counter_api'])){ if($options['twitter_counter_api'] == '3') {
+							echo "checked='checked'";
+							}} ?> /><label for="apss_twitter_counter_option_2"><?php _e( 'Use', 'accesspress-social-share'); ?> <a href='	http://opensharecount.com/' target='_blank'>OpenShareCount</a><?php _e( ' to show Twitter share counts', 'accesspress-social-share' ); ?></label>
+							<div class="apss_notes_cache_settings"> To use opensharecount public API, you have to sign up and register your website url <?php echo site_url(); ?> at their <a href='http://opensharecount.com/' target='_blank'>website</a>. </div>
+						</div>
+						<div class="apss_notes_cache_settings"> Note: If you switch the API please don't forget to clear cache for fetching new share counts.</div>
+					</div>
+
 					<div class="apss-total-counter-settings clearfix">
 						<h4><?php _e( 'Social share total counter enable?', 'accesspress-social-share' ); ?> </h4>
 						<div class="misc-opt"><input type="radio" id='total_counter_enable_options_n' name="apss_share_settings[total_counter_enable_options]" value="0" <?php if ( isset( $options['total_counter_enable_options'] ) && $options['total_counter_enable_options'] == '0' ) {
@@ -193,12 +219,29 @@
 						<div class="misc-opt"><input type="radio" id='dialog_box_options_2' name="apss_share_settings[dialog_box_options]" value="1" <?php if ( $options['dialog_box_options'] == '1' ) {
 					echo "checked='checked'";
 				} ?> /><label for="dialog_box_options_2"><?php _e( 'Open in new window/Tab', 'accesspress-social-share' ); ?></label></div>
+				
+						<div class="misc-opt"><input type="radio" id='dialog_box_options_3' name="apss_share_settings[dialog_box_options]" value="2" <?php if ( $options['dialog_box_options'] == '2' ) {
+					echo "checked='checked'";
+				} ?> /><label for="dialog_box_options_3"><?php _e( 'Open in popup window', 'accesspress-social-share' ); ?></label></div>
 					</div>
 
+
+					<div class='apss_cache_enable_opt'>
+						<h4><?php _e( 'Enable cache? ', 'accesspress-social-share' ); ?> </h4>
+							<div class='misc-opt'>
+								<input type="radio" id='enable_cache_yes' name="apss_share_settings[enable_cache]" value="1" <?php if ( isset($options['enable_cache']) && $options['enable_cache'] == '1' ) { echo "checked='checked'"; } ?> />
+								<label for='enable_cache_yes'><?php _e('Yes', 'accesspress-social-share'); ?></label>
+							</div>
+							<div class='misc-opt'>
+								<input type="radio" id='enable_cache_no' name="apss_share_settings[enable_cache]" value="0" <?php if ( isset($options['enable_cache']) && $options['enable_cache'] == '0' ) { echo "checked='checked'"; } ?> />
+								<label for='enable_cache_no'><?php _e('No', 'accesspress-social-share'); ?></label>
+							</div>
+					</div>
+					<br />
 					<div class='cache-settings'>
 						<h4><?php _e( 'Cache Settings: ', 'accesspress-social-share' ); ?> </h4>
 						<label for="apss_cache_settings"><?php _e( 'Cache Period:', 'accesspress-social-share' ); ?></label>
-						<input type='number' id="apss_cache_period" name='apss_share_settings[cache_settings]' value="<?php if ( isset( $options['cache_period'] ) ) {
+						<input type='text' id="apss_cache_period" name='apss_share_settings[cache_settings]' value="<?php if ( isset( $options['cache_period'] ) ) {
 					echo $options['cache_period'];
 				} ?>" onkeyup="removeMe('invalid_cache_period');"/>
 						<span class="error invalid_cache_period"></span>
@@ -216,6 +259,13 @@
 						<div class="app-email-body email-setg">
 							<label for='apss-email-body'><?php _e( 'Email body:', 'accesspress-social-share' ); ?></label>
 							<textarea rows='30' cols='30' name="apss_share_settings[apss_email_body]"><?php echo $options['apss_email_body'] ?></textarea>
+						</div>
+						<div class="apss_notes_cache_settings">
+							Available parameters: <br />
+							%%url%% = current page/post url(custom url if you have used "custom_share_link" attribute in the shortcode ) <br /> 
+							%%title%% = current page/post's title <br />
+							%%permalink%% = current page/post url <br />
+							%%siteurl%% = Site url <br />
 						</div>
 					</div>
 				</div>

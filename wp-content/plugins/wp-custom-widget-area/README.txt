@@ -2,8 +2,8 @@
 Contributors: krozero
 Tags: widget area, custom widget area, widget, simple widget area, custom sidebar, dynamic sidebar, menu, menus, custom menu, custom menu locations, menu location, menu area
 Requires at least: 3.0.1
-Tested up to: 4.3.1
-Stable tag: 1.2.1
+Tested up to: 4.5
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,9 @@ It allows you to show custom widget areas and menu locations created with this p
 
 == Changelog ==
 
+= 1.2.2 =
+* Widget area bug fix for tag less code display on frontend. support ticket : widget-title-showing-in-code-form
+
 = 1.2.1 =
 * Widget area edit form bug fix
 
@@ -125,6 +128,9 @@ It allows you to show custom widget areas and menu locations created with this p
 
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+* Widget area bug fix for tag less code display on frontend. support ticket : widget-title-showing-in-code-form
 
 = 1.2.1 =
 * Widget area edit form bug fix

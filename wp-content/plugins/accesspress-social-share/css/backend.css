@@ -383,3 +383,11 @@
     display:inline-block;
 }
 
+
+.apss-counter-api {
+    margin-top: 10px;
+}
+
+.apss-counter-api-options.apss-counter-settings.clearfix {
+    margin-top: 10px !important;
+}

@@ -237,7 +237,7 @@
 	function resetForm(){
 		$('.cwa-form input[type="hidden"]' ).val('');
 		$('.cwa-form input[disabled]' ).prop('disabled', false);
-		$('.cwa-form select' ).val('');
+		$('.cwa-form select' ).children(':first-child').prop('selected', true);
 		$('.cwa-form input[type="text"]' ).val('');
 		$('.cwa-form input[type="submit"]' ).val('Create');
 		$('.cwa-form  .cwa-form-message' ).empty();
