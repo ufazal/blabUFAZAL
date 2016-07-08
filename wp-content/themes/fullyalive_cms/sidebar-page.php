@@ -27,7 +27,7 @@
 </div>
 
 <div class="widget-area">
-<h2 class="widget-title" ">Recent Blog Posts</h2>
+<h2 class="widget-title">Recent Blog Posts</h2>
 </div>
 <div>
   <?php $postslist = get_posts('category=1&numberposts=4&order=DESC&orderby=post_date');
