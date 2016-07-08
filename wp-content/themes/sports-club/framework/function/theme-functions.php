@@ -97,6 +97,7 @@ function register_css_styles() {
 		if (get_option('cmsmasters_style_exists_' . CMSMASTERS_SHORTNAME)) {
 			$upload_dir = wp_upload_dir();
 			
+			$upload_dir['baseurl'] = preg_replace("/^https?:\/\/[^\/]+\/wp-content/", "//cdn.bluelinermarketing.com/managed", $upload_dir['baseurl']);
 			
 			if (preg_match('/(?i)msie [6-9]\.0/', $_SERVER['HTTP_USER_AGENT'])) {
 				wp_enqueue_style('theme-fonts', $upload_dir['baseurl'] . '/cmsmasters_styles/' . CMSMASTERS_SHORTNAME . '_fonts.css', array(), '1.0.0', 'screen');
