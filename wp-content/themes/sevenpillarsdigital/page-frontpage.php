@@ -96,7 +96,7 @@ get_header();
     <h1  style="color:#0A66B1;">49er Matrix</h1>
     <h4>The 49er Matrix can be thought of as a 7-Dimensional Chess Board, upon which we play out the strategic game of Marketing. </br></br>It is a multi-purpose visualization tool that provides a map of the Digital Marketing universe. </br></br> The first two dimensions (7 Pillars x 7 Modes) generate 49 blocks or marketing elements, which marketers and executives should account for. </h4>
     <br>
-    <p><a href="http://7pillarsdigital.com/wp-content/uploads/2016/01/Mode3-strategy-table-blank.pdf" target="_blank" class="btn btn-primary btn-lg btn-block" role="button">Download 49er Matrix Template</a></p>
+    <p><a href="http://cdn.bluelinermarketing.com/managed/uploads/sites/4/2016/01/Mode3-strategy-table-blank.pdf" target="_blank" class="btn btn-primary btn-lg btn-block" role="button">Download 49er Matrix Template</a></p>
   </div>
 </div>
 <div class="container-fluid" style="background-color:#efefef">
