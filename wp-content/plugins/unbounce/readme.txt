@@ -2,8 +2,8 @@
 Contributors: unbouncewordpress
 Tags: Unbounce, AB testing, A/B testing, split testing, CRO, conversion optimization, wordpress landing page, wp landing pages, splash pages, landing pages, squeeze pages, lead gen, lead generation, email list, responsive landing pages, templates, inbound marketing, ppc, analytics
 Requires at least: 4.1.5
-Tested up to: 4.4
-Stable tag: 1.0.23
+Tested up to: 4.5.3
+Stable tag: 1.0.24
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,10 @@ to help track down the issue.
 4. Edit and update all your landing pages from Unbounce’s page builder. They’ll automatically get updated on your WordPress site.
 
 == Changelog ==
+
+= 1.0.24=
+* Improves support for installations using SSL
+  * is_ssl() has higher precedence for determing protocol of content to serve
 
 = 1.0.23 =
 * Add optional support for web servers with a load balancer or proxy that is on a different network

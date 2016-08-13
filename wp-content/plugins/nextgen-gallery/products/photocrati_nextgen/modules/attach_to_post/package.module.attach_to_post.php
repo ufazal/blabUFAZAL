@@ -145,8 +145,6 @@ class A_Attach_To_Post_Ajax extends Mixin
                 // Get the thumbnail
                 $entity->thumb_url = $storage->get_image_url($image, 'thumb', TRUE);
                 $entity->thumb_html = $storage->get_image_html($image, 'thumb');
-                $entity->max_width = $settings->thumbwidth;
-                $entity->max_height = $settings->thumbheight;
             }
         } else {
             $response['error'] = __('Missing parameters', 'nggallery');
@@ -223,7 +221,7 @@ class C_Attach_Controller extends C_NextGen_Admin_Page_Controller
         }
         return self::$_instances[$context];
     }
-    public function define($context)
+    public function define($context = FALSE)
     {
         if (!is_array($context)) {
             $context = array($context);
@@ -316,6 +314,7 @@ class Mixin_Attach_To_Post extends Mixin
         $this->object->mark_script('jquery-ui-sortable');
         $this->object->mark_script('jquery-ui-tooltip');
         $this->object->mark_script('ngg_tabs');
+        wp_enqueue_style('buttons');
         // Ensure select2
         wp_enqueue_style('ngg_select2');
         wp_enqueue_script('ngg_select2');
@@ -372,7 +371,8 @@ class Mixin_Attach_To_Post extends Mixin
         $image_mapper = C_Image_Mapper::get_instance();
         // Get the first entity from the displayed gallery. We will use this
         // for a preview pic
-        $entity = array_pop($this->object->_displayed_gallery->get_included_entities(1));
+        $results = $this->object->_displayed_gallery->get_included_entities(1);
+        $entity = array_pop($results);
         $image = FALSE;
         if ($entity) {
             // This is an album or gallery
@@ -478,7 +478,7 @@ class Mixin_Attach_To_Post extends Mixin
      */
     public function _render_display_tab()
     {
-        return $this->object->render_partial('photocrati-attach_to_post#display_tab', array('messages' => array(), 'tabs' => $this->object->_get_display_tabs()), TRUE);
+        return $this->object->render_partial('photocrati-attach_to_post#display_tab', array('messages' => array(), 'displayed_gallery' => $this->object->_displayed_gallery, 'tabs' => $this->object->_get_display_tabs()), TRUE);
     }
     /**
      * Renders the tab used primarily for Gallery and Image creation

@@ -9,6 +9,11 @@
 .epyt-gallery iframe {
     margin-bottom: 0;
 }
+
+.epyt-gallery.epyt-lb iframe {
+    display: none;
+    height: 0 !important;
+}
 .epyt-gallery-list {
     margin: 0 -8px 0 -8px;
     position: relative;
@@ -197,6 +202,16 @@
 
 .epyt-gallery-list.epyt-loading .epyt-pagination .epyt-loader {
     display: inline-block;
+}
+
+body .lity-container{
+    width: 100%;
+    max-width: 964px;
+}
+
+.epyt-curtain .lity-opened iframe {
+    opacity: 0;
+    transition: opacity .3s linear .5s;
 }
 
 /*
@@ -397,6 +412,8 @@ Carousel
     height: auto  !important;
     vertical-align: middle  !important;   
     padding: 0 6px 3px 0;
+    display: inline-block;
+    background: transparent;
 }
 
 #wpadminbar #wp-admin-bar-ytprefs-bar-cache > .ab-item:before {

@@ -16,7 +16,7 @@ class M_Ajax extends C_Base_Module
             'photocrati-ajax',
             'AJAX',
             'Provides AJAX functionality',
-            '0.8',
+            '0.9',
             'https://www.imagely.com',
             'Photocrati Media',
             'https://www.imagely.com'
@@ -55,7 +55,8 @@ class M_Ajax extends C_Base_Module
 		if (isset($_REQUEST[NGG_AJAX_SLUG])) {
 			$controller = C_Ajax_Controller::get_instance();
 			$controller->index_action();
-			throw new E_Clean_Exit;
+            // E_Clean_Exit may cause a warning to be appended to our response, spoiling any JSON sent
+            exit;
 		}
 	}
 

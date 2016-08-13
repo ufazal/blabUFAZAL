@@ -750,7 +750,7 @@ class nggdb
                 $searchand = ' AND ';
             }
 
-            $term = $wpdb->escape($request);
+            $term = esc_sql($request);
             if (count($search_terms) > 1 && $search_terms[0] != $request )
                 $search .= " OR (tt.description LIKE '{$n}{$term}{$n}') OR (tt.alttext LIKE '{$n}{$term}{$n}') OR (tt.filename LIKE '{$n}{$term}{$n}')";
 

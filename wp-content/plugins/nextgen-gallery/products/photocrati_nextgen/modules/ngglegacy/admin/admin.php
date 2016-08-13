@@ -284,8 +284,7 @@ class nggAdminPanel{
 
 		switch ($_GET['page']) {
 			case NGGFOLDER :
-				wp_enqueue_script( 'postbox' );
-				add_thickbox();
+				wp_enqueue_script( 'ngg_overview', $router->get_static_url('photocrati-nextgen-legacy#overview.js'), array('jquery'), NGG_SCRIPT_VERSION);
 			break;
 			case "nggallery-manage-gallery" :
 				wp_enqueue_script( 'postbox' );
@@ -342,7 +341,7 @@ class nggAdminPanel{
 
 		switch ($_GET['page']) {
 			case NGGFOLDER :
-				wp_enqueue_style( 'thickbox' );
+				wp_add_inline_style( 'nggadmin', file_get_contents(C_Fs::get_instance()->find_static_abspath('photocrati-nextgen-legacy#overview.css') ) );			
 			case "nggallery-about" :
 				wp_enqueue_style( 'nggadmin' );
                 //TODO:Remove after WP 3.3 release

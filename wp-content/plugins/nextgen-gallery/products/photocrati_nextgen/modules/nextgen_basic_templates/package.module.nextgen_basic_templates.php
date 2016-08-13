@@ -37,6 +37,8 @@ class A_NextGen_Basic_Template_Form extends Mixin
         if (!isset($templates[$display_type->settings['template']])) {
             $templates[$display_type->settings['template']] = $display_type->settings['template'];
         }
+        // add <default> template that acts the same way as having no template specified
+        $templates['default'] = __('Default', 'nggallery');
         return $this->object->render_partial('photocrati-nextgen_basic_templates#nextgen_basic_templates_settings_template', array('display_type_name' => $display_type->name, 'template_label' => __('Template', 'nggallery'), 'template_text' => __('Use a legacy template when rendering (not recommended).', 'nggallery'), 'chosen_file' => $display_type->settings['template'], 'templates' => $templates), True);
     }
     /**

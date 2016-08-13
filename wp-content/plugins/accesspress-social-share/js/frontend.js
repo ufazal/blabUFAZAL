@@ -1,4 +1,5 @@
-//function from https://halgatewood.com/how-to-customize-the-pin-it-button-for-pinterest
+
+// function from https://halgatewood.com/how-to-customize-the-pin-it-button-for-pinterest
 function pinIt()
 {
   var e = document.createElement('script');

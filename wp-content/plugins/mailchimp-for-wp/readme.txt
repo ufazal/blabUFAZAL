@@ -3,8 +3,8 @@ Contributors: Ibericode, DvanKooten, hchouhan, lapzor
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=donate-link
 Tags: mailchimp, mc4wp, email, marketing, newsletter, subscribe, widget, mc4wp, contact form 7, woocommerce, buddypress, ibericode, mailchimp forms, mailchimp integrations
 Requires at least: 3.8
-Tested up to: 4.5.2
-Stable tag: 3.1.10
+Tested up to: 4.6
+Stable tag: 4.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,14 +41,14 @@ MailChimp for WordPress helps you add more subscribers to your MailChimp lists u
 	- [MailChimp Top Bar](https://wordpress.org/plugins/mailchimp-top-bar/)
 	- [MailChimp Activity](https://wordpress.org/plugins/mc4wp-activity/)
 	- [MailChimp User Sync](https://wordpress.org/plugins/mailchimp-sync/)
-	- [Scroll Triggered Boxes](https://wordpress.org/plugins/scroll-triggered-boxes/)
+	- [Boxzilla Pop-ups](https://wordpress.org/plugins/boxzilla/)
 	- [Captcha](https://wordpress.org/plugins/mc4wp-captcha/)
 	- Third Party:
 	    - [WPBruiser](https://wordpress.org/plugins/goodbye-captcha/)
 
 - Well documented. Our [knowledge base](https://mc4wp.com/kb/) is updated daily.
 
-- Developer friendly. MailChimp for WordPress is built to be extensible, and comes with a dedicated [code reference for developers](http://developer.mc4wp.com/).
+- Developer friendly. MailChimp for WordPress is built to be extensible, and comes with a [code reference for developers](http://developer.mc4wp.com/).
 
 <blockquote>
 <h4>Become a Premium user</h4>
@@ -146,6 +146,10 @@ You can add your custom CSS to your theme stylesheet or (easier) by using a plug
 If you're getting an `HTTP Error` when trying to connect to your MailChimp account, please contact your webhost and ask them if they have PHP CURL installed and updated to the latest version (7.40.x).
 Also, please ask them to allow requests to `https://api.mailchimp.com/`.
 
+#### How do I show a sign-up form in a pop-up?
+
+We recommend the [Boxzilla pop-up plugin](https://wordpress.org/plugins/boxzilla/) for this. You can use the form shortcode in your pop-up box to show a sign-up form.
+
 #### My question is not listed
 
 Please head over to the [MailChimp for WordPress knowledge base](https://mc4wp.com/kb/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=faq) for more detailed documentation.
@@ -182,6 +186,76 @@ MailChimp for WordPress is being developed on GitHub. If you want to collaborate
 6. Detailed statistics on which methods are generating the most subscribers. **(Pro Feature)**
 
 == Changelog == 
+
+
+#### 4.0.2 - August 10, 2016
+
+**Fixes**
+
+- Hidden fields which referenced interest groups by name were not sent to MailChimp.
+- Adding hidden field to form would reset value on every change.
+
+**Improvements**
+
+- Decrease file size of JavaScript for forms by about 30%.
+
+
+#### 4.0 & 4.0.1 - August 9, 2016
+
+This release updates the plugin to version 3 of the MailChimp API. Please [read through the upgrade guide](https://mc4wp.com/kb/upgrading-to-4-0/) before updating to make sure things keep working as expected for you.
+
+**Changes**
+
+- "Send welcome email" is now handled from your list settings in MailChimp.
+- Filter `mc4wp_form_merge_vars` is now called `mc4wp_form_data`.
+- Filter `mc4wp_integration_merge_vars` is now called `mc4wp_integration_data`.
+- New format for GROUPING fields in forms & filter hooks.
+- Value delimiter in hidden fields is now a pipe `|` character.
+
+**Additions**
+
+- New filter: `mc4wp_form_subscriber_data`.
+- New filter: `mc4wp_integration_subscriber_data`.
+- New form tag: `{cookie name="mycookie"}`
+
+**Improvements**
+
+- The plugin now communicates with the latest & greatest MailChimp API.
+- Previously unsubscribed subscribers can now be re-added without errors.
+- Add `User-Agent` header to all API requests.
+- Available fields in form editor are now split-up by category.
+- Birthday fields now accept a broader range of values and delimiters.
+
+**Fixes**
+
+- Issue with only 10 MailChimp lists / fields / interests being returned.
+- Incorrect form message showing when double opt-in is disabled.
+- Error in upgrade routine when API request fails.
+- List fields not fetched when list has just 1 non-default merge field.
+
+
+#### 3.1.12 - July 28, 2016
+
+**Improvements**
+
+- Smarter scrolling after submitting form & reloading page.
+- Format output of `{subscriber_count}` tag.
+- You can now use `<img>` in your form messages.
+- Add MailChimp API error code to debug log lines.
+- Add plugin name + version to User-Agent header for all MailChimp API requests.
+- Make sure value of MC_LANGUAGE field is limited to 2 characters.
+
+
+#### 3.1.11 - July 5, 2016
+
+**Improvements**
+
+- Update JavaScript dependencies for admin screens.
+- Test debug log & show notice when it's not writable.
+
+**Additions**
+
+- Add "placeholder" option for dropdown fields.
 
 
 #### 3.1.10 - June 21, 2016
