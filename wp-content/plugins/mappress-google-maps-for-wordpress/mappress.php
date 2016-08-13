@@ -4,7 +4,7 @@ Plugin Name: MapPress Easy Google Maps
 Plugin URI: http://www.wphostreviews.com/mappress
 Author URI: http://www.wphostreviews.com/mappress
 Description: MapPress makes it easy to insert Google Maps in WordPress posts and pages.
-Version: 2.43.8
+Version: 2.43.10
 Author: Chris Richardson
 Text Domain: mappress-google-maps-for-wordpress
 Thanks to all the translators and to Matthias Stasiak for his wonderful icons (http://code.google.com/p/google-maps-icons/)
@@ -32,7 +32,7 @@ if (file_exists(dirname( __FILE__ ) . '/pro/mappress_pro.php')) {
 	include_once dirname( __FILE__ ) . '/pro/mappress_widget.php';
 }
 class Mappress {
-	const VERSION = '2.43.8';
+	const VERSION = '2.43.10';
 
 	static
 		$baseurl,
@@ -98,6 +98,8 @@ class Mappress {
 
 		if (isset($_GET['mp_info'])) {
 			echo "<b>Plugin version</b> " . $this->get_version_string();
+			foreach(array('version', 'language', 'wpurl', 'url') as $info)
+				printf("<br/>%s : %s", $info, get_bloginfo($info));
 			die();
 		}
 
@@ -347,22 +349,13 @@ class Mappress {
 			return;
 		}
 
-		// Dismissable notices
+		// Dismissible notices
 		$notices = array();
-		$dismissed = get_option('mappress-dismissed');
+		if (!self::$options->apiKey)
+			$notices['apikey'] = sprintf("%s. %s <a href='%s'>%s</a>.", __("A Google Maps API key is required", 'mappress-google-maps-for-wordpress'), __("Please update your", 'mappress-google-maps-for-wordpress'), admin_url('admin.php?page=mappress'), __('MapPress Settings', 'mappress-google-maps-for-wordpress'));
 
-		// API Keys
-		if (!self::$options->apiKey) {
-			$apiurl = sprintf("<a href='%s' target='_blank'>%s</a>", 'https://developers.google.com/maps/pricing-and-plans/standard-plan-2016-update', __('API Key', 'mappress-google-maps-for-wordpress'));
-			$settings = sprintf("<a href='%s'>%s</a>", admin_url('admin.php?page=mappress'), __('MapPress Settings', 'mappress-google-maps-for-wordpress'));
-			$notices['apikey'] = sprintf("Google Maps requires an %s on public sites.  Please update your %s", $apiurl, $settings);
-		}
-
-		foreach($notices as $notice => $msg) {
-			if (is_array($dismissed) && in_array($notice, $dismissed))
-				continue;
+		foreach($notices as $notice => $msg)
 			echo "<div class='notice error is-dismissible'><p>$msg</p></div>";
-		}
 	}
 
 	static function dismiss($notice) {
@@ -487,7 +480,9 @@ class Mappress {
 		$loaded = true;
 
 		$version = self::VERSION;
-		$dev = (defined('MAPPRESS_DEV')) ? MAPPRESS_DEV : isset($_REQUEST['mp_dev']);
+		$dev = (defined('MAPPRESS_DEV')) ? MAPPRESS_DEV : '';
+		$dev = (isset($_REQUEST['mp_dev'])) ? $_REQUEST['mp_dev'] : $dev;
+		$dev = (is_bool($dev)) ? 'dev' : $dev;
 
 		$apiversion = ($dev) ? 'v=3.exp' : 'v=3';
 		$apikey = (!empty(self::$options->apiKey)) ? "&key=" . self::$options->apiKey : '';
@@ -555,8 +550,9 @@ class Mappress {
 
 		// Globals
 		$l10n['options'] = array(
-			'ajaxurl' => admin_url('admin-ajax.php'),
 			'admin' => current_user_can('administrator'),
+			'ajaxurl' => admin_url('admin-ajax.php'),
+			'apiKey' => Mappress::$options->apiKey,
 			'debug' => Mappress::$debug,
 			'iconsUrl' => (class_exists('Mappress_Icons')) ? Mappress_Icons::$icons_url : null,
 			'language' => $this->get_language(),

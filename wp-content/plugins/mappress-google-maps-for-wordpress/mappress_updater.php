@@ -4,7 +4,7 @@ class Mappress_Updater {
 		$pro_url = 'http://wphostreviews.com/account',
 		$plugin_name = 'mappress';
 
-	function Mappress_Updater($basename) {
+	function __construct($basename) {
 		$this->basename = $basename;
 
 		// Plugin actions

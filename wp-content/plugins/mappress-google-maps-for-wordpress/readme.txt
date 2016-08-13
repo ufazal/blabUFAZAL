@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: google maps,google,map,maps,easy,poi,mapping,mapper,gps,lat,lon,latitude,longitude,geocoder,geocoding,georss,geo rss,geo,v3,marker,mashup,mash,api,v3,buddypress,mashup,geo,wp-geo,geo mashup,simplemap,simple,wpml
 Requires at least: 3.5
 Tested up to: 4.9
-Stable tag: 2.43.8
+Stable tag: 2.43.10
 
 MapPress is the most popular and easiest way to create great-looking Google Maps and driving directions in your blog.
 
@@ -94,6 +94,21 @@ See full [installation intructions and Documentation](http://www.wphostreviews.c
 4. Get directions from any map marker
 
 == Changelog ==
+
+2.43.10
+* Changed: show blank container while loading mashups instead of default map
+* Changed: no alerts for admins on missing map container
+* Changed: apply wpautop to POIs when they are saved (wpautop inserts html tags to format carriage returns)
+* Fixed: bug where mashups were limited to 10 POIs
+* Fixed: polys are now allowed again for mashups
+* Fixed: changed Mappress_Updater constructor for PHP 7
+
+2.43.9
+* Added: support for XHTML sites (must be running WP 4.5 or higher)
+* Added: server API key for geocoding
+* Fixed: debugging functions
+* Fixed: removed extra code for api key in geocoder
+* Fixed: removed anonymous functions to support hosts still running PHP 5.2
 
 2.43.8
 =

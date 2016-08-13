@@ -157,6 +157,11 @@ class Mappress_Map extends Mappress_Obj {
 		$maps_table = $wpdb->prefix . 'mappress_maps';
 		$posts_table = $wpdb->prefix . 'mappress_posts';
 
+		// Apply wpautop to POI bodies
+		foreach($this->pois as &$poi)
+			$poi->body = wpautop($poi->body);
+
+
 		$map = serialize($this);
 
 		// Update map
@@ -356,10 +361,13 @@ class Mappress_Map extends Mappress_Obj {
 		if (empty($this->query))
 			$this->prepare();
 
-		$html .= Mappress::script(array(
-			"mapp.data.push( " . json_encode($this) . " );",
-			"if (typeof mapp.load != 'undefined') { mapp.load(); };"
-		));
+		$script = "mapp.data.push( " . json_encode($this) . " ); if (typeof mapp.load != 'undefined') { mapp.load(); };";
+
+		// WP 4.5: queue maps for XHTML compatibility
+		if (function_exists('wp_add_inline_script') && (!defined('DOING_AJAX') || !DOING_AJAX))
+			wp_add_inline_script('mappress', "//<![CDATA[\r\n" . $script . "\r\n//]]>");
+		else
+			$html .= Mappress::script($script);
 
 		if ($this->options->directions == 'inline') {
 			$html .= "<div id='{$this->name}_directions_' style='display:none'>";

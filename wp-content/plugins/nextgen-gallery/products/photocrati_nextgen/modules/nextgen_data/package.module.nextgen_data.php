@@ -268,7 +268,7 @@ class C_Gallery extends C_DataMapper_Model
      * Defines the interfaces and methods (through extensions and hooks)
      * that this class provides
      */
-    public function define($properties, $mapper = FALSE, $context = FALSE)
+    public function define($properties = array(), $mapper = FALSE, $context = FALSE)
     {
         parent::define($mapper, $properties, $context);
         $this->add_mixin('Mixin_NextGen_Gallery_Validation');
@@ -519,11 +519,11 @@ class C_GalleryStorage_Base extends C_Component
 class C_Gallery_Storage extends C_GalleryStorage_Base
 {
     public static $_instances = array();
-    public function define($object_name, $context = FALSE)
+    public function define($context = FALSE)
     {
         parent::define($context);
         $this->add_mixin('Mixin_GalleryStorage');
-        $this->wrap('I_GalleryStorage_Driver', array(&$this, '_get_driver'), array($object_name, $context));
+        $this->wrap('I_GalleryStorage_Driver', array(&$this, '_get_driver'), $context);
         $this->implement('I_Gallery_Storage');
     }
     static function get_instance($context = False)
@@ -538,13 +538,11 @@ class C_Gallery_Storage extends C_GalleryStorage_Base
      * @param array $args
      * @return mixed
      */
-    public function _get_driver($args)
+    public function _get_driver($context)
     {
-        $object_name = $args[0];
-        $context = $args[1];
         $factory_method = $this->_get_driver_factory_method($context);
         $factory = C_Component_Factory::get_instance();
-        return $factory->create($factory_method, $object_name, $context);
+        return $factory->create($factory_method, FALSE, $context);
     }
 }
 class E_UploadException extends E_NggErrorException
@@ -1679,6 +1677,10 @@ class Mixin_GalleryStorage_Driver_Base extends Mixin
                 }
                 if (is_null($thumbnail)) {
                     $thumbnail = new C_NggLegacy_Thumbnail($destpath, true);
+                    if ($thumbnail->error) {
+                        $thumbnail = null;
+                        return null;
+                    }
                 } else {
                     $thumbnail->fileName = $destpath;
                 }
@@ -1738,7 +1740,7 @@ class Mixin_GalleryStorage_Driver_Base extends Mixin
 class C_GalleryStorage_Driver_Base extends C_GalleryStorage_Base
 {
     public static $_instances = array();
-    public function define($context)
+    public function define($context = FALSE)
     {
         parent::define($context);
         $this->add_mixin('Mixin_GalleryStorage_Driver_Base');
@@ -3022,7 +3024,7 @@ class Mixin_NggLegacy_GalleryStorage_Driver extends Mixin
             } elseif (isset($gallery->slug)) {
                 $fs = C_Fs::get_instance();
                 $basepath = C_NextGen_Settings::get_instance()->gallerypath;
-                $retval = $fs->join_paths($basepath, $gallery->slug);
+                $retval = $fs->join_paths($basepath, sanitize_file_name(sanitize_title($gallery->slug)));
             }
         }
         $root_type = defined('NGG_GALLERY_ROOT_TYPE') ? NGG_GALLERY_ROOT_TYPE : 'site';
@@ -3922,19 +3924,35 @@ class C_NggLegacy_Thumbnail
         }
         //initialize resources if no errors
         if ($this->error == false) {
+            $img_err = null;
             switch ($this->format) {
                 case 'GIF':
-                    $this->oldImage = @ImageCreateFromGif($this->fileName);
+                    if (function_exists('ImageCreateFromGif')) {
+                        $this->oldImage = @ImageCreateFromGif($this->fileName);
+                    } else {
+                        $img_err = __('Support for GIF format is missing.', 'nggallery');
+                    }
                     break;
                 case 'JPG':
-                    $this->oldImage = @ImageCreateFromJpeg($this->fileName);
+                    if (function_exists('ImageCreateFromJpeg')) {
+                        $this->oldImage = @ImageCreateFromJpeg($this->fileName);
+                    } else {
+                        $img_err = __('Support for JPEG format is missing.', 'nggallery');
+                    }
                     break;
                 case 'PNG':
-                    $this->oldImage = @ImageCreateFromPng($this->fileName);
+                    if (function_exists('ImageCreateFromPng')) {
+                        $this->oldImage = @ImageCreateFromPng($this->fileName);
+                    } else {
+                        $img_err = __('Support for PNG format is missing.', 'nggallery');
+                    }
                     break;
             }
             if (!$this->oldImage) {
-                $this->errmsg = 'Create Image failed. Check memory limit';
+                if ($img_err == null) {
+                    $img_err = __('Check memory limit', 'nggallery');
+                }
+                $this->errmsg = sprintf(__('Create Image failed. %1$s', 'nggallery'), $img_err);
                 $this->error = true;
             } else {
                 $size = GetImageSize($this->fileName);
@@ -4504,7 +4522,7 @@ class C_NggLegacy_Thumbnail
         // attempt adding a new word until the width is too large; then start a new line and start again
         foreach ($words as $word) {
             // sanitize the text being input; imagettftext() can be sensitive
-            $TextSize = $this->ImageTTFBBoxDimensions($wmSize, 0, $wmFontPath, $line . preg_replace('~^(&([a-zA-Z0-9]);)~', htmlentities('${1}'), mb_convert_encoding($word, 'HTML-ENTITIES', 'UTF-8')));
+            $TextSize = $this->ImageTTFBBoxDimensions($wmSize, 0, $this->correct_gd_unc_path($wmFontPath), $line . preg_replace('~^(&([a-zA-Z0-9]);)~', htmlentities('${1}'), mb_convert_encoding($word, 'HTML-ENTITIES', 'UTF-8')));
             if ($watermark_image_width == 0) {
                 $watermark_image_width = $TextSize['width'];
             }
@@ -4520,7 +4538,7 @@ class C_NggLegacy_Thumbnail
         }
         $lines[] = trim($line);
         // use this string to determine our largest possible line height
-        $line_dimensions = $this->ImageTTFBBoxDimensions($wmSize, 0, $wmFontPath, 'MXQJALYmxqjabdfghjklpqry019`@$^&*(,!132');
+        $line_dimensions = $this->ImageTTFBBoxDimensions($wmSize, 0, $this->correct_gd_unc_path($wmFontPath), 'MXQJALYmxqjabdfghjklpqry019`@$^&*(,!132');
         $line_height = $line_dimensions['height'] * 1.05;
         // Create an image to apply our text to
         $this->workingImage = ImageCreateTrueColor($watermark_image_width, count($lines) * $line_height);
@@ -4534,11 +4552,27 @@ class C_NggLegacy_Thumbnail
         // Put text on the image, line-by-line
         $y_pos = $wmSize;
         foreach ($lines as $line) {
-            imagettftext($this->workingImage, $wmSize, 0, 0, $y_pos, $TextColor, $wmFontPath, $line);
+            imagettftext($this->workingImage, $wmSize, 0, 0, $y_pos, $TextColor, $this->correct_gd_unc_path($wmFontPath), $line);
             $y_pos += $line_height;
         }
         $this->watermarkImgPath = $this->workingImage;
         return;
+    }
+    /**
+     * Returns a path that can be used with imagettftext() and ImageTTFBBox()
+     *
+     * imagettftext() and ImageTTFBBox() cannot load resources from Windows UNC paths
+     * and require they be mangled to be like //server\filename instead of \\server\filename
+     * @param string $path Absolute file path
+     * @return string $path Mangled absolute file path
+     */
+    public function correct_gd_unc_path($path)
+    {
+        if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' && substr($path, 0, 2) === '\\\\') {
+            $path = ltrim($path, '\\\\');
+            $path = '//' . $path;
+        }
+        return $path;
     }
     /**
      * Calculates the width & height dimensions of ImageTTFBBox().
@@ -4552,7 +4586,7 @@ class C_NggLegacy_Thumbnail
      */
     public function ImageTTFBBoxDimensions($wmSize, $fontAngle, $wmFontPath, $text)
     {
-        $box = @ImageTTFBBox($wmSize, $fontAngle, $wmFontPath, $text) or die;
+        $box = @ImageTTFBBox($wmSize, $fontAngle, $this->correct_gd_unc_path($wmFontPath), $text);
         $max_x = max(array($box[0], $box[2], $box[4], $box[6]));
         $max_y = max(array($box[1], $box[3], $box[5], $box[7]));
         $min_x = min(array($box[0], $box[2], $box[4], $box[6]));

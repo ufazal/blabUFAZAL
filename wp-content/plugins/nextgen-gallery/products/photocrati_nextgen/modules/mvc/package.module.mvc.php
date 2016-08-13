@@ -441,23 +441,18 @@ class C_MVC_View extends C_Component
     public $_engine = '';
     public $_params = array();
     public $_queue = array();
-    public function define($template, $params = array(), $engine = 'php', $context = FALSE)
+    public function __construct($template, $params = array(), $engine = 'php', $context = FALSE)
+    {
+        $this->_template = $template;
+        $this->_params = (array) $params;
+        $this->_engine = $engine;
+        parent::__construct();
+    }
+    public function define($context = FALSE)
     {
         parent::define($context);
         $this->implement('I_MVC_View');
         $this->add_mixin('Mixin_Mvc_View_Instance_Methods');
-    }
-    /**
-     * Initialize the view with some parameters
-     * @param array $params
-     * @param context $context
-     */
-    public function initialize($template, $params = array(), $engine = 'php', $context = FALSE)
-    {
-        parent::initialize($context);
-        $this->_template = $template;
-        $this->_params = (array) $params;
-        $this->_engine = $engine;
     }
 }
 class Mixin_Mvc_View_Instance_Methods extends Mixin
