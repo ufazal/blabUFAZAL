@@ -114,8 +114,13 @@
 /* Override common theme / user agent styles that interfere */
 .mapp-iw * {
 	color: black;
+	line-height: normal;				/* To support wpautop */
 	margin: 0px !important;
 	padding: 0px !important;
+}
+
+.mapp-iw p {
+	margin: 5px 0 5px 0 !important;		/* To support wpautop */
 }
 
 .mapp-iw .mapp-title {

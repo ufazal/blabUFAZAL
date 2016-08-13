@@ -100,10 +100,21 @@ class UBHTTP {
     $script_uri_scheme = parse_url($script_uri, PHP_URL_SCHEME);
     $https = UBUtil::array_fetch($server_global, 'HTTPS', 'off');
 
+    UBLogger::debug_var('UBHTTP::forwarded_proto', $forwarded_proto);
+    UBLogger::debug_var('UBHTTP::request_scheme', $request_scheme);
+    UBLogger::debug_var('UBHTTP::script_uri', $script_uri);
+    UBLogger::debug_var('UBHTTP::script_uri_scheme', $script_uri_scheme);
+    UBLogger::debug_var('UBHTTP::https', $https);
+
     // X-Forwarded-Proto should be respected first, as it is what the end
     // user will see (if Wordpress is behind a load balancer).
     if(UBHTTP::is_valid_protocol($forwarded_proto)) {
       return $forwarded_proto . '://';
+    }
+    // Wordpress' is_ssl() may return the correct boolean for http/https if
+    // the site was setup properly.
+    elseif($wp_is_ssl || !is_null($https) && $https !== 'off') {
+        return 'https://';
     }
     // Next use REQUEST_SCHEME, if it is available. This is the recommended way
     // to get the protocol, but it is not available on all hosts.
@@ -113,11 +124,6 @@ class UBHTTP {
     // Next try to pull it out of the SCRIPT_URI. This is also not always available.
     elseif(UBHTTP::is_valid_protocol($script_uri_scheme)) {
       return $script_uri_scheme . '://';
-    }
-    // Wordpress' is_ssl() may return the correct boolean for http/https if
-    // the site was setup properly.
-    elseif($wp_is_ssl || !is_null($https) && $https !== 'off') {
-      return 'https://';
     }
     // We default to http as most HTTPS sites will also have HTTP available.
     else {

@@ -71,7 +71,7 @@ class nggLoader
 		} else {
 
 			// Add MRSS to wp_head
-			if ( $this->options['useMediaRSS'] )
+			if ( isset( $this->options['useMediaRSS'] ) && $this->options['useMediaRSS'] )
 				add_action('wp_head', array('nggMediaRss', 'add_mrss_alternate_link'));
 
 		}
