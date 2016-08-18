@@ -500,22 +500,6 @@ class _404_To_301_Admin {
         
         include_once I4T3_PLUGIN_DIR . '/admin/partials/404-to-301-admin-custom-redirect.php';
     }
-    
-    /**
-     * This function updates terms and conditions options
-     * 
-     * @since 2.2.0
-     * @acess public
-     * 
-     * @return void
-     */
-    public function agreement_notice() {
-
-        if( isset( $_GET['i4t3_agreement'] ) ) {
-            $agreement = ($_GET['i4t3_agreement'] == 0) ? 0 : 1;
-            update_option( 'i4t3_agreement', $agreement );
-        }
-    }
 
     /**
      * Get debug data.

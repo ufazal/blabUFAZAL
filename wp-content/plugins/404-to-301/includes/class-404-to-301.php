@@ -131,7 +131,6 @@ class _404_To_301 {
         $this->loader->add_action('admin_footer', $plugin_admin, 'get_redirect_content');
         $this->loader->add_action('wp_ajax_i4t3_redirect_thickbox', $plugin_admin, 'open_custom_redirect');
         $this->loader->add_action('wp_ajax_i4t3_redirect_form', $plugin_admin, 'save_custom_redirect');
-        $this->loader->add_action('admin_init', $plugin_admin, 'agreement_notice');
     }
 
     /**
@@ -149,7 +148,6 @@ class _404_To_301 {
         
         // Main Hook to perform redirections on 404s
         $this->loader->add_filter('template_redirect', $plugin_public, 'i4t3_redirect_404');
-        $this->loader->add_filter('the_content', $plugin_public, 'load_from_cdn');
     }
 	
     /**

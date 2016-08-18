@@ -19,9 +19,6 @@
                 default:
                     break;
             }
-            if( get_option( 'i4t3_agreement', 2 ) == 2 ) {
-                include_once '404-to-301-admin-agreement-tab.php';
-            }
         ?>
         <table class="form-table">
             <tbody>
