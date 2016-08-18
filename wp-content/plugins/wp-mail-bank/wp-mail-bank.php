@@ -86,7 +86,7 @@ if(!function_exists("wp_mail_bank_configure"))
 		$ux_chk_from_email = get_option("show_from_email_in_email");
 		if( $ux_chk_from_email == "" || $ux_chk_from_email == "1")
 		{
-			$phpmailer->From = $data->from_email;
+			$phpmailer->setFrom = $data->from_email;
 		}
 
 		$phpmailer->Sender =  $data->return_path == 0 ? $data->return_email : $data->from_email;
