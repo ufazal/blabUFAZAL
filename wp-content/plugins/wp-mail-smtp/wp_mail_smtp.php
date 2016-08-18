@@ -178,7 +178,7 @@ function wp_mail_smtp_options_page() {
 	}
 
 	// Send a test mail if necessary
-	if (isset($_POST['wpms_action']) && $_POST['wpms_action'] == __('Send Test', 'wp_mail_smtp') && isset($_POST['to'])) {
+	if (isset($_POST['wpms_action']) && $_POST['wpms_action'] == __('Send Test', 'wp_mail_smtp') && is_email($_POST['to'])) {
 		
 		check_admin_referer('test-email');
 		
@@ -352,14 +352,12 @@ endif;
  */
 if (!function_exists('wp_mail_smtp_mail_from')) :
 function wp_mail_smtp_mail_from ($orig) {
-
-	return "test@test.com";
 	
 	// This is copied from pluggable.php lines 348-354 as at revision 10150
 	// http://trac.wordpress.org/browser/branches/2.7/wp-includes/pluggable.php#L348
 	
 	// Get the site domain and get rid of www.
-	$sitename = strtolower( $_SERVER['HTTP_HOST'] );
+	$sitename = strtolower( $_SERVER['SERVER_NAME'] );
 	if ( substr( $sitename, 0, 4 ) == 'www.' ) {
 		$sitename = substr( $sitename, 4 );
 	}
