@@ -357,7 +357,7 @@ function wp_mail_smtp_mail_from ($orig) {
 	// http://trac.wordpress.org/browser/branches/2.7/wp-includes/pluggable.php#L348
 	
 	// Get the site domain and get rid of www.
-	$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+	$sitename = strtolower( $_SERVER['HTTP_HOST'] );
 	if ( substr( $sitename, 0, 4 ) == 'www.' ) {
 		$sitename = substr( $sitename, 4 );
 	}
