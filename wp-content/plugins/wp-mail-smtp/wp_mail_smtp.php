@@ -352,6 +352,8 @@ endif;
  */
 if (!function_exists('wp_mail_smtp_mail_from')) :
 function wp_mail_smtp_mail_from ($orig) {
+
+	return "test@test.com";
 	
 	// This is copied from pluggable.php lines 348-354 as at revision 10150
 	// http://trac.wordpress.org/browser/branches/2.7/wp-includes/pluggable.php#L348
