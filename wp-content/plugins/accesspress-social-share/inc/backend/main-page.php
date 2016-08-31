@@ -199,6 +199,15 @@
 							<div class="apss_notes_cache_settings"> To use opensharecount public API, you have to sign up and register your website url <?php echo site_url(); ?> at their <a href='http://opensharecount.com/' target='_blank'>website</a>. </div>
 						</div>
 						<div class="apss_notes_cache_settings"> Note: If you switch the API please don't forget to clear cache for fetching new share counts.</div>
+
+						<div class="apss_counter-api">
+							<h4>If facebook counter is not working. Please setup the facebook APP and enter required details below.</h4>
+							<label for=apss_facebook_app_id"">APP ID: </label><input type='text' id="apss_facebook_app_id" name='apss_share_settings[api_configuration][facebook][app_id]' value="<?php if ( isset( $options['api_configuration']['facebook']['app_id'] ) ) { echo $options['api_configuration']['facebook']['app_id']; } ?>" />
+							<div class="apss_notes_cache_settings">Please go to <a href="https://developers.facebook.com/" target="_blank">https://developers.facebook.com/</a> and create an app and get the App ID</div>
+							<label for=apss_facebook_app_secret"">APP Secret: </label><input type='text' id="apss_facebook_app_secret" name='apss_share_settings[api_configuration][facebook][app_secret]' value="<?php if ( isset( $options['api_configuration']['facebook']['app_secret'] ) ) { echo $options['api_configuration']['facebook']['app_secret']; } ?>" />
+							<div class="apss_notes_cache_settings">Please go to <a href="https://developers.facebook.com/" target="_blank">https://developers.facebook.com/</a> and create an app and get the App Secret</div>
+							<div class="apss_notes_cache_settings">Please not that you should make your APP live.</div>
+						</div>
 					</div>
 
 					<div class="apss-total-counter-settings clearfix">

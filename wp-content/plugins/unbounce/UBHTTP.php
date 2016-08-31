@@ -165,6 +165,8 @@ class UBHTTP {
                                               $forwarded_for,
                                               $remote_ip);
     UBLogger::debug_var('target_url', $target_url);
+    UBLogger::debug_var('original_headers', print_r($headers0, true));
+    UBLogger::debug_var('sent_headers', print_r($headers, true));
 
     $stream_headers = UBHTTP::stream_headers_function($existing_headers);
     $stream_body = UBHTTP::stream_response_function();

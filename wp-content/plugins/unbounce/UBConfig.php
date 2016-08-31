@@ -4,8 +4,8 @@ class UBConfig {
 
   const UB_PLUGIN_NAME           = 'ub-wordpress';
   const UB_CACHE_TIMEOUT_ENV_KEY = 'UB_WP_ROUTES_CACHE_EXP';
-  const UB_USER_AGENT            = 'Unbounce WP Plugin 1.0.24';
-  const UB_VERSION               = '1.0.24';
+  const UB_USER_AGENT            = 'Unbounce WP Plugin 1.0.26';
+  const UB_VERSION               = '1.0.26';
 
   // Option keys
   const UB_ROUTES_CACHE_KEY        = 'ub-route-cache';
@@ -41,7 +41,8 @@ class UBConfig {
       UBConfig::UB_USER_ID_KEY,
       UBConfig::UB_DOMAIN_ID_KEY,
       UBConfig::UB_CLIENT_ID_KEY,
-      UBConfig::UB_PROXY_ERROR_MESSAGE_KEY
+      UBConfig::UB_PROXY_ERROR_MESSAGE_KEY,
+      UBConfig::UB_ALLOW_PUBLIC_ADDRESS_X_FORWARDED_FOR
     );
   }
 
