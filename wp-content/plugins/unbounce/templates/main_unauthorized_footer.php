@@ -4,4 +4,4 @@
 <a class="ub-diagnostics-link" href="<?php echo admin_url('admin.php?page=unbounce-pages-diagnostics'); ?>">
   Click here for troubleshooting and plugin diagnostics
 </a>
-<p class="ub-version">Unbounce Version 1.0.24</p>
+<p class="ub-version">Unbounce Version 1.0.26</p>
