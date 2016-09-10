@@ -2005,9 +2005,11 @@ class Mixin_Gallery_Image_Mapper extends Mixin
                     $gallery_id = $gallery->{$key};
                 }
             }
+        } elseif (is_numeric($gallery)) {
+            $gallery_id = $gallery;
         }
         if ($gallery_id) {
-            $retval = $this->object->select()->where(array('galleryid = %s'), $gallery_id)->run_query(FALSE, $model);
+            $retval = $this->object->select()->where(array('galleryid = %s', $gallery_id))->run_query(FALSE, $model);
         }
         return $retval;
     }

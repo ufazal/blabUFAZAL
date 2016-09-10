@@ -4,14 +4,12 @@ Plugin Name: Wp Mail Bank
 Plugin URI: http://tech-banker.com
 Description: WP Mail Bank reconfigures the wp_mail() function and make it more enhanced.
 Author: Tech Banker
-Version: 1.46
+Version: 1.47
 Author URI: http://tech-banker.com
 License: GPLv3 or later
 */
-
-
 /////////////////////////////////////  Define  WP Mail Bank Constants  ////////////////////////////////////////
-
+if (!defined("ABSPATH")) exit; //exit if accessed directly
 if (!defined("MAIL_BK_PLUGIN_DIR")) define("MAIL_BK_PLUGIN_DIR",  plugin_dir_path( __FILE__ ));
 if (!defined("MAIL_BK_PLUGIN_DIRNAME")) define("MAIL_BK_PLUGIN_DIRNAME", plugin_basename(dirname(__FILE__)));
 if (!defined("mail_bank")) define("mail_bank", "mail-banker");
@@ -35,7 +33,10 @@ if(!function_exists("create_global_menus_for_mail_bank"))
 			$current_user->role = array_keys($current_user->$role);
 			$role = $current_user->role[0];
 		}
-		include MAIL_BK_PLUGIN_DIR . "/lib/wp-include-menus.php";
+		if(file_exists(MAIL_BK_PLUGIN_DIR . "/lib/wp-include-menus.php"))
+		{
+			include MAIL_BK_PLUGIN_DIR . "/lib/wp-include-menus.php";
+		}
 	}
 }
 
@@ -153,7 +154,10 @@ if(isset($_REQUEST["action"]))
 						$current_user->role = array_keys($current_user->$role);
 						$role = $current_user->role[0];
 					}
-					include MAIL_BK_PLUGIN_DIR . "/lib/add_mail_class_file.php";
+					if(file_exists(MAIL_BK_PLUGIN_DIR . "/lib/add_mail_class_file.php"))
+					{
+						include MAIL_BK_PLUGIN_DIR . "/lib/add_mail_class_file.php";
+					}
 				}
 			}
 		break;
