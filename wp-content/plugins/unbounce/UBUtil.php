@@ -85,5 +85,21 @@ class UBUtil {
     }
   }
 
+  /**
+   * Checks if the current page is a preview page (from on GET parameters).
+   *
+   * This is needed because Wordpress's is_preview() is only true for pages that
+   * are already published.
+   *
+   * This should return true when:
+   *   - previewing posts
+   *   - previewing pages
+   *   - previewing drafts (of posts & pages)
+   */
+  public static function is_wordpress_preview($get_params) {
+    return isset($get_params['preview'])
+      && (isset($get_params['p']) || isset($get_params['page_id']) || isset($get_params['preview_id']));
+  }
+
 }
 ?>

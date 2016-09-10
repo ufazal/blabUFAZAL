@@ -2,7 +2,7 @@
 Contributors: photocrati, imagely
 Tags: nextgen, nextgen gallery, gallery, galleries, image, images, image gallery, photo, photos, photo gallery, picture, pictures, picture gallery, album, albums, photo albums, image album, media, media gallery, thumbnails, thumbnail gallery, thumbnail galleries, slideshow, slideshows, slideshow gallery, slideshow galleries, fancybox, lightbox, responsive, responsive gallery, responsive galleries, wordpress responsive gallery, nextcellent, wordpress gallery plugin, wordpress photo gallery plugin, wp gallery, wp gallery plugins, best gallery plugin, free photo gallery, singlepic, image captions imagebrowser, watermarks, watermarking, photography, photographer
 Requires at least: 4.0.0
-Stable tag: 2.1.49
+Stable tag: 2.1.50
 Tested up to: 4.6.0
 License: GPLv2
 
@@ -186,6 +186,17 @@ For more information, feel free to visit the official website for the NextGEN Ga
 
 
 == Changelog ==
+
+= V2.1.50 - 08.30-2016 =
+* NEW:     Added the ability to open galleries within albums using a lightbox
+* Changed: Increased freemius opt-in to 100%
+* Changed: Tamara Lackey's biography on the overview page
+* Fixed:   Images not responsive for all display types
+* Fixed:   Compatibility with the Imagely Lightroom plugin
+* Fixed:   Removed Pope tests folder
+* Fixed:   Maximum function nesting level fatal error when displaying two or more albums
+* Fixed:   Ensure Insert Gallery Window background stays white
+* Fixed:   PHP warning for C_NGG_Lightbox class using incompatible constructor
 
 = V2.1.49 - 07.26.2016 =
 * NEW:     Add a "Default" template option to override ATP settings when a global setting is used

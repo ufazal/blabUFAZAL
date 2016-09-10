@@ -152,6 +152,9 @@ class UBHTTP {
                                         $headers0,
                                         $user_agent) {
 
+    // Always add this header to responses to show it comes from our plugin.
+    header("X-Unbounce-Plugin: 1", false);
+
     $existing_headers = headers_list();
     $forwarded_for = UBUtil::array_fetch($_SERVER, 'HTTP_X_FORWARDED_FOR');
     $remote_ip = UBUtil::array_fetch($_SERVER, 'REMOTE_ADDR');

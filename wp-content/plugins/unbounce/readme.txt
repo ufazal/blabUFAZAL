@@ -3,7 +3,7 @@ Contributors: unbouncewordpress
 Tags: Unbounce, AB testing, A/B testing, split testing, CRO, conversion optimization, wordpress landing page, wp landing pages, splash pages, landing pages, squeeze pages, lead gen, lead generation, email list, responsive landing pages, templates, inbound marketing, ppc, analytics
 Requires at least: 4.1.5
 Tested up to: 4.6
-Stable tag: 1.0.26
+Stable tag: 1.0.29
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,11 @@ Unbounce when switched on. This feature is disabled when you install the plugin.
 Success Coach may request that you turn the debug feature on if you are experiencing issues with the plugin
 to help track down the issue.
 
+= Unbounce Pages are loading, but my conversions are not being tracked =
+
+This is typically caused by caching responses which affects how users are assigned unique identifiers.
+You should add a rule to your cache to avoid caching Unbounce Pages which have the HTTP header "X-Unbounce-Plugin".
+
 == Screenshots ==
 
 1. Build your landing page in Unbounce, the world’s most powerful landing page builder.
@@ -88,6 +93,15 @@ to help track down the issue.
 4. Edit and update all your landing pages from Unbounce’s page builder. They’ll automatically get updated on your WordPress site.
 
 == Changelog ==
+
+= 1.0.28 =
+* Disables the unbounce plugin when editing drafts as a logged in user.
+
+= 1.0.27 =
+* Add a custom header "X-Unbounce-Plugin: 1" to identify all pages served by the plugin to support cache invalidation.
+
+= 1.0.26 =
+* Minor fix
 
 = 1.0.25 =
 * Minor bug fix

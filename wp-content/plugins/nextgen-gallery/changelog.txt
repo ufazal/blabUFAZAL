@@ -1,6 +1,17 @@
 NextGEN Gallery
 by Imagely
 
+= V2.1.50 - 08.30-2016 =
+* NEW:     Added the ability to open galleries within albums using a lightbox
+* Changed: Increased freemius opt-in to 100%
+* Changed: Tamara Lackey's biography on the overview page
+* Fixed:   Images not responsive for all display types
+* Fixed:   Compatibility with the Imagely Lightroom plugin
+* Fixed:   Removed Pope tests folder
+* Fixed:   Maximum function nesting level fatal error when displaying two or more albums
+* Fixed:   Ensure Insert Gallery Window background stays white
+* Fixed:   PHP warning for C_NGG_Lightbox class using incompatible constructor
+
 = V2.1.49 - 07.26.2016 =
 * NEW:     Add a "Default" template option to override ATP settings when a global setting is used
 * NEW:     Added "generic" error reporting back during image upload.
