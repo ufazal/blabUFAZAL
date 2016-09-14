@@ -1,0 +1,11 @@
+/*
+Theme Name: SMG Safety
+Description: Unicon Child Theme for SMG Safety
+Author: minti
+Template: unicon
+Version: 1.0
+*/
+@import url("../unicon/style.css");
+
+/* Load in mustafa's shortcode CSS changes */
+@import url("custom/shortcodes.css");

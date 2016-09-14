@@ -291,6 +291,10 @@ class A_NextGen_Basic_Album_Controller extends Mixin_NextGen_Basic_Pagination
      */
     public function index_action($displayed_gallery, $return = FALSE)
     {
+        // Ensure that the open_gallery_in_lightbox setting is present
+        if (!array_key_exists('open_gallery_in_lightbox', $displayed_gallery->display_settings)) {
+            $displayed_gallery->display_settings['open_gallery_in_lightbox'] = 0;
+        }
         $display_settings = $displayed_gallery->display_settings;
         // We need to fetch the album containers selected in the Attach
         // to Post interface. We need to do this, because once we fetch the
@@ -383,6 +387,27 @@ class A_NextGen_Basic_Album_Controller extends Mixin_NextGen_Basic_Pagination
                 $params['pagination'] = $pagination_result['output'];
                 $params['image_gen_params'] = $albums['image_gen_params'];
                 $params['galleries'] = $albums['galleries'];
+                foreach ($params['galleries'] as &$gallery) {
+                    $gallery->entity_type = isset($gallery->is_gallery) && intval($gallery->is_gallery) ? 'gallery' : 'album';
+                    // If we're to open a gallery in a lightbox, we need to expose it to the lightbox
+                    // as a displayed gallery
+                    if (isset($params['open_gallery_in_lightbox']) && $gallery->entity_type == 'gallery') {
+                        $gallery->displayed_gallery = new C_Displayed_Gallery();
+                        $gallery->displayed_gallery->container_ids = array($gallery->{$gallery->id_field});
+                        $gallery->displayed_gallery->display_settings = $displayed_gallery->display_settings;
+                        $gallery->displayed_gallery->returns = 'included';
+                        $gallery->displayed_gallery->source = 'galleries';
+                        $gallery->displayed_gallery->images_list_count = $gallery->displayed_gallery->get_entity_count();
+                        $gallery->displayed_gallery->is_album_gallery = TRUE;
+                        $gallery->displayed_gallery->to_transient();
+                        if ($this->does_lightbox_support_displayed_gallery($displayed_gallery)) {
+                            $gallery->displayed_gallery->effect_code = $this->object->get_effect_code($gallery->displayed_gallery);
+                        }
+                        // Add "galleries.gallery_1 = {};"
+                        $this->object->_add_script_data('ngg_common', 'galleries.gallery_' . $gallery->displayed_gallery->id(), (array) $gallery->displayed_gallery->get_entity(), FALSE);
+                        $this->object->_add_script_data('ngg_common', 'galleries.gallery_' . $gallery->displayed_gallery->id() . '.wordpress_page_root', get_permalink(), FALSE);
+                    }
+                }
                 $params['displayed_gallery'] = $displayed_gallery;
                 $params = $this->object->prepare_display_parameters($displayed_gallery, $params);
                 switch ($displayed_gallery->display_type) {
@@ -461,6 +486,8 @@ class A_NextGen_Basic_Album_Controller extends Mixin_NextGen_Basic_Pagination
             $gallery->previewurl = '';
             if ($gallery->previewpic && $gallery->previewpic > 0) {
                 if ($image = $image_mapper->find(intval($gallery->previewpic))) {
+                    $gallery->previewpic_image = $image;
+                    $gallery->previewpic_fullsized_url = $storage->get_image_url($image, 'full');
                     $gallery->previewurl = $storage->get_image_url($image, $image_gen->get_size_name($image_gen_params), TRUE);
                     $gallery->previewname = $gallery->name;
                 }
@@ -549,6 +576,7 @@ class A_NextGen_Basic_Album_Mapper extends Mixin
             $this->object->_set_default_value($entity, 'settings', 'disable_pagination', 0);
             $this->object->_set_default_value($entity, 'settings', 'enable_descriptions', 0);
             $this->object->_set_default_value($entity, 'settings', 'template', '');
+            $this->object->_set_default_value($entity, 'settings', 'open_gallery_in_lightbox', 0);
             // Thumbnail dimensions -- only used by extended albums
             if ($entity->name == NGG_BASIC_EXTENDED_ALBUM) {
                 $this->_set_default_value($entity, 'settings', 'override_thumbnail_settings', 0);
