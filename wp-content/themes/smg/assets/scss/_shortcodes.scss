@@ -4204,19 +4204,19 @@ a.catimage:hover .catimage-text {
 	clear: both;
 	height: 1px;
 	width: 100%;
-	background: url(../images/dotted.png) repeat-x;
+	background: url(../img/dotted.png) repeat-x;
 	margin: 50px 0;
 	height: 1px;
 }
 @media only screen and (-webkit-min-device-pixel-ratio:2), only screen and (min-device-pixel-ratio:2) {
 	.divider2 {
-		background-image: url(../images/dotted@2x.png);
+		background-image: url(../img/dotted@2x.png);
 		background-size: 4px 1px;
 	}
 }
 .divider3 {
 	height: 25px;
-	background: url(../images/shadow.png) no-repeat center center;
+	background: url(../img/shadow.png) no-repeat center center;
 	width: 100%;
 	margin: 50px 0;
 }
@@ -4225,12 +4225,12 @@ a.catimage:hover .catimage-text {
 	margin: 50px 0;
 	width: 100%;
 	height: 14px;
-	background: url(../images/stripes.png);
+	background: url(../img/stripes.png);
 	display: block;
 }
 @media only screen and (-webkit-min-device-pixel-ratio:2), only screen and (min-device-pixel-ratio:2) {
 	.divider4 {
-		background-image: url(../images/stripes@2x.png);
+		background-image: url(../img/stripes@2x.png);
 		background-size: 5px 5px;
 	}
 }
@@ -7237,7 +7237,7 @@ ul.styled-list li i {
 	width: 18px;
 	height: 18px;
 	display: block;
-	background: #999999 url(../images/accordion-open.png) no-repeat center center;
+	background: #999999 url(../img/accordion-open.png) no-repeat center center;
 	margin: 23px 12px 0px 0;
 	border-radius: 2px;
 	cursor: pointer;
@@ -7248,7 +7248,7 @@ ul.styled-list li i {
 	transition: all 0.07s ease;
 }
 .wpb_accordion .wpb_accordion_wrapper .ui-state-active .ui-icon {
-	background-image: url(../images/accordion-close.png);
+	background-image: url(../img/accordion-close.png);
 	background-color: #44bdbd;
 }
 .wpb_accordion .wpb_accordion_wrapper .ui-state-active.wpb_accordion_header a {
@@ -7262,11 +7262,11 @@ ul.styled-list li i {
 }
 @media only screen and (-webkit-min-device-pixel-ratio:2), only screen and (min-device-pixel-ratio:2) {
 	.wpb_accordion .wpb_accordion_wrapper .ui-state-default .ui-icon {
-		background-image: url(../images/accordion-open@2x.png);
+		background-image: url(../img/accordion-open@2x.png);
 		background-size: 10px 10px;
 	}
 	.wpb_accordion .wpb_accordion_wrapper .ui-state-active .ui-icon {
-		background-image: url(../images/accordion-close@2x.png);
+		background-image: url(../img/accordion-close@2x.png);
 		background-size: 10px 10px;
 	}
 }
@@ -7685,6 +7685,9 @@ ul.styled-list li i {
 }
 
 /* ------------------------------------------------------------------------ */
+.wpb_content_element.wpb_tour .wpb_tabs_nav li a:after {
+	display: none;
+}
 
 /* EOF
 /* ------------------------------------------------------------------------ */
