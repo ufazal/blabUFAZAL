@@ -1014,10 +1014,6 @@ var RevSliderAdmin = new function(){
 				resizable:false,
 				buttons:{
 					"Local":function(){
-						if(RS_DEMO){
-							alert(rev_lang.not_available_in_demo);
-							return false;
-						}
 						jQuery(".input_import_slider").val('');
 						jQuery('.rs-import-slider-button').hide();
 						
@@ -1104,10 +1100,6 @@ var RevSliderAdmin = new function(){
 		
 		//import slide dialog
 		jQuery("#button_import_slider").click(function(){
-			if(RS_DEMO){
-				alert(rev_lang.not_available_in_demo);
-				return false;
-			}
 			jQuery('.rev-import-slider-button').hide();
 			
 			jQuery(".input_import_slider").val('');
