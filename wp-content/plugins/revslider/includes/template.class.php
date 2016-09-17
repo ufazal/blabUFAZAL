@@ -560,8 +560,6 @@ class RevSliderTemplate {
 			}
 		}
 		
-		krsort($defaults);
-		
 		return $defaults;
 		
 	}

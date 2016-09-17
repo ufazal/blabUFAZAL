@@ -174,13 +174,6 @@ class RevSliderFunctionsWP{
 	}
 	
 	
-	/**
-	 * Check if current user is administrator
-	 **/
-	public static function isAdminUser(){
-		return current_user_can('administrator');
-	}
-	
 	
 	/* Import media from url
 	 *
@@ -430,13 +423,11 @@ class RevSliderFunctionsWP{
 	 * 
 	 * get posts by coma saparated posts
 	 */
-	public static function getPostsByIDs($strIDs, $slider_id, $is_gal, $additional = array()){
+	public static function getPostsByIDs($strIDs, $slider_id){
 		
 		if(is_string($strIDs)){
 			$arr = explode(",",$strIDs);
-		}else{
-			$arr = $strIDs;
-		}
+		}			
 		
 		$query = array(
 			'post_type'=>"any",
@@ -444,11 +435,6 @@ class RevSliderFunctionsWP{
 			'post__in' => $arr
 		);
 		
-		if($is_gal){
-			$query['post_status'] = 'inherit';
-		}
-		
-		$query = array_merge($query, $additional);
 		$query = apply_filters('revslider_get_posts', $query, $slider_id);
 		
 		$objQuery = new WP_Query($query);
