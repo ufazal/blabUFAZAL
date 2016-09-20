@@ -86,6 +86,7 @@ class tcS3 {
 
 			//if the file doesn't exist, skip it
 			if (!file_exists($localFile)) {
+				error_log("{$localFile} does not exist")
 				continue;
 			}
 
