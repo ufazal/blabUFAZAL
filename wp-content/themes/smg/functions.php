@@ -4,10 +4,10 @@ class smg{
 
 	public function __construct(){
 		add_action("wp_enqueue_scripts", array($this, "enqueue_scripts"), 99);
-		add_filter("wp_head", array($this, "header_tags"), -1);
+		add_action("wp_head", array($this, "header_tags"), -1);
 
 		if(getenv("ENV") == "prod" || getenv("ENV") == "production"){
-			add_filter("wp_footer", array($this, "google_analytics"), 99);
+			add_action("wp_footer", array($this, "google_analytics"), 99);
 		}
 	}
 
