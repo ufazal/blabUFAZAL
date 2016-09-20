@@ -42,7 +42,7 @@ class smg{
 			ga('create', '{$siteID}', 'auto');
 			ga('send', 'pageview');
 			</script>
-			<!-- End Google Analytics —->
+			<!-- End Google Analytics -->
 		";
 
 		echo $html;
