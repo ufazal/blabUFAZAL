@@ -78,6 +78,7 @@ class tcS3 {
 		}
 
 		foreach ($keys as $key) {
+			error_log(json_encode($keys));
 			$localFile = $localdir . "/" . $key;
 			$remoteFile = $this->sanitize_s3_path($this->options["bucket_path"] . $remotedir . "/" . $key);
 
