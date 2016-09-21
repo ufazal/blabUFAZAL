@@ -11,33 +11,28 @@ class tcS3_Nextgen extends tcS3{
 	}
 
 	public function nextgen_register_hooks(){
-		add_filter( 'ngg_get_image_url', array($this, 'nextgen_modify_url'), 10, 3 );
+		add_filter( 'ngg_get_image_url', array($this, 'nextgen_modify_url'), 99, 3 );
 		add_action( 'ngg_delete_picture', array($this, 'nextgen_delete_image'), 10, 1 );
 		add_action( 'ngg_after_new_images_added', array($this, 'nextgen_add_image'), 10, 2 ); 
 		add_action( 'ngg_image_updated', array($this, 'nextgen_image_updated'), 10, 1 );
 	}
 
-	public function nextgen_modify_url($retval, $image, $size){
-		error_log("========== RETVAL ================");
-		error_log(var_export($retval, true));
-		error_log("========== !RETVAL ================");
+	public function nextgen_modify_url($retval, $image, $size){	
+		error_log("========== FILTERING {$retval} ================");
+
+		if(preg_match("/wp-content\/(.+)\/[^.]+\.[A-Za-z]+$/", $retval, $matches)){
 		
-		preg_match("/wp-content\/(.+)\/[^.]+\.[A-Za-z]+$/", $retval, $matches);
-		
-		error_log("========== GalleryDir ================");
-		error_log(var_export($matches, true));
-		error_log("========== !GalleryDir ================");
+			$galleryDir = "/" . $matches[1];
 
-		$galleryDir = "/" . $matches[1];
+			$retval = $this->build_attachment_url($retval, $galleryDir);
 
-		$retval = $this->build_attachment_url($retval, $galleryDir);
-
-		error_log("========== RETVAL ================");
-		error_log(var_export($galleryDir, true));
-		error_log(var_export($retval, true));
-		error_log("========== !RETVAL ================");
+			
+			error_log(var_export($galleryDir, true));
+			error_log(var_export($retval, true));
+		}
 
 		//error_log($url);
+		error_log("========== !FILTERING {$retval} ================");
 		
 		return $retval;
 	}
