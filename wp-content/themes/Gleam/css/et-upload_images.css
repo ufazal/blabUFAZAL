@@ -47,7 +47,7 @@ cursor: pointer; }
 	.et_image_options input { margin-bottom: 8px; }
 	.et_image_options textarea { height: 41px; margin-bottom: 4px; }
 	a.et_image_save { color: white; text-decoration: none; background: red; padding: 1px 8px; font-size: 9px; float: right; }
-	
+
 .et_settings_box { background: #eee; border: 1px solid #d0d0d0; padding: 0 20px 0; margin-bottom: 10px; }
 .et_single_option { display: inline-block; padding: 12px; }
 	.et_single_option label { font-weight: bold; }

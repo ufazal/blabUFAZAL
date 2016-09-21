@@ -14,16 +14,15 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-	<title><?php elegant_titles(); ?></title>
 	<?php elegant_description(); ?>
 	<?php elegant_keywords(); ?>
 	<?php elegant_canonical(); ?>
 
 	<?php do_action('et_head_meta'); ?>
-	
+
 	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-	
+
 	<!--[if lt IE 7]>
 		<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/ie6style.css" />
 		<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/DD_belatedPNG_0.0.8a-min.js"></script>
@@ -46,30 +45,24 @@
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<div id="my_logo">
-<a href="http://www.facebook.com/pages/Ifill-Events-LLC/110543502367104" target="_blank"><img src="//cdn.bluelinermarketing.com/managed/uploads/sites/6/2012/10/facebook-icon.png" height="40" width="40"/></a>
-<a href="http://twitter.com/IfillEvents" target="_blank"><img src="//cdn.bluelinermarketing.com/managed/uploads/sites/6/2012/10/twitter-icon.png" height="40" width="40"/></a>
-<a href="http://www.linkedin.com/in/ifillevents" target="_blank"><img src="//cdn.bluelinermarketing.com/managed/uploads/sites/6/2012/10/linkedin-icon.png" height="40" width="40"/></a>
-</div>
-
 	<div id="wrapper">
 		<div id="main_content"<?php if ( is_home() ) echo ' class="home_content"'; ?>>
 			<header id="main_header">
 				<div id="logo_area">
 					<?php if ( ( $logo = get_option('gleam_logo') ) && '' != $logo ) { ?>
-						<a href="<?php echo esc_url( home_url() ); ?>">
-							<img src="<?php echo esc_url( $logo ); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" id="logo"/>
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+							<img src="<?php echo esc_attr( $logo ); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" id="logo"/>
 						</a>
 					<?php } else { ?>
 						<h1>
-							<a href="<?php echo esc_url( home_url() ); ?>"><?php echo get_option('gleam_logo_text'); ?></a>
+							<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php echo get_option('gleam_logo_text'); ?></a>
 						</h1>
 					<?php } ?>
 					<p><?php echo esc_html( get_bloginfo('description') ); ?></p>
 				</div> <!-- #logo_area -->
-					
+
 				<?php do_action('et_header_top'); ?>
-						
+
 				<nav id="main_menu">
 					<?php
 						$menuClass = 'clearfix';
@@ -79,9 +72,9 @@
 							$primaryNav = wp_nav_menu( array( 'theme_location' => 'primary-menu', 'container' => '', 'depth' => '1', 'fallback_cb' => '', 'menu_class' => $menuClass, 'echo' => false ) );
 						}
 						if ($primaryNav == '') { ?>
-							<ul class="<?php echo $menuClass; ?>">
+							<ul class="<?php echo esc_attr( $menuClass ); ?>">
 								<?php if (get_option('gleam_home_link') == 'on') { ?>
-									<li <?php if (is_home()) echo('class="current_page_item"') ?>><a href="<?php echo home_url(); ?>"><?php esc_html_e('Home','Gleam') ?></a></li>
+									<li <?php if (is_home()) echo('class="current_page_item"') ?>><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e('Home','Gleam') ?></a></li>
 								<?php }; ?>
 
 								<?php show_page_menu($menuClass,false,false); ?>

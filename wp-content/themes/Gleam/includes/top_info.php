@@ -31,6 +31,6 @@
 <div id="top_title">
 	<h1><?php echo esc_html( $et_page_title ); ?></h1>
 	<?php if ( '' != $et_tagline ){ ?>
-		<p><?php echo esc_html( $et_tagline ); ?></p>
+		<p><?php echo esc_html( strip_tags( $et_tagline ) ); ?></p>
 	<?php } ?>
 </div> <!-- #top_title -->
