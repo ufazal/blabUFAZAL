@@ -1,11 +1,11 @@
-<?php 
+<?php
 /*
 Template Name: Sitemap Page
 */
 ?>
-<?php 
+<?php
 $et_ptemplate_settings = array();
-$et_ptemplate_settings = maybe_unserialize( get_post_meta($post->ID,'et_ptemplate_settings',true) );
+$et_ptemplate_settings = maybe_unserialize( get_post_meta(get_the_ID(),'et_ptemplate_settings',true) );
 
 $fullwidth = isset( $et_ptemplate_settings['et_fullwidthpage'] ) ? (bool) $et_ptemplate_settings['et_fullwidthpage'] : false;
 ?>
@@ -20,12 +20,12 @@ $fullwidth = isset( $et_ptemplate_settings['et_fullwidthpage'] ) ? (bool) $et_pt
 		<h2><?php esc_html_e('Pages','Gleam'); ?></h2>
 		<ul id="sitemap-pages"><?php wp_list_pages('title_li='); ?></ul>
 	</div> <!-- end .sitemap-col -->
-	
+
 	<div class="sitemap-col">
 		<h2><?php esc_html_e('Categories','Gleam'); ?></h2>
 		<ul id="sitemap-categories"><?php wp_list_categories('title_li='); ?></ul>
 	</div> <!-- end .sitemap-col -->
-	
+
 	<div class="sitemap-col<?php if (!$fullwidth) echo ' last'; ?>">
 		<h2><?php esc_html_e('Tags','Gleam'); ?></h2>
 		<ul id="sitemap-tags">
@@ -37,11 +37,11 @@ $fullwidth = isset( $et_ptemplate_settings['et_fullwidthpage'] ) ? (bool) $et_pt
 			} ?>
 		</ul>
 	</div> <!-- end .sitemap-col -->
-	
+
 	<?php if (!$fullwidth) { ?>
 		<div class="clear"></div>
 	<?php } ?>
-	
+
 	<div class="sitemap-col<?php if ($fullwidth) echo ' last'; ?>">
 		<h2><?php esc_html_e('Authors','Gleam'); ?></h2>
 		<ul id="sitemap-authors" ><?php wp_list_authors('show_fullname=1&optioncount=1&exclude_admin=0'); ?></ul>
@@ -49,5 +49,5 @@ $fullwidth = isset( $et_ptemplate_settings['et_fullwidthpage'] ) ? (bool) $et_pt
 </div> <!-- end #sitemap -->
 
 <div class="clear"></div>
-	
+
 <?php get_footer(); ?>
