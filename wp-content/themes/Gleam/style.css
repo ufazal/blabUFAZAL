@@ -1,7 +1,7 @@
 /*
 Theme Name: Gleam
 Theme URI: http://www.elegantthemes.com/gallery/
-Version: 1.6
+Version: 2.8.5
 Description: Theme from Elegant Themes
 Author: Elegant Themes
 Author URI: http://www.elegantthemes.com
@@ -112,7 +112,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'LeagueGothicRegular', Arial, sans-serif; 
 	#et_backgrounds li.active_slide { z-index: -10; }
 		#et_backgrounds img { position: relative; }
 	#pattern_overlay { z-index: -5; background: url(images/overlay_pattern.png); }
-	
+
 #main_content { background: url(images/main_bg.png); width: 800px; border: 1px solid #0b0d0e; -moz-box-shadow: inset 1px 1px 0 rgba(158,205,215,0.1), 0 0 30px rgba(0,0,0,0.7); -webkit-box-shadow: inset 1px 1px 0 rgba(158,205,215,0.1), 0 0 30px rgba(0,0,0,0.7); box-shadow: inset 1px 1px 0 rgba(158,205,215,0.1), 0 0 30px rgba(0,0,0,0.7); position: absolute; left: 50%; top: 0; overflow: hidden; padding-top: 2px !important; }
 #main_content.home_content { background-image: url(images/main_bg_home.png); width: 352px; top: 50%; }
 #main_content.home_content #et_page_content { display: none; }
@@ -133,73 +133,73 @@ h1, h2, h3, h4, h5, h6 { font-family: 'LeagueGothicRegular', Arial, sans-serif; 
 				#main_menu li ul { display: none !important; }
 				#main_menu a { display: block; float: left; text-align: left; font-size: 14px; font-family: 'Droid Sans', Arial, sans-serif; color: #fefefe; text-shadow: 1px 1px 1px #000; background: url(images/dropdown_link_bg.png); overflow: hidden; height: 45px; -webkit-transition: background-color 0.5s ease-in; -moz-transition:background-color 0.5s ease-in; -o-transition: background-color 0.5s ease-in; transition: background-color 0.5s ease-in; }
 				#main_menu a:hover { background: #65bab3; text-decoration: none; color: #fff; }
-				
+
 			span.menu_slide, span.main_text { display: block; padding: 15px 5px 11px 30px; width: 141px; position: relative; }
-				
+
 	#temp_content { display: none; }
 	#et_page_content { padding: 46px; padding-bottom: 66px; }
-	
+
 	a#big_arrow_left, a#big_arrow_right { position: absolute; top: 42%; margin-top: -41px; width: 82px; height: 144px; left: 0; }
 	a#big_arrow_left { background: url(images/big_arrow_left.png) no-repeat; }
 	a#big_arrow_right { background: url(images/big_arrow_right.png) no-repeat; }
-	
+
 	#breadcrumbs { color: #afc1c6; font-size: 12px; text-transform: uppercase; text-shadow: 1px 1px 0 #000; margin-bottom: 10px; }
 		#breadcrumbs a, #breadcrumbs span { color: #74858a; }
 		#breadcrumbs a:hover { color: #afc1c6; text-decoration: none; }
 		#breadcrumbs span.raquo { margin: 0 4px; }
-	
+
 	p.meta-info, #top_title p, .comment_date { font-size: 14px; color: #65bab3; text-transform: uppercase; text-shadow: 1px 1px 0 #000; padding-bottom: 3px; }
 		p.meta-info a { color: #c0fffa; }
 		p.meta-info a:hover { color: #e2fffd; text-decoration: none; }
-		
+
 	.title_area { margin-bottom: 15px; margin-top: -10px; }
 		h1.main_title, #top_title h1 { font-size: 60px; text-transform: uppercase; text-shadow: 0 0 10px rgba(255, 255, 255, 0.6); margin-bottom: -1px; }
 		#page_description { color: #65bab3; text-shadow: 1px 1px 0 #000; font-size: 14px; text-transform: uppercase; padding-bottom: 0; }
-	
+
 	#top_title { margin-bottom: 35px; }
 		#top_title h1 { margin-bottom: -5px; }
-	
+
 	.article { width: 320px; float: left; margin-right: 40px; margin-bottom: 38px; }
 		.article h2 { margin-bottom: 0; }
 			.article h2 a:hover { color: #eee; text-decoration: none; }
-	
+
 	p.meta { font-size: 11px; text-transform: uppercase; color: #74858a; text-shadow: 1px 1px 0 #000; padding-bottom: 10px; line-height: 17px; }
 		p.meta a { color: #74858a; }
 		p.meta a:hover { color: #fff; text-decoration: none; }
-		
+
 	.blog_image { position: relative; width: 316px; border: 1px solid #0b0d0e; -webkit-box-shadow: 1px 1px 0 rgba(158,205,215,0.1); -moz-box-shadow: 1px 1px 0 rgba(158,205,215,0.1); box-shadow: 1px 1px 0 rgba(158,205,215,0.1); overflow: hidden; }
 		.blog_image img { display: block; }
 		.blog_image .description { position: absolute; left: 0; bottom: -30px; width: 100%; background: url(images/blog_post_overlay.png); padding: 10px 0; text-shadow: 1px 1px 0 rgba(0,0,0,0.4); display: none; }
 			.blog_image .description p { padding: 0 18px; line-height: 19px; }
-		
+
 	.post-image { position: relative; margin-bottom: 12px; }
 		.post-image span.overlay, .blog_image span.overlay, .avatar-overlay, #thumb_switcher span.overlay, .gleam_gallery_image span.overlay { width: 100%; height: 100%; position: absolute; top: 0; left: 0; -moz-box-shadow: inset 0 0 30px rgba(0,0,0,0.7); -webkit-box-shadow: inset 0 0 30px rgba(0,0,0,0.7); box-shadow: inset 0 0 30px rgba(0,0,0,0.7); display: block; }
 		.post-image img { display: block; }
 	.page .post-image, body.single-post .post-image { width: 678px; border: 1px solid #0b0d0e; box-shadow: 1px 1px 0 rgba(158,205,215,0.1); }
-	
+
 	.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 { margin-bottom: 10px; }
 	.post-content p { padding-bottom: 15px; }
-				
+
 	.post ul, .comment-content ul { list-style-type: disc; padding: 0 0 23px 16px; line-height: 26px; }
 	.post ol, .comment-content ol { list-style-type: decimal; list-style-position: inside; padding: 0 0 23px 16px; line-height: 26px; }
 		.post ul li ul, .post ul li ol, .comment-content ul li ul, .comment-content ul li ol { padding: 2px 0px 2px 20px; }
 		.post ol li ul, .post ol li ol, .comment-content ol li ul, .comment-content ol li ol  { padding: 2px 0px 2px 35px; }
-	
+
 	.jspContainer:before, .jspContainer:after { content: ''; position: absolute; left: 1px; width: 800px; }
 	.jspContainer:before { top: 0; background: url(images/page_content_top.png) repeat-x; height: 53px; z-index: 3; }
 	.jspContainer:after { bottom: 0; background: url(images/page_content_bottom.png) repeat-x; height: 66px; }
-		
+
 	.jspContainer { overflow: hidden; position: relative; }
 	.jspPane { position: absolute; }
 
 	#close_button { opacity: .7; position: absolute; top: 0; right: 0; background: #65bab3 url(images/et_close_button.png) no-repeat center; width: 19px; height: 19px; z-index: 6; display: block; }
 	#close_button:hover { opacity: 1; -webkit-transition: opacity .5s ease-in-out; -moz-transition: opacity .5s ease-in-out; transition: opacity .5s ease-in-out;}
-	
+
 	.jspVerticalBar { position: absolute; top: 0; right: 0; width: 19px; height: 100%; border-left: 1px solid #0b0d0e; -moz-box-shadow: 0 0 0 1px rgba(158,205,215,0.1); -webkit-box-shadow: 0 0 0 1px rgba(158,205,215,0.1); box-shadow: 0 0 0 1px rgba(158,205,215,0.1); z-index: 5; }
 	.jspHorizontalBar { position: absolute; bottom: 0; left: 0; width: 100%; height: 16px; background: red; display: none; }
 	.jspVerticalBar *, .jspHorizontalBar * { margin: 0; padding: 0; }
 	.jspCap { display: none; }
-	.jspHorizontalBar .jspCap { float: left; } 
+	.jspHorizontalBar .jspCap { float: left; }
 	.jspTrack { background: url(images/scrollbar_bg.png); position: relative; width: 19px; }
 	.jspDrag { background: rgba(80,94,98,.4); position: relative; top: 0; left: 0; cursor: pointer; -webkit-transition:background .3s ease-in-out; -moz-transition:background .3s ease-in-out; transition:background .3s ease-in-out; margin-top: 18px; }
 	.jspDrag:hover { background: rgba(80,94,98,.5); }
@@ -218,7 +218,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'LeagueGothicRegular', Arial, sans-serif; 
 
 	.jspCorner { background: #eeeef4; float: left; height: 100%; }
 	* html .jspCorner { margin: 0 -3px 0 0; }
-	
+
 .jspPane #main_header { display: none !important; }
 
 .gleam_gallery_entry { float: left; border: 1px solid #0b0d0e; -webkit-box-shadow: 1px 1px 0 #353f41; -moz-box-shadow: 1px 1px 0 #353f41; box-shadow: 1px 1px 0 #353f41; position: relative; margin: 0 40px 35px 0; }
@@ -236,14 +236,14 @@ h1, h2, h3, h4, h5, h6 { font-family: 'LeagueGothicRegular', Arial, sans-serif; 
 #et_slideshow_fs { position: fixed; bottom: 110px; left: 60px; }
 	.et_fs_slide { display: none; font-size: 17px; text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7); }
 		.et_fs_slide h2 { font-size: 65px; margin-bottom: 3px; }
-		
+
 #small_thumbs { bottom: 48px; position: fixed; left: 50%; padding: 7px 34px 7px 42px; background: url(images/footer_bg.png); border: 1px solid #0B0D0E; border-bottom: none; -moz-box-shadow: inset 1px 0 0 rgba(158,205,215,0.1); -webkit-box-shadow: inset 1px 0 0 rgba(158,205,215,0.1); box-shadow: inset 1px 0 0 rgba(158,205,215,0.1); display: none; }
 	#thumb_switcher li { float: left; position: relative; border: 1px solid #0b0d0e; border: 1px solid #0b0d0e; box-shadow: 1px 1px 0 #353f41; margin-right: 8px; }
 		#thumb_switcher li  img { display: block; }
 	#thumb_prev, #thumb_next { display: block; position: absolute; top: 20px; width: 14px; height: 24px; text-indent: -9999px; }
 	#thumb_prev { left: 12px; background: url(images/small_slider_left.png) no-repeat; }
 	#thumb_next { right: 12px; background: url(images/small_slider_right.png) no-repeat; }
-	
+
 h2.et_pt_title { padding-bottom: 1px !important; font-size: 34px !important; }
 	h2.et_pt_title a { color: #fff !important; }
 p.et_pt_blogmeta a { color: #EEE !important; }
@@ -277,7 +277,7 @@ p.et_pt_blogmeta a:hover { color: #fff !important; }
 #et_pt_portfolio_gallery .page-nav { margin: 0 0 0 36px !important; }
 
 #et_pt_portfolio_gallery img { height: auto; max-width: 100%; }
-		
+
 /*------------------------------------------------*/
 /*-------------------[COMMENTS]-------------------*/
 /*------------------------------------------------*/
@@ -290,7 +290,7 @@ p.et_pt_blogmeta a:hover { color: #fff !important; }
 
 	span.fn { display: block; font-size: 24px; font-family: 'LeagueGothicRegular', Arial, sans-serif; text-transform: uppercase; margin-bottom: 3px; }
 	span.fn, span.fn a { color: #fff; }
-	
+
 	.comment { padding: 10px 0; }
 		.reply-container { text-align: right; }
 			a.comment-reply-link, #commentform input#submit { display: inline-block; padding: 7px 15px; border: 1px solid #14171a; color: #fff; font-size: 12px; text-shadow: 1px 1px 0 rgba(0,0,0,0.9); -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; -webkit-box-shadow: inset 0 1px 0 rgba(158,205,215,0.1); -moz-box-shadow: inset 0 1px 0 rgba(158,205,215,0.1); box-shadow: inset 0 1px 0 rgba(158,205,215,0.1);
@@ -319,9 +319,9 @@ h1#comments { margin-bottom: 25px; }
 .commentlist #reply-title { border: none; left: 0; padding-left: 0; top: 6px; }
 	.commentlist #reply-title small { display: block; margin-top: -16px; }
 		#reply-title small a { font-size: 14px; text-transform: lowercase; font-family: Arial,sans-serif; color: #65bab3; }
-		
+
 #respond, #trackbacks { margin: 18px 0 5px; }
-	
+
 /*------------------------------------------------*/
 /*---------------------[FOOTER]-------------------*/
 /*------------------------------------------------*/
@@ -332,12 +332,12 @@ h1#comments { margin-bottom: 25px; }
 			#secondary_menu li { float: left; }
 				#secondary_menu a { font-size: 18px; font-family: 'LeagueGothicRegular', Arial, sans-serif; color: #fff; display: block; text-transform: uppercase; overflow: hidden; height: 94px; -webkit-transition: background-color 0.5s ease-in; -moz-transition:background-color 0.5s ease-in; -o-transition: background-color 0.5s ease-in; transition: background-color 0.5s ease-in; }
 					#secondary_menu a span.main_text, #secondary_menu a span.menu_slide { padding: 14px 17px; width: auto; }
-					
+
 				#secondary_menu a:hover { text-decoration: none; background: #65bab3; }
 				#secondary_menu li.current-menu-item a, #secondary_menu li.current-menu-item a:hover { background: #141516; }
 				#secondary_menu a:hover, #secondary_menu li.current-menu-item a { color: #fff; }
 
-	
+
 /*------------------------------------------------*/
 /*--------------------[SIDEBAR]-------------------*/
 /*------------------------------------------------*/
@@ -358,7 +358,7 @@ div.post .new-post .aligncenter, .aligncenter { display: block; margin-left: aut
 img.alignleft { display:inline; float:left; margin-right:15px; }
 img.alignright { display:inline; float:right; margin-left:15px; }
 
-		
+
 /*------------------------------------------------*/
 /*-----------------[WP CALENDAR]-----------------*/
 /*------------------------------------------------*/
@@ -372,7 +372,7 @@ img.alignright { display:inline; float:right; margin-left:15px; }
 		#wp-calendar #prev a, #wp-calendar #next a { font-size: 9pt; }
 		#wp-calendar #next a { padding-right: 10px; text-align: right; }
 		#wp-calendar #prev a { padding-left: 10px; text-align: left; }
-		
+
 /*------------------------------------------------*/
 /*-------------------[PAGE NAVI]------------------*/
 /*------------------------------------------------*/
@@ -388,7 +388,4 @@ img.alignright { display:inline; float:right; margin-left:15px; }
 .et_embedded_videos { display: none !important; }
 html#ie7 .menu_slide { display: none !important; }
 
-p.form-allowed-tags {display: none;}
-
-#my_logo { position:absolute; bottom:0px; right:20px; z-index:999999 }
-.home #my_logo {display:none }
+div:not(.et_builder_outer_content) .last { margin-right: 0px !important; clear:right; }

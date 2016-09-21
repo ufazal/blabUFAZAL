@@ -2,16 +2,16 @@
 	<article class="entry post page">
 		<div class="title_area">
 			<h1 class="main_title"><?php the_title(); ?></h1>
-			<?php if ( ( $page_description = get_post_meta( $post->ID, 'Description', true ) ) && '' != $page_description ) { ?>
+			<?php if ( ( $page_description = get_post_meta( get_the_ID(), 'Description', true ) ) && '' != $page_description ) { ?>
 				<p id="page_description"><?php echo esc_html( $page_description ); ?></p>
 			<?php } ?>
 		</div> <!-- .title_area -->
-		
+
 		<div class="post-content clearfix">
 			<?php
 				$thumb = '';
-				$width = apply_filters('et_image_width',678);
-				$height = apply_filters('et_image_height',200);
+				$width = (int) apply_filters('et_image_width',678);
+				$height = (int) apply_filters('et_image_height',200);
 				$classtext = '';
 				$titletext = get_the_title();
 				$thumbnail = get_thumbnail($width,$height,$classtext,$titletext,$titletext,false,'Single');

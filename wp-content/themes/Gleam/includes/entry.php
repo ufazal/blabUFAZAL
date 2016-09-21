@@ -3,15 +3,15 @@
 	$i = 1;
 ?>
 <div id="posts_grid" class="clearfix">
-	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>	
+	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 		<div class="article<?php if ( $i % 2 == 0 ) echo ' last'; ?>">
 			<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 			<?php get_template_part('includes/postinfo'); ?>
-			
+
 			<?php
 				$thumb = '';
-				$width = apply_filters('et_image_width',316);
-				$height = apply_filters('et_image_height',175);
+				$width = (int) apply_filters('et_image_width',316);
+				$height = (int) apply_filters('et_image_height',175);
 				$classtext = '';
 				$titletext = get_the_title();
 				$thumbnail = get_thumbnail($width,$height,$classtext,$titletext,$titletext,false,'Entry');
