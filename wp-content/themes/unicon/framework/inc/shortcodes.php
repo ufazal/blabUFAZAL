@@ -577,7 +577,7 @@ if (!function_exists('minti_googlefont_function')) {
 /* Google Maps */
 /*-----------------------------------------------------------------------------------*/
 function minti_load_googlemaps() {
-	wp_register_script( 'google-maps-api', '//maps.google.com/maps/api/js', false, NULL, true);
+	wp_register_script( 'google-maps-api', '//maps.google.com/maps/api/js?key=AIzaSyA2rpJkcI3NgRnBKhX9d_8MBjf2Y2kSd7o', false, NULL, true);
 }
 add_action( 'wp_enqueue_scripts', 'minti_load_googlemaps' );
 
