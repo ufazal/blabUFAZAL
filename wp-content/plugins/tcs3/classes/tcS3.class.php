@@ -78,7 +78,6 @@ class tcS3 {
 		}
 
 		foreach ($keys as $key) {
-			error_log(print_r($key, true));
 			preg_match("/^(?:[0-9]+\/)?([0-9]+\/[0-9]+\/[A-Za-z0-9-_.]+)$/", $key, $matches);
 			$key = $matches[1];
 			$localFile = $localdir . "/" . $key;
