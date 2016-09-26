@@ -78,7 +78,7 @@ class tcS3 {
 		}
 
 		foreach ($keys as $key) {
-			preg_match("/^\/?(?:[A-Za-z0-9]+\/)?((?:[A-Za-z0-9]+\/)?(?:[A-Za-z0-9]+\/)?[A-Za-z0-9-_.]+)$/", $key, $matches);
+			preg_match("/^(?:[0-9]+\/)?([0-9]+\/[0-9]+\/[A-Za-z0-9-_.]+)$/", $key, $matches);
 			$key = $matches[1];
 			$localFile = $localdir . "/" . $key;
 			$remoteFile = $this->sanitize_s3_path($this->options["bucket_path"] . $remotedir . "/" . $key);
