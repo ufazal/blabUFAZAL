@@ -2,8 +2,8 @@
 Contributors: slickremix
 Tags:  facebook photos, facebook reviews, facebook videos, videos, facebook albums, albums, photos facebook, photo, facebook feed, facebook posts, hastags, social, social plugin, social networking, networking, custom feed, custom facebook feed, facebook plugin, facebook group, facebook groups, events, facebook events, facebook page events, facebook group events, facebook page, facebook pages, twitter, twitter plugin, twitter hashtag, twitter #, twitter @, twitter search, vine, vine videos, vine gallery, vine plugin, vine seo, instagram, instagram plugin, feed me social, social plugin, feed, feeds, shortcode, facebook wall, slickremix, plugin, pages, posts, images, page, post, image, youtube, youtube feed, youtube channel, youtube video, youtube videos, videos, youtube embed, embed, video iframe, admin, comments, widgets, seo, wordpress, pinterest, pinterest boards, pinterest feeds, pinterest photos, pinterest widget, pinterest widgets, instagram popup, Facebook videos, facebook reviews, twitter videos
 Requires at least: 3.6.0
-Tested up to: 4.6.0
-Stable tag: 2.0.6
+Tested up to: 4.6.1
+Stable tag: 2.0.9
 License: GPLv2 or later
 
 Custom feeds for Facebook Pages, Groups, Events, Album Photos, Videos & Covers, Twitter, Vine, Instagram, Pinterest & YouTube on pages, posts or widgets.
@@ -28,7 +28,7 @@ Create Social Feeds of any or all your celebrities, family, friends, yourself, o
  * Responsive Social Feeds.
  * Customize Font Colors.
  * Add Like and/or Follow Buttons above or below any feeds.
- * With our [Premium Extension](http://www.slickremix.com/product/feed-them-social-premium-extension/) you can set how many posts, pictures, tweets, or videos for each individual social feed! Facebook Groups now has the option to hide the Title or Description too! [See Example Demo](http://feedthemsocial.com/)
+ * With our [Premium Extension](https://www.slickremix.com/product/feed-them-social-premium-extension/) you can set how many posts, pictures, tweets, or videos for each individual social feed! Facebook Groups now has the option to hide the Title or Description too! [See Example Demo](http://feedthemsocial.com/)
  * Facebook and Instagram feeds now have Load More Button and Infinite Scroll features available in Premium Version and they are mobile friendly.
  * Awesome Support!
 
@@ -47,6 +47,7 @@ Create Social Feeds of any or all your celebrities, family, friends, yourself, o
  * [Pinterest Latest Pins from a User](http://feedthemsocial.com/pinterest-demo-pins-from-user/)
   
 = PREMIUM Demos =
+ * [YouTube Feed Demo](http://feedthemsocial.com/youtube-demo-1-large-with-4-video-per-row/)
  * [Facebook Video Feed Demo](http://feedthemsocial.com/facebook-videos-demo/)
  * [Facebook Photo and Video Carousels Demo](http://feedthemsocial.com/facebook-videos-demo/)
 
@@ -59,9 +60,11 @@ Create Social Feeds of any or all your celebrities, family, friends, yourself, o
 = Facebook Reviews Extension =
  ✭ [NEW! See Demo](http://feedthemsocial.com/facebook-page-reviews-demo/)
 
-ALL SlickRemix plugins come with FREE Basic Support! If you need help or have questions we're here to help, just post on our [Support Forum](http://www.slickremix.com/support-forum/) and we’ll get to you as quickly as we can! (usually within 48hrs)
+All SlickRemix plugins come with FREE Basic Support! If you need help or have questions we're here to help, just post on our [Support Forum](https://www.slickremix.com/support-forum/) and we’ll get to you as quickly as we can! (usually within 48hrs)
 	
 If you enjoy using our plugin please tell others. [Click here to share](http://www.facebook.com/sharer.php?u=http://wordpress.org/plugins/feed-them-social/&t=FeedThemSocial).
+
+Feed Them Social was Developed By SlickRemix --> [https://www.slickremix.com/](https://www.slickremix.com/)
 
 == Installation ==
 
@@ -72,8 +75,18 @@ If you enjoy using our plugin please tell others. [Click here to share](http://w
   * Extract the zip file and drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page. 
 
 == Changelog ==
+= Version 2.0.9 Tuesday, October 4th, 2016 =
+   * FIX: Twitter: Search type feeds (@, #, etc) not showing the full text.
+
+= Version 2.0.8 Wednesday, September 29th, 2016 =
+   * NEW: Twitter: Added new way of getting media url. Restyled and added retweet icon, favorite icon and counts. Plus all new Background cover photo and stats bar you can display above your feed like Twitter. Add cover_photo=yes stats_bar=yes to your Twitter shortcode to see the new additions. Premium users will need to upgrade to version 1.6.4 to use the new additions. [Updated Example](http://feedthemsocial.com/twitter-feed-demo/).
+
+= Version 2.0.7 Monday, September 19th, 2016 =
+   * NEW: Facebook Options: Now all you have to do is click a button to get an Access Token, no more having to create an APP in facebook! Same goes for our Premium Review Plugin too.
+   * FIXED: Settings: Various links to our site for instructions.
+
 = Version 2.0.6 Tuesday, August 30th, 2016 =
-   * VERY IMPORTANT: Pinterest: All users must now go to the Pinterest Options page and create and Access Token. It's very simple to generate the token. [http://www.slickremix.com/docs/how-to-create-a-pinterest-access-token/](http://www.slickremix.com/docs/how-to-create-a-pinterest-access-token/)
+   * VERY IMPORTANT: Pinterest: All users must now go to the Pinterest Options page and create and Access Token. It's very simple to generate the token. [https://www.slickremix.com/docs/how-to-create-a-pinterest-access-token/](https://www.slickremix.com/docs/how-to-create-a-pinterest-access-token/)
    * FIXED: Pinterest: The Boards feed was not working because the existing API was closed suddenly.
    * FIXED: Jetpack Photon filter had a ) in wrong possition causing a warning message that would not go away.
    * FIXED: Vine: Overlapping hover cover on some themes.
@@ -102,14 +115,14 @@ If you enjoy using our plugin please tell others. [Click here to share](http://w
 = Version 2.0.1 Friday, July 8th, 2016 =
    * FIXED: Facebook Page: Shared Event post was not displaying correctly.
    * NEW: Facebook: Like Box is now set to a width of 500px by default.
-   * NEW: [Feed Them Carousel Premium](http://www.slickremix.com/downloads/feed-them-carousel-premium/) for Feed Them Social
+   * NEW: [Feed Them Carousel Premium](https://www.slickremix.com/downloads/feed-them-carousel-premium/) for Feed Them Social
 
 = Version 2.0.0 Tuesday, June 21st, 2016 =
    * FIXED: Instagram: Feed was going to the top on some themes.
 
 = Version 1.9.9 Monday, June 20th, 2016 =
    * FIXED: Instagram: CSS Adjustments.
-   * NEW: Photos and Videos in popup now available in our [Premium Extension 1.5.9](http://www.slickremix.com/product/feed-them-social-premium-extension/)
+   * NEW: Photos and Videos in popup now available in our [Premium Extension 1.5.9](https://www.slickremix.com/product/feed-them-social-premium-extension/)
    * COMING SOON: Fix scripts url to work with SSL on backend.
 
 = Version 1.9.8 Friday, June 10th, 2016 =
@@ -151,8 +164,8 @@ If you enjoy using our plugin please tell others. [Click here to share](http://w
    * FIXED: Facebook: Add overflow:hidden on like button below title and below feed.
    * FIXED: Facebook: Issue with Facebook Reviews not showing proper selected option such as, show only 5 star reviews.
    * FIXED: Twitter: @ button was not showing in Firefox if using the FTS Bar.
-   * FIXED: Twitter: Update to fix caching problems when 2 or more search @ or # are used. Thanks to [James](http://www.slickremix.com/support-forum/topic/twitter-shortcode-is-not-working-well/) in our support forum for bringing this to our attention.
-   * FIXED: Twitter: Update to fix caching problems when 2 or more username feeds are used. Thanks to [Walt](http://www.slickremix.com/support-forum/topic/twitter-shortcodes-repeat-first-entry-info-for-all-entries/) in our support forum for bringing this to our attention.
+   * FIXED: Twitter: Update to fix caching problems when 2 or more search @ or # are used. Thanks to [James](https://www.slickremix.com/support-forum/topic/twitter-shortcode-is-not-working-well/) in our support forum for bringing this to our attention.
+   * FIXED: Twitter: Update to fix caching problems when 2 or more username feeds are used. Thanks to [Walt](https://www.slickremix.com/support-forum/topic/twitter-shortcodes-repeat-first-entry-info-for-all-entries/) in our support forum for bringing this to our attention.
 
 = Version 1.9.3 Wednesday, December 9th, 2015 =
    * FIXED: Shortcodes not working because of WP4.4 update. No space without underscores(_) allowed anymore.
@@ -169,7 +182,7 @@ If you enjoy using our plugin please tell others. [Click here to share](http://w
    * NEW: Facebook and Twitter: Now you can choose a date option called 1 Day Ago from the main settings page. This will show the time like facebook and twitter does. ie. 2 minutes ago, 1 hour ago, etc.
    * NEW: Facebook and Twitter: Set your own custom Date Format from the main Settings page.
    * ADDED FILTER: Now if you accidentally add the full url for a user of any feed on our Settings page we will strip out only what is required.
-   * FIXED: Facebook Albums Covers: The 'View on Facebook' link now opens proper on mobile devices. Thanks to [Larry Shank](http://www.slickremix.com/support-forum/topic/album-cover-links-to-page-and-album-break-on-mobile/) for bringing this to our attention.
+   * FIXED: Facebook Albums Covers: The 'View on Facebook' link now opens proper on mobile devices. Thanks to [Larry Shank](https://www.slickremix.com/support-forum/topic/album-cover-links-to-page-and-album-break-on-mobile/) for bringing this to our attention.
    * FIXED: Added if(imagesLoaded) in fts-global.js to prevent jquery error when function is not in use.
    * FIXED: Instagram: popup warning notices.
    * FIXED: Facebook: Shared posts with uploaded videos will now show.
@@ -259,7 +272,7 @@ If you enjoy using our plugin please tell others. [Click here to share](http://w
 = Version 1.7.9 Saturday, May 16th, 2015 =
  * FIXED: New cache method using transient instead of cache folder.
  * FIXED: Facebook post icon link and name link now open in new window.
- * FIXED: Facebook Language problem that was causing fb feeds to fail. Thanks to [Brad Allen](http://www.slickremix.com/support-forum/topic/facebook-feed-issue) for pointing this issue out.
+ * FIXED: Facebook Language problem that was causing fb feeds to fail. Thanks to [Brad Allen](https://www.slickremix.com/support-forum/topic/facebook-feed-issue) for pointing this issue out.
  * NEW: Facebook like button color option, dark or light, now on the Facebook Options page.
  * NEW: Instagram height option available when you generate a shortcode so you can create a scrolling feed.
  * NEW: Instagram comment and like counts have proper number formatting including rounding for numbers above 10k and 1m like Instagram.
@@ -433,7 +446,7 @@ If you enjoy using our plugin please tell others. [Click here to share](http://w
  * UPDATED: Reduced the screenshot images for wordpress preview so now the zip is only 2.3mb
 
 = Version 1.5.3 Sunday, August 31st, 2014 =
- * NEW: functionality for brand new [FTS Bar Extension.](http://www.slickremix.com/downloads/fts-bar/)
+ * NEW: functionality for brand new [FTS Bar Extension.](https://www.slickremix.com/downloads/fts-bar/)
  * ADDED: New warning/error messages for Instagram and Facebook feeds.
  * UPDATED: FTS framework now using classes in functions file for easier extending.
  * FIXED: Pinterest cache issue.
@@ -583,7 +596,7 @@ If you enjoy using our plugin please tell others. [Click here to share](http://w
  * Updated: Twitter Feed updated to API v.1.1. Twitters old API (v1) has been deprecated but this plugin still works.
  
 = Version 1.1.7 February 15th, 2013 =
- * Updated: Instagram, Facebook Group, YouTube, Twitter Feed, and shortcodes now work with widgets in our [Premium Version](http://www.slickremix.com/product/feed-them-social-premium-extension/). CSS styles for all feeds have had minor tweaks, including new styles for widget feeds.
+ * Updated: Instagram, Facebook Group, YouTube, Twitter Feed, and shortcodes now work with widgets in our [Premium Version](https://www.slickremix.com/product/feed-them-social-premium-extension/). CSS styles for all feeds have had minor tweaks, including new styles for widget feeds.
  * Fixed: Spelling of permissions in facebook group feed.
  * We are still working on a twitter solution to all those faithful followers. As of March Twitter will be changing the api for feeds, so a [newer limit will be set on calls](http://arstechnica.com/business/2012/08/new-api-severely-restricts-third-party-twitter-applications/). To many calls to the api an hour from one IP address are most likely the cause for your errors, if you have been experiencing them currently. 
  
@@ -615,30 +628,32 @@ If you enjoy using our plugin please tell others. [Click here to share](http://w
  * Initial Release
 
 == Frequently Asked Questions ==
-You can find answers to your questions, suggest a feed, or just drop us a line at our [Support Forum](http://www.slickremix.com/support-forum).
+You can find answers to your questions, suggest a feed, or just drop us a line at our [Support Forum](https://www.slickremix.com/support-forum).
 
-You can see Bugs and Suggested Changes here: [http://www.slickremix.com/feed-them-social-bugs-and-suggested-changes](http://www.slickremix.com/feed-them-social-bugs-and-suggested-changes)
+You can see Bugs and Suggested Changes here: [https://www.slickremix.com/feed-them-social-bugs-and-suggested-changes](https://www.slickremix.com/feed-them-social-bugs-and-suggested-changes)
 
 = Are there Extensions for this plugin? =
 
-Yes. Currently we have [2 Premium Extensions and some Bundles](http://www.slickremix.com/downloads/category/feed-them-social/)
+Yes. Currently we have [2 Premium Extensions and some Bundles](https://www.slickremix.com/downloads/category/feed-them-social/)
 
 == Screenshots ==
 
-1. This is the settings area for the Feed Them Social. Generate shortcodes in seconds!
-2. Facebook Page Shortcode Generator (The group shortcode generator looks the same)! Just add your Page ID and with the [Premium Extension](http://www.slickremix.com/product/feed-them-social-premium-extension/) change the number of Posts beyond 5.
-3. Example "Facebook Group" feed. Show up to 24 Posts per feed!
-4. Facebook Feed view on a desktop computer
-5. Facebook Feed view on a tablet
-6. Facebook Feed view on an iphone
-7. Twitter Shortcode Generator! Just add your Twitter name and with the [Premium Extension](http://www.slickremix.com/product/feed-them-social-premium-extension/) change the number of Tweets Posts beyond 5.
-8. Example "Twitter" feed. Show up to 20 Tweets per feed!
-9. Convert Instagram Name to ID and Instagram Shortcode Generator! Just convert your Instagram name and with the [Premium Extension](http://www.slickremix.com/product/feed-them-social-premium-extension/) change the number of Pictures beyond 5
-10. Example "Instagram" feed. Show up to 20 Pictures per feed!
-11. Add your generated shortcode to your post or page!
-12. System Info page. To easily generate a debugging report for us!
-13. Our premium version also offers the YouTube Feed.
-14. Example of YouTube Video Popup.
-15. Another YouTube Example with other feeds on Page.
-16. Example of Premium Pinterest Feed on a Full Page.
-17. Widget Style Pinterest Feed Example.
+1. Facebook Feed. All Feeds Work on Pages, posts or Text Widgets. Adjust the height to make it a scrolling feed too. [Demo](http://feedthemsocial.com/facebook-page-feed-demo/)
+2. Facebook Popup with comments. All popups for feeds except Vine are available in the [Premium Extension](https://www.slickremix.com/downloads/feed-them-social-premium-extension/). [Demo](http://feedthemsocial.com/facebook-page-feed-demo/)
+3. Facebook Popup example showing a video. [Demo](http://feedthemsocial.com/facebook-page-feed-demo/)
+4. Facebook Album Photos Feed. [Demo](http://feedthemsocial.com/facebook-album-photos-demo/)
+5. Facebook Popup for the Album Photos. You can show album photos, your latest photos or even album covers with our plugin. [Demo](http://feedthemsocial.com/facebook-album-photos-demo/)
+6. Instagram Feed. We have the new style and the old classic style format. [Demo](http://feedthemsocial.com/instagram-feed-demo/)
+7. Instagram Popup with description of photo or video. Premium Feature. [Demo](http://feedthemsocial.com/instagram-feed-demo/)
+8. Twitter Feed. See photos and videos in your feed. Show @ or # or user type feeds. [Demo](http://feedthemsocial.com/twitter-feed-demo/)
+9. Twitter Popup with photo description. Premium Feature. [Demo](http://feedthemsocial.com/twitter-feed-demo/)
+10. Vine Feed. Show as many vine videos as you want. [Demo](http://feedthemsocial.com/vine-demo/)
+11. Vine Popup that shows video. Available in the Free Version. [Demo](http://feedthemsocial.com/vine-demo/)
+12. Pinterest Feed to display your Boards. [Demo](http://feedthemsocial.com/pinterest/)
+13. Pinterest Feed to display Pins from a specific Board. [Demo](http://feedthemsocial.com/pinterest-pins-from-a-single-board/)
+14. Pinterest Feed to display you latest Pins. [Demo](http://feedthemsocial.com/pinterest-demo-pins-from-user/)
+15. Our premium version also offers the YouTube Feed. [Demo](http://feedthemsocial.com/youtube-demo-1-large-with-4-video-per-row/)
+16. Youtube Feed Popup. [Demo](http://feedthemsocial.com/youtube-demo-1-large-with-4-video-per-row/)
+17. Settings page where you can generate a shortcode for any of the feeds and more.
+18. Facebook Options page of our plugin. The other pages have similar options.
+19. Add the shortcode you generated from the settings page to any post, page or text widget.

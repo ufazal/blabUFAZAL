@@ -96,7 +96,6 @@ class FTS_instagram_options_page
                         <h3>
                             <?php _e('Instagram API Token', 'feed-them-social'); ?>
                         </h3>
-                    </div>
                     <?php
 
                     $insta_url = 'https://api.instagram.com/v1/tags/slickremix/media/recent/?access_token=' . $fts_instagram_access_token;
@@ -109,15 +108,15 @@ class FTS_instagram_options_page
                   //   print_r(json_decode($response));
                   //   echo '</pre>';
                     ?>
-                    <div class="fts-facebook-custom-api-token-label">
                         <p>
-                            <?php _e('This is required to make the feed work. Just click the button below and it will connect to your instagram to get an access token, then it will return it in the input below. Then just click the save button and you will now be able to generate your Instagram feed.', 'feed-them-social'); ?>
+                            <?php _e('This is required to make the feed work. Just click the button below and it will connect to your instagram to get an access token, then it will return it in the input below. Then just click the save button and you will now be able to generate your Instagram feed. If the button is not working for you and can always manually create an Access Token <a href="http://www.slickremix.com/docs/how-to-create-instagram-access-token/" target="_blank">here</a>.', 'feed-them-social'); ?>
                         </p>
+                        <p>
+                            <a href="https://instagram.com/oauth/authorize/?client_id=da06fb6699f1497bb0d5d4234a50da75&redirect_uri=http://www.slickremix.com/instagram-token-plugin/?return_uri=<?php echo admin_url('admin.php?page=fts-instagram-feed-styles-submenu-page');?>&response_type=token&scope=public_content" class="fts-instagram-get-access-token">
+                                <?php _e('Log in and get my Access Token'); ?>
+                            </a></p>
                     </div>
-                    <p>
-                        <a href="https://instagram.com/oauth/authorize/?client_id=da06fb6699f1497bb0d5d4234a50da75&redirect_uri=http://www.slickremix.com/instagram-token-plugin/?return_uri=<?php echo admin_url('admin.php?page=fts-instagram-feed-styles-submenu-page');?>&response_type=token&scope=public_content" class="fts-instagram-get-access-token">
-                            <?php _e('Log in and get my Access Token'); ?>
-                        </a></p>
+
                     <div class="clear"></div>
                     <div class="feed-them-social-admin-input-wrap" style="margin-bottom:0px;">
                         <div class="feed-them-social-admin-input-label fts-twitter-border-bottom-color-label">
