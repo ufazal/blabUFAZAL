@@ -528,6 +528,10 @@ class feed_them_social_functions
             'fb_hide_images_in_posts',
             'fb_count_offset',
             'fb_hide_no_posts_message',
+            'fts_facebook_custom_api_token_user_id',
+            'fts_facebook_custom_api_token_user_name',
+            'fts_facebook_custom_api_token_user_id_biz',
+            'fts_facebook_custom_api_token_user_name_biz',
         );
         $this->register_settings('fts-facebook-feed-style-options', $fb_style_options);
     }
@@ -1030,7 +1034,7 @@ class feed_them_social_functions
             $output .= '<form method="post" class="feed-them-social-admin-form shortcode-generator-form fb-event-shortcode-form" id="fts-fb-event-form" action="options.php">';
             $output .= '<h2>' . __('Facebook List of Events Shortcode Generator', 'feed-them-social') . '</h2>';
         }
-        $output .= '<div class="instructional-text inst-text-facebook-page">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/2013/09/09/how-to-get-your-facebook-page-vanity-url/" target="_blank">' . __('Facebook Page ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>';
+        $output .= '<div class="instructional-text inst-text-facebook-page">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/how-to-get-your-facebook-page-vanity-url/" target="_blank">' . __('Facebook Page ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>';
         $output .= '<div class="feed-them-social-admin-input-wrap fb_page_list_of_events_id">';
         $output .= '<div class="feed-them-social-admin-input-label">' . __('Facebook Event ID (required)', 'feed-them-social') . '</div>';
         $output .= '<input type="text" name="fb_page_list_of_events_id" id="fb_page_list_of_events_id" class="feed-them-social-admin-input" value="' . $fb_event_id_option . '" />';
@@ -1097,7 +1101,7 @@ class feed_them_social_functions
             $output .= '<form method="post" class="feed-them-social-admin-form shortcode-generator-form fb-event-shortcode-form" id="fts-fb-event-form" action="options.php">';
             $output .= '<h2>' . __('Facebook Event Shortcode Generator', 'feed-them-social') . '</h2>';
         }
-        $output .= '<div class="instructional-text inst-text-facebook-page">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/2012/12/14/how-to-get-your-facebook-event-id/" target="_blank">' . __('Facebook Page Event ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>';
+        $output .= '<div class="instructional-text inst-text-facebook-page">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/how-to-get-your-facebook-event-id/" target="_blank">' . __('Facebook Page Event ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>';
         $output .= '<div class="feed-them-social-admin-input-wrap fb_event_id">';
         $output .= '<div class="feed-them-social-admin-input-label">' . __('Facebook Event ID (required)', 'feed-them-social') . '</div>';
         $output .= '<input type="text" name="fb_event_id" id="fb_event_id" class="feed-them-social-admin-input" value="' . $fb_event_id_option . '" />';
@@ -1162,7 +1166,7 @@ class feed_them_social_functions
             $output .= '<form class="feed-them-social-admin-form shortcode-generator-form fb-group-shortcode-form" id="fts-fb-group-form">';
             $output .= '<h2>' . __('Facebook Group Shortcode Generator', 'feed-them-social') . '</h2>';
         }
-        $output .= '<div class="instructional-text">' . __('You must copy your ', 'feed-them-social') . ' <a href="http://www.slickremix.com/2012/12/14/how-to-get-your-facebook-group-id/" target="_blank">' . __('Facebook Group ID ', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>';
+        $output .= '<div class="instructional-text">' . __('You must copy your ', 'feed-them-social') . ' <a href="http://www.slickremix.com/how-to-get-your-facebook-group-id/" target="_blank">' . __('Facebook Group ID ', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>';
         $output .= '<div class="feed-them-social-admin-input-wrap fb_group_id">';
         $output .= '<div class="feed-them-social-admin-input-label">' . __('Facebook Group ID (required)', 'feed-them-social') . '</div>';
         $output .= '<input type="text" name="fb_group_id" id="fb_group_id" class="feed-them-social-admin-input" value="' . $fb_group_id_option . '" />';
@@ -1272,10 +1276,10 @@ class feed_them_social_functions
             $output .= '</div><!--/feed-them-social-admin-input-wrap-->';
         };
         // INSTRUCTIONAL TEXT FOR FACEBOOK TYPE SELECTION. PAGE, GROUP, EVENT, ALBUMS, ALBUM COVERS AND HASH TAGS
-        $output .= '<div class="instructional-text facebook-message-generator page inst-text-facebook-page" style="display:block;">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/2013/09/09/how-to-get-your-facebook-page-vanity-url/" target="_blank">' . __('Facebook Page ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below. You cannot use Personal Profiles it must be a Facebook Page. If your page ID looks something like, My-Page-Name-50043151918, only use the number portion, 50043151918.', 'feed-them-social') . ' <a href="http://feedthemsocial.com/?feedID=50043151918" target="_blank">' . __('Test your Page ID on our demo', 'feed-them-social') . '</a></div>
-			<div class="instructional-text facebook-message-generator group inst-text-facebook-group">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/2012/12/14/how-to-get-your-facebook-group-id/" target="_blank">' . __('Facebook Group ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>
-			<div class="instructional-text facebook-message-generator event-list inst-text-facebook-event-list">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/2012/12/14/how-to-get-your-facebook-event-id/" target="_blank">' . __('Facebook Event ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below. PLEASE NOTE: This will only work with Facebook Page Events and you cannot have more than 25 events on Facebook.', 'feed-them-social') . '</div>
-			<div class="instructional-text facebook-message-generator event inst-text-facebook-event">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/2012/12/14/how-to-get-your-facebook-event-id/" target="_blank">' . __('Facebook Event ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>
+        $output .= '<div class="instructional-text facebook-message-generator page inst-text-facebook-page" style="display:block;">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/how-to-get-your-facebook-page-vanity-url/" target="_blank">' . __('Facebook Page ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below. You cannot use Personal Profiles it must be a Facebook Page. If your page ID looks something like, My-Page-Name-50043151918, only use the number portion, 50043151918.', 'feed-them-social') . ' <a href="http://feedthemsocial.com/?feedID=50043151918" target="_blank">' . __('Test your Page ID on our demo', 'feed-them-social') . '</a></div>
+			<div class="instructional-text facebook-message-generator group inst-text-facebook-group">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/how-to-get-your-facebook-group-id/" target="_blank">' . __('Facebook Group ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>
+			<div class="instructional-text facebook-message-generator event-list inst-text-facebook-event-list">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/how-to-get-your-facebook-event-id/" target="_blank">' . __('Facebook Event ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below. PLEASE NOTE: This will only work with Facebook Page Events and you cannot have more than 25 events on Facebook.', 'feed-them-social') . '</div>
+			<div class="instructional-text facebook-message-generator event inst-text-facebook-event">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/how-to-get-your-facebook-event-id/" target="_blank">' . __('Facebook Event ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>
 			<div class="instructional-text facebook-message-generator album_photos inst-text-facebook-album-photos">' . __('To show a specific Album copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/docs/how-to-get-your-facebook-photo-gallery-id/" target="_blank">' . __('Facebook Album ID', 'feed-them-social') . '</a> ' . __('and paste it in the second input below. If you want to show all your uploaded photos leave the Album ID input blank.', 'feed-them-social') . '</div>
 			<div class="instructional-text facebook-message-generator albums inst-text-facebook-albums">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/docs/how-to-get-your-facebook-photo-gallery-id/" target="_blank">' . __('Facebook Album Covers ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>
 			<div class="instructional-text facebook-message-generator video inst-text-facebook-video">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/docs/how-to-get-your-facebook-id-and-video-gallery-id" target="_blank">' . __('Facebook ID', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>';
@@ -1537,7 +1541,7 @@ class feed_them_social_functions
         $output .= '</div><!--/twitter-hashtag-etc-wrap-->';
 
 
-        $output .= '<div class="instructional-text"><span class="hashtag-option-small-text">' . __('Twitter Name is only required if you want to show a', 'feed-them-social') . ' <a href="admin.php?page=fts-twitter-feed-styles-submenu-page">' . __('Follow Button', 'feed-them-social') . '</a>.</span><span class="must-copy-twitter-name">' . __('You must copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/2012/12/18/how-to-get-your-twitter-name/" target="_blank">' . __('Twitter Name', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</span></div>';
+        $output .= '<div class="instructional-text"><span class="hashtag-option-small-text">' . __('Twitter Name is only required if you want to show a', 'feed-them-social') . ' <a href="admin.php?page=fts-twitter-feed-styles-submenu-page">' . __('Follow Button', 'feed-them-social') . '</a>.</span><span class="must-copy-twitter-name">' . __('You must copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/how-to-get-your-twitter-name/" target="_blank">' . __('Twitter Name', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</span></div>';
         $output .= '<div class="feed-them-social-admin-input-wrap twitter_name">';
         $output .= '<div class="feed-them-social-admin-input-label">' . __('Twitter Name', 'feed-them-social') . ' <span class="hashtag-option-not-required">' . __('(required)', 'feed-them-social') . '</span></div>';
         $output .= '<input type="text" name="twitter_name" id="twitter_name" class="feed-them-social-admin-input" value="' . $twitter_name_option . '" />';
@@ -1696,7 +1700,7 @@ class feed_them_social_functions
         }
         $instagram_name_option = isset($instagram_name_option) ? $instagram_name_option : "";
         $instagram_id_option = isset($instagram_id_option) ? $instagram_id_option : "";
-        $output .= '<div class="instructional-text">' . __('You must copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/2012/12/18/how-to-get-your-instagram-name-and-convert-to-id/" target="_blank">' . __('Instagram Name', 'feed-them-social') . '</a> ' . __('and paste it in the first input below', 'feed-them-social') . '</div>';
+        $output .= '<div class="instructional-text">' . __('You must copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/how-to-get-your-instagram-name-and-convert-to-id/" target="_blank">' . __('Instagram Name', 'feed-them-social') . '</a> ' . __('and paste it in the first input below', 'feed-them-social') . '</div>';
         $output .= '<div class="feed-them-social-admin-input-wrap convert_instagram_username">';
         $output .= '<div class="feed-them-social-admin-input-label">' . __('Instagram Name (required)', 'feed-them-social') . '</div>';
         $output .= '<input type="text" id="convert_instagram_username" name="convert_instagram_username" class="feed-them-social-admin-input" value="' . $instagram_name_option . '" />';
@@ -1823,7 +1827,7 @@ class feed_them_social_functions
 
             $output .= '<h2>' . __('YouTube Shortcode Generator', 'feed-them-social') . '</h2>';
         }
-        $output .= '<div class="instructional-text">' . __('You must copy your YouTube ', 'feed-them-social') . ' <a href="http://www.slickremix.com/2013/08/01/how-to-get-your-youtube-name/" target="_blank">' . __('Username, Channel ID and or Playlist ID', 'feed-them-social') . '</a> ' . __('and paste it below.', 'feed-them-social') . '</div>';
+        $output .= '<div class="instructional-text">' . __('You must copy your YouTube ', 'feed-them-social') . ' <a href="http://www.slickremix.com/how-to-get-your-youtube-name/" target="_blank">' . __('Username, Channel ID and or Playlist ID', 'feed-them-social') . '</a> ' . __('and paste it below.', 'feed-them-social') . '</div>';
         if (is_plugin_active('feed-them-premium/feed-them-premium.php')) {
             include($this->premium . 'admin/youtube-settings-fields.php');
         } else {
@@ -1869,8 +1873,8 @@ class feed_them_social_functions
         $output .= '</select>';
         $output .= '<div class="clear"></div>';
         $output .= '</div><!--/feed-them-social-admin-input-wrap-->';
-        $output .= '<h3>' . __('Pinterest Feed', 'feed-them-social') . '</h3><div class="instructional-text pinterest-name-text">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/2013/08/01/how-to-get-your-pinterest-name/" target="_blank">' . __('Pinterest Name', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>';
-        $output .= '<div class="instructional-text pinterest-board-and-name-text" style="display:none;">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/2013/08/01/how-to-get-your-pinterest-name/" target="_blank">' . __('Pinterest and Board Name', 'feed-them-social') . '</a> ' . __('and paste them below.', 'feed-them-social') . '</div>';
+        $output .= '<h3>' . __('Pinterest Feed', 'feed-them-social') . '</h3><div class="instructional-text pinterest-name-text">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/how-to-get-your-pinterest-name/" target="_blank">' . __('Pinterest Name', 'feed-them-social') . '</a> ' . __('and paste it in the first input below.', 'feed-them-social') . '</div>';
+        $output .= '<div class="instructional-text pinterest-board-and-name-text" style="display:none;">' . __('Copy your', 'feed-them-social') . ' <a href="http://www.slickremix.com/how-to-get-your-pinterest-name/" target="_blank">' . __('Pinterest and Board Name', 'feed-them-social') . '</a> ' . __('and paste them below.', 'feed-them-social') . '</div>';
         $pinterest_name_option = isset($pinterest_name_option) ? $pinterest_name_option : "";
         $boards_count_option = isset($boards_count_option) ? $boards_count_option : "";
         $output .= '<div class="feed-them-social-admin-input-wrap pinterest_name">';

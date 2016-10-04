@@ -106,23 +106,20 @@ class FTS_pinterest_options_page {
 		  <div class="feed-them-social-admin-input-wrap"><div class="fts-title-description-settings-page">
 				  <h3>
 					  <?php _e('Pinterest Access Token', 'feed-them-social'); ?>
-				  </h3>
-				  <?php _e('You must add a Pinterest Access Token in order for the feeds to work. <a href="http://www.slickremix.com/docs/how-to-create-a-pinterest-access-token/" target="_blank">Get your Access Token here.</a>', 'feed-them-social'); ?>
-			  </div>
-
-			<div style="display:none">
-			  <div class="fts-facebook-custom-api-token-label">
-				  <p>
-					  <?php _e('This is required to make the feed work. Just click the button below and it will connect to your Pinterest account to get an access token, and it will return it in the input below. Then just click the save button and you will now be able to generate your Instagram feed.', 'feed-them-social'); ?>
+				  </h3><p>
+					  <?php _e('This is required to make the feed work. Just click the button below and it will connect to your Pinterest account to get an access token, and it will return it in the input below. Then just click the save button and you will now be able to generate your Instagram feed. If you are having troubles with the button you can also get your Access Token <a href="http://www.slickremix.com/docs/how-to-create-a-pinterest-access-token/" target="_blank">here.</a> ', 'feed-them-social'); ?>
 				  </p>
-			  </div>
-			  <p>
-				  <a href="https://api.pinterest.com/oauth/?response_type=token&redirect_uri=https://www.slickremix.com/pinterest-token-plugin/&client_id=4852080225414031681&scope=read_public&state=<?php echo admin_url('admin.php?page=fts-pinterest-feed-styles-submenu-page');?>" class="fts-pinterest-get-access-token">
+				  <p><a href="https://api.pinterest.com/oauth/?response_type=token&redirect_uri=https://www.slickremix.com/pinterest-token-plugin/&client_id=4852080225414031681&scope=read_public&state=<?php echo admin_url('admin.php?page=fts-pinterest-feed-styles-submenu-page');?>" class="fts-pinterest-get-access-token">
 					  <?php _e('Log in and get my Access Token'); ?>
 				  </a></p>
+			  </div>
+
+
+
+
+
 			  <div class="clear"></div>
 
-			</div><!-- display none until pinterest approves our app -->
 			  <div class="feed-them-social-admin-input-wrap" style="margin-bottom:0px;">
 				  <div class="feed-them-social-admin-input-label fts-twitter-border-bottom-color-label">
 					  <?php _e('Access Token Required', 'feed-them-social'); ?>
