@@ -173,9 +173,9 @@ class FTS_Facebook_Feed extends feed_them_social_functions {
         $page_data = json_decode($response['page_data']);
         $feed_data = json_decode($response['feed_data']);
 
-         //  echo'<pre>';
-         //  	print_r($feed_data);
-         //   echo'</pre>';
+        //  echo'<pre>';
+        //  	print_r($feed_data);
+        //   echo'</pre>';
 
 
         //If No Response or Error then return
@@ -275,7 +275,7 @@ class FTS_Facebook_Feed extends feed_them_social_functions {
 
 
                 if (isset($FB_Shortcode['video_album']) && $FB_Shortcode['video_album'] == 'yes') {
-                } elseif (isset($FB_Shortcode['slider']) && $FB_Shortcode['slider'] !== 'yes' || isset($FB_Shortcode['grid']) && $FB_Shortcode['grid'] == 'yes') {
+                } elseif (isset($FB_Shortcode['slider']) && $FB_Shortcode['slider'] !== 'yes' && $FB_Shortcode['image_stack_animation'] == 'yes' || isset($FB_Shortcode['grid']) && $FB_Shortcode['grid'] == 'yes' || isset($FB_Shortcode['image_stack_animation']) && $FB_Shortcode['image_stack_animation'] == 'yes' ) {
                     wp_enqueue_script('fts-masonry-pkgd', plugins_url('feed-them-social/feeds/js/masonry.pkgd.min.js'), array('jquery'));
                     $FTS_FB_OUTPUT .= '<script>';
                     $FTS_FB_OUTPUT .= 'jQuery(window).load(function(){';
@@ -288,8 +288,7 @@ class FTS_Facebook_Feed extends feed_them_social_functions {
 
 
                 if (!isset($FBtype) && $FB_Shortcode['type'] == 'albums' || !isset($FBtype) && $FB_Shortcode['type'] == 'album_photos' && !isset($FBtype) && !isset($FB_Shortcode['slider']) || !isset($FBtype) && $FB_Shortcode['type'] == 'album_photos' && !isset($FBtype) && isset($FB_Shortcode['slider']) && $FB_Shortcode['slider'] !== 'yes') {
-                    $FTS_FB_OUTPUT .= '<div class="fts-slicker-facebook-photos fts-slicker-facebook-albums ' . (isset($FB_Shortcode['video_album']) && $FB_Shortcode['video_album'] && $FB_Shortcode['video_album'] == 'yes' ? 'popup-video-gallery-fb' : ' popup-gallery-fb masonry js-masonry') . ' ' . (isset($FB_Shortcode['images_align']) && $FB_Shortcode['images_align'] ? ' popup-video-gallery-align-' . $FB_Shortcode['images_align'] : '') . ' popup-gallery-fb ' . $fts_dynamic_class_name . '" style="margin:auto;" data-masonry-options=\'{ "isFitWidth": ' . ($FB_Shortcode['center_container'] == 'no' ? 'false' : 'true') . ' ' . ($FB_Shortcode['image_stack_animation'] == 'no' ? ', "transitionDuration": 0' : '') . '}\' style="margin:auto;">';
-
+                    $FTS_FB_OUTPUT .= '<div class="fts-slicker-facebook-photos fts-slicker-facebook-albums' . (isset($FB_Shortcode['video_album']) && $FB_Shortcode['video_album'] && $FB_Shortcode['video_album'] == 'yes' ? ' popup-video-gallery-fb' : '') . (isset($FB_Shortcode['image_stack_animation']) && $FB_Shortcode['image_stack_animation'] == 'yes' ? ' masonry js-masonry' : '') . (isset($FB_Shortcode['images_align']) && $FB_Shortcode['images_align'] ? ' popup-video-gallery-align-' . $FB_Shortcode['images_align'] : '') . ' popup-gallery-fb ' . $fts_dynamic_class_name . '"';if($FB_Shortcode['image_stack_animation'] == 'yes'){ $FTS_FB_OUTPUT .= 'data-masonry-options=\'{ "isFitWidth": ' . ($FB_Shortcode['center_container'] == 'no' ? 'false' : 'true') . ' ' . ($FB_Shortcode['image_stack_animation'] == 'no' ? ', "transitionDuration": 0' : '') . '}\' style="margin:auto;"';} $FTS_FB_OUTPUT .= '>';
 
                 } // slideshow scrollHorz or carousel
                 elseif (!isset($FBtype) && isset($FB_Shortcode['slider']) && $FB_Shortcode['slider'] == 'yes') {
@@ -472,8 +471,8 @@ style="margin:' . (isset($FB_Shortcode['slider_margin']) && $FB_Shortcode['slide
         }// END POST foreach
 
         // this will show our new feed array including the offset
-        //  echo'<pre>';
-        //		print_r($feed_data);
+              //  echo'<pre>';
+        	//	print_r($feed_data);
         //		echo'</pre>';
 
 
@@ -675,8 +674,8 @@ style="margin:' . (isset($FB_Shortcode['slider_margin']) && $FB_Shortcode['slide
     function fts_facebook_post_photo($FBlink, $FB_Shortcode, $photo_from, $photo_source) {
         if ($FB_Shortcode['type'] == 'album_photos' || $FB_Shortcode['type'] == 'albums') {
             $output = '<a href="' . $FBlink . '" target="_blank" class="fts-jal-fb-picture album-photo-fts" style="width:' . $FB_Shortcode['image_width'].';height:' . $FB_Shortcode['image_height'].';';
-          //  if ($FB_Shortcode['image_position_lr'] !== '-0%' || $FB_Shortcode['image_position_top'] !== '-0%') {
-           //     $output .= 'style="right:' . $FB_Shortcode['image_position_lr'] . ';left:' . $FB_Shortcode['image_position_lr'] . ';top:' . $FB_Shortcode['image_position_top'] . '"';
+            //  if ($FB_Shortcode['image_position_lr'] !== '-0%' || $FB_Shortcode['image_position_top'] !== '-0%') {
+            //     $output .= 'style="right:' . $FB_Shortcode['image_position_lr'] . ';left:' . $FB_Shortcode['image_position_lr'] . ';top:' . $FB_Shortcode['image_position_top'] . '"';
 
             //  }
             if ($FB_Shortcode['type'] == 'albums') {
@@ -684,7 +683,7 @@ style="margin:' . (isset($FB_Shortcode['slider_margin']) && $FB_Shortcode['slide
 
                 //   $output .= '><img border="0" alt="' . $photo_from . '" src="https://graph.facebook.com/' . $photo_source . '/picture"/>';
             } else {
-              //  $output .= '><img border="0" alt="' . $photo_from . '" src="' . $photo_source . '"/>';
+                //  $output .= '><img border="0" alt="' . $photo_from . '" src="' . $photo_source . '"/>';
                 $output .= 'background-image:url(' . $photo_source . ');">';
             }
             $output .= '</a>';
@@ -1555,12 +1554,15 @@ style="margin:' . (isset($FB_Shortcode['slider_margin']) && $FB_Shortcode['slide
                 $LOADMORE_OUPUT .= 'console.log("Well Done and got this from sever: " + data);';
                 if ($FBtype && $FB_Shortcode['type'] == 'albums' || $FBtype && $FB_Shortcode['type'] == 'album_photos' && $FB_Shortcode['video_album'] !== 'yes' || $FB_Shortcode['grid'] == 'yes') {
                     $LOADMORE_OUPUT .= 'jQuery(".' . $fts_dynamic_class_name . '").append(data).filter(".' . $fts_dynamic_class_name . '").html();';
-                    $LOADMORE_OUPUT .= 'jQuery(".' . $fts_dynamic_class_name . '").masonry( "reloadItems");';
-                    $LOADMORE_OUPUT .= 'setTimeout(function() {';
-                    // Do something after 3 seconds
-                    // This can be direct code, or call to some other function
-                    $LOADMORE_OUPUT .= 'jQuery(".' . $fts_dynamic_class_name . '").masonry("layout");';
-                    $LOADMORE_OUPUT .= '}, 500);';
+                    if (isset($FB_Shortcode['image_stack_animation']) && $FB_Shortcode['image_stack_animation'] == 'yes') {
+                        $LOADMORE_OUPUT .= 'jQuery(".' . $fts_dynamic_class_name . '").masonry( "reloadItems");';
+
+                        $LOADMORE_OUPUT .= 'setTimeout(function() {';
+                        // Do something after 3 seconds
+                        // This can be direct code, or call to some other function
+                        $LOADMORE_OUPUT .= 'jQuery(".' . $fts_dynamic_class_name . '").masonry("layout");';
+                        $LOADMORE_OUPUT .= '}, 500);';
+                    }
                     $LOADMORE_OUPUT .= 'if(!nextURL_' . $_REQUEST['fts_dynamic_name'] . ' || nextURL_' . $_REQUEST['fts_dynamic_name'] . ' == "no more"){';
                     if ($FB_Shortcode['type'] == 'reviews') {
                         $LOADMORE_OUPUT .= 'jQuery("#loadMore_' . $fts_dynamic_name . '").replaceWith(\'<div class="fts-fb-load-more no-more-posts-fts-fb">' . __('No More Reviews', 'feed-them-social') . '</div>\');';

@@ -4,6 +4,7 @@ class FTS_Twitter_Feed extends feed_them_social_functions
 {
     /**
      * Construct
+     * Added Since 9/28/2016 https://dev.twitter.com/overview/api/upcoming-changes-to-tweets
      *
      * Twitter Feed constructor.
      *
@@ -73,6 +74,8 @@ class FTS_Twitter_Feed extends feed_them_social_functions
                 'description_image' => '',
                 'search' => '',
                 'show_retweets' => '',
+                'cover_photo' => '',
+                'stats_bar' => '',
             ), $atts));
         }
         $numTweets = $tweets_count;
@@ -80,7 +83,7 @@ class FTS_Twitter_Feed extends feed_them_social_functions
             $numTweets = '5';
         }
 
-        if(!is_plugin_active('feed-them-premium/feed-them-premium.php') && $numTweets > '6'){
+        if (!is_plugin_active('feed-them-premium/feed-them-premium.php') && $numTweets > '6') {
             $numTweets = '6';
         }
 
@@ -135,10 +138,10 @@ class FTS_Twitter_Feed extends feed_them_social_functions
             $totalToFetch = ($excludeReplies) ? max(50, $numTweets * 3) : $numTweets;
             $description_image = !empty($description_image) ? $description_image : "";
             $show_retweets = !empty($show_retweets) ? $show_retweets : "1";
-            if (!empty($show_retweets) && $show_retweets == 'yes'){
+            if (!empty($show_retweets) && $show_retweets == 'yes') {
                 $show_retweets = '1';
             }
-            if (!empty($show_retweets) && $show_retweets == 'no'){
+            if (!empty($show_retweets) && $show_retweets == 'no') {
                 $show_retweets = '0';
             }
             // $url_of_status = !empty($url_of_status) ? $url_of_status : "";
@@ -151,12 +154,14 @@ class FTS_Twitter_Feed extends feed_them_social_functions
                         'count' => $totalToFetch,//
                         'result_type' => 'recent',
                         'include_rts' => $show_retweets,
+                        'tweet_mode' => 'extended',
                     )
                 );
             } else {
                 $fetchedTweets = $connection->get(
                     'statuses/user_timeline',
                     array(
+                        'tweet_mode' => 'extended',
                         'screen_name' => $name,
                         'count' => $totalToFetch,
                         'exclude_replies' => $excludeReplies,
@@ -165,9 +170,9 @@ class FTS_Twitter_Feed extends feed_them_social_functions
                     )
                 );
             }
-            // echo'<pre>';
-            // print_r($fetchedTweets);
-            // echo'</pre>';
+             //   echo'<pre>';
+             //   print_r($fetchedTweets);
+             //   echo'</pre>';
 
             if (!empty($search)) {
                 $fetchedTweets = $fetchedTweets->statuses;
@@ -180,22 +185,19 @@ class FTS_Twitter_Feed extends feed_them_social_functions
         }//END ELSE
         //Error Check
         if (isset($fetchedTweets->errors)) {
-            $error_check = '<div>Oops, Somethings wrong. ' . $fetchedTweets->errors[0]->message . '.</div>';
+            $error_check = __('Oops, Somethings wrong. ', 'feed-them-social') . $fetchedTweets->errors[0]->message;
             if ($fetchedTweets->errors[0]->code == 32) {
-                $error_check .= ' Please check that you have entered your Twitter API token information correctly.';
+                $error_check .= __(' Please check that you have entered your Twitter API token information correctly on the Twitter Options page of Feed Them Social.', 'feed-them-social');
             }
             if ($fetchedTweets->errors[0]->code == 34) {
-                $error_check .= ' Please check the Twitter Username you have entered is correct.';
+                $error_check .= __(' Please check the Twitter Username you have entered is correct in your shortcode for Feed Them Social.', 'feed-them-social');
             }
         } elseif (empty($fetchedTweets) && !isset($fetchedTweets->errors)) {
-            $error_check = '<div>This account has no tweets. Please Tweet to see this feed.</div>';
+            $error_check = __(' This account has no tweets. Please Tweet to see this feed. Feed Them Social.', 'feed-them-social');
         }
         //IS RATE LIMIT REACHED?
-        if (isset($fetchedTweets->errors)) {
-            echo '<pre>';
-            print_r($fetchedTweets->errors);
-            echo 'If you are seeing Rate Limited Exceeded please go to our Twitter Options page and follow the instructions under the header Twitter API Token.';
-            echo '</pre>';
+        if (isset($fetchedTweets->errors) && $fetchedTweets->errors[0]->code !== 32 && $fetchedTweets->errors[0]->code !== 34) {
+            _e('Rate Limited Exceeded. Please go to the Feed Them Social Plugin then the Twitter Options page and follow the instructions under the header Twitter API Token.', 'feed-them-social');
         }
         // Did the fetch fail?
         if (isset($error_check)) {
@@ -221,12 +223,18 @@ class FTS_Twitter_Feed extends feed_them_social_functions
                     $permalink = $protocol . 'twitter.com/' . $screen_name . '/status/' . $tweet->id_str;
                     $user_permalink = $protocol . 'twitter.com/#!/' . $screen_name;
                     //Is Media Set
-                    if (isset($tweet->entities->media[0]->media_url)) {
-                        $media_url = $tweet->entities->media[0]->media_url;
-                        $media_url = str_replace($not_protocol, $protocol, $media_url);
-                    } else {
+
+                    if (!empty($tweet->entities->media[0]->media_url)) {
+                        $media_url = $tweet->entities->media[0]->media_url_https;
+                        // $media_url = str_replace($not_protocol, $protocol, $media_url);
+
+                    } elseif(!empty($tweet->retweeted_status->extended_entities->media[0]->media_url_https)) {
+                        $media_url = $tweet->retweeted_status->extended_entities->media[0]->media_url_https;
+                    }
+                    else {
                         $media_url = '';
                     }
+
                     //  $widget_type_for_videos = $tweet->widget_type_for_videos;
                     /* Alternative image sizes method: http://dev.twitter.com/doc/get/users/profile_image/:screen_name */
                     $image = isset($tweet->user->profile_image_url) ? $tweet->user->profile_image_url : "";
@@ -234,7 +242,7 @@ class FTS_Twitter_Feed extends feed_them_social_functions
                     // Message. Convert links to real links.
                     $pattern = array('/http:(\S)+/', '/https:(\S)+/', '/([^a-zA-Z0-9-_&])@([0-9a-zA-Z_]+)/', '/([^a-zA-Z0-9-_&])#([0-9a-zA-Z_]+)/');
                     $replace = array(' <a href="${0}" target="_blank" rel="nofollow">${0}</a>', ' <a href="${0}" target="_blank" rel="nofollow">${0}</a>', ' <a href="' . $protocol . 'twitter.com/$2" target="_blank" rel="nofollow">@$2</a>', ' <a href="' . $protocol . 'twitter.com/search?q=%23$2&src=hash" target="_blank" rel="nofollow">#$2</a>');
-                    $text = preg_replace($pattern, $replace, $tweet->text);
+                    $full_text = preg_replace($pattern, $replace, $tweet->full_text);
                     // Need to get time in Unix format.
                     $times = isset($tweet->created_at) ? $tweet->created_at : "";
 
@@ -253,11 +261,10 @@ class FTS_Twitter_Feed extends feed_them_social_functions
 
                     $fts_twitter_offset_time = get_option('fts_twitter_time_offset');
 
-                    if($fts_twitter_offset_time == 1){
-                        $fts_twitter_offset_time_final =  strtotime($times);
-                    }
-                    else {
-                        $fts_twitter_offset_time_final = strtotime($times)  - 3 * 3600;
+                    if ($fts_twitter_offset_time == 1) {
+                        $fts_twitter_offset_time_final = strtotime($times);
+                    } else {
+                        $fts_twitter_offset_time_final = strtotime($times) - 3 * 3600;
                     }
 
                     if ($CustomDateCheck == 'one-day-ago') {
@@ -272,12 +279,34 @@ class FTS_Twitter_Feed extends feed_them_social_functions
 
                     $id = isset($tweet->id) ? $tweet->id : "";
                     $fts_twitter_full_width = get_option('twitter_full_width');
+
+                    $statuses_count = isset($tweet->user->statuses_count) ? $tweet->user->statuses_count : "";
                     $followers_count = isset($tweet->user->followers_count) ? $tweet->user->followers_count : "";
+                    $friends_count = isset($tweet->user->friends_count) ? $tweet->user->friends_count : "";
+                    $favourites_count = isset($tweet->user->favourites_count) ? $tweet->user->favourites_count : "";
+
+                    // the retweet count works for posts and retweets
+                    $retweet_count = isset($tweet->retweet_count) ? $tweet->retweet_count : "";
+
+                    // the favorites count needs to be switched up for retweets
+                    if(empty($tweet->retweeted_status->favorite_count)){
+                       $favorite_count = $tweet->favorite_count;
+                    }
+                    else {
+                       $favorite_count = $tweet->retweeted_status->favorite_count;
+                    }
+
+                    $profile_banner_url = isset($tweet->user->profile_banner_url) ? $tweet->user->profile_banner_url : "";
+                    // not using right now
+                    // $listed_count = isset($tweet->user->listed_count) ? $tweet->user->listed_count : "";
+                    // $profile_image_url_https = isset($tweet->user->profile_image_url_https) ? $tweet->user->profile_image_url_https : "";
+                    // $profile_background_image_url_https = isset($tweet->user->profile_background_image_url_https) ? $tweet->user->profile_background_image_url_https : "";
+
                     // $urls string is used so we can parse out video files
                     $urls = isset($tweet->entities->urls[0]->expanded_url) ? $tweet->entities->urls[0]->expanded_url : "";
                     // Now make the new array.
                     $tweets[] = array(
-                        'text' => $text,
+                        'full_text' => $full_text,
                         'name' => $name,
                         'screen_name' => $screen_name,
                         'user_permalink' => $user_permalink,
@@ -287,30 +316,89 @@ class FTS_Twitter_Feed extends feed_them_social_functions
                         'media_url' => $media_url,
                         'id' => $id,
                         'urls' => $urls,
+                        'retweet_count' => $retweet_count,
+                        'favorite_count' => $favorite_count,
                     );
                 }//End FOR fts-twitter-full-width
-                // echo '<pre>';
-                //  print_r($tweets);
-                // echo '</pre>';
+              //   echo '<pre>';
+              //    print_r($tweets);
+              //   echo '</pre>';
                 $twitter_allow_shortlink_conversion = get_option('twitter_allow_shortlink_conversion');
+
                 ?>
                 <div id="twitter-feed-<?php print $twitter_name ?>" class="fts-twitter-div<?php if ($twitter_height !== 'auto' && empty($twitter_height) == NULL) { ?> fts-twitter-scrollable<?php }
                 if (isset($popup) && $popup == 'yes') { ?> popup-gallery-twitter<?php } ?>" <?php if ($twitter_height !== 'auto' && empty($twitter_height) == NULL) { ?>style="height:<?php echo $twitter_height; ?>"<?php } ?>>
+
                     <?php
                     //******************
-                    // SOCIAL BUTTON
+                    // SOCIAL BUTTON IF COVER PHOTO ON
                     //******************
                     if (!empty($search)) {
                         $screen_name = $twitter_name;
                     }
-                    if (isset($twitter_show_follow_btn) && $twitter_show_follow_btn == 'yes' && $twitter_show_follow_btn_where == 'twitter-follow-above' && $twitter_name !== '') {
+                    if (isset($profile_banner_url) && isset($cover_photo) && $cover_photo == "yes") {
+                        ?>
+                        <div class="fts-twitter-backg-image">
+                            <?php
+                            if (isset($twitter_show_follow_btn) && $twitter_show_follow_btn == 'yes' && $twitter_show_follow_btn_where == 'twitter-follow-above' && $twitter_name !== '') {
+                                echo '<div class="twitter-social-btn-top">';
+                                $this->social_follow_button('twitter', $screen_name);
+                                echo '</div>';
+                            }
+                            ?>
+                            <img src="<?php print $profile_banner_url; ?>"/>
+
+                        </div>
+                    <?php } elseif (isset($twitter_show_follow_btn) && $twitter_show_follow_btn == 'yes' && $twitter_show_follow_btn_where == 'twitter-follow-above' && $twitter_name !== '' && $cover_photo !== "yes") {
                         echo '<div class="twitter-social-btn-top">';
                         $this->social_follow_button('twitter', $screen_name);
                         echo '</div>';
+                    }// if cover photo = yes
+
+
+                    // These need to be in this order to keep the different counts straight since I used either $statuses_count or $followers_count throughout.
+
+                    // here we add a , for all numbers below 9,999
+                    if (isset($statuses_count) && $statuses_count <= 9999) {
+                        $statuses_count = number_format($statuses_count);
                     }
+                    // here we convert the number for the like count like 1,200,000 to 1.2m if the number goes into the millions
+                    if (isset($statuses_count) && $statuses_count >= 1000000) {
+                        $statuses_count = round(($statuses_count / 1000000), 1) . 'm';
+                    }
+                    // here we convert the number for the like count like 10,500 to 10.5k if the number goes in the 10 thousands
+                    if (isset($statuses_count) && $statuses_count >= 10000) {
+                        $statuses_count = round(($statuses_count / 1000), 1) . 'k';
+                    }
+
+                    // here we add a , for all numbers below 9,999
+                    if (isset($followers_count) && $followers_count <= 9999) {
+                        $followers_count = number_format($followers_count);
+                    }
+                    // here we convert the number for the comment count like 1,200,000 to 1.2m if the number goes into the millions
+                    if (isset($followers_count) && $followers_count >= 1000000) {
+                        $followers_count = round(($followers_count / 1000000), 1) . 'm';
+                    }
+                    // here we convert the number  for the comment count like 10,500 to 10.5k if the number goes in the 10 thousands
+                    if (isset($followers_count) && $followers_count >= 10000) {
+                        $followers_count = round(($followers_count / 1000), 1) . 'k';
+                    }
+
+
                     // option to allow the followers plus count to show
-                    if (isset($twitter_show_follow_count) && $twitter_show_follow_count == 'yes' && $search == '') {
-                        print '<div class="twitter-followers-fts"><a href="' . $user_permalink . '" target="_blank">' . __('Followers:', 'feed-them-social') . '</a> ' . number_format($followers_count) . '</div>';
+                    if (isset($twitter_show_follow_count) && $twitter_show_follow_count == 'yes' && $search == '' && isset($stats_bar) && $stats_bar !== "yes") {
+                        print '<div class="twitter-followers-fts-singular"><a href="' . $user_permalink . '" target="_blank">' . __('Followers:', 'feed-them-social') . '</a> ' . $followers_count . '</div>';
+                    }
+                    if (isset($stats_bar) && $stats_bar == "yes" && $search == '') {
+                        // option to allow the followers plus count to show
+
+                        print '<div class="fts-twitter-followers-wrap">';
+                        print '<div class="twitter-followers-fts fts-tweets-first"><a href="' . $user_permalink . '" target="_blank">' . __('Tweets', 'feed-them-social') . '</a> ' . $statuses_count . '</div>';
+                        print '<div class="twitter-followers-fts fts-following-link-div"><a href="' . $user_permalink . '" target="_blank">' . __('Following', 'feed-them-social') . '</a> ' . number_format($friends_count) . '</div>';
+                        print '<div class="twitter-followers-fts fts-followers-link-div"><a href="' . $user_permalink . '" target="_blank">' . __('Followers', 'feed-them-social') . '</a> ' . $followers_count . '</div>';
+                        print '<div class="twitter-followers-fts fts-likes-link-div"><a href="' . $user_permalink . '" target="_blank">' . __('Likes', 'feed-them-social') . '</a> ' . number_format($favourites_count) . '</div>';
+                        print '</div>';
+
                     } ?>
                     <?php foreach ($tweets as $t) :
                         $twitter_allow_videos = get_option('twitter_allow_videos');
@@ -363,7 +451,7 @@ class FTS_Twitter_Feed extends feed_them_social_functions
                                         }
                                     }); // end of ajax()
                                     return false;
-                                })
+                                });
                                 jQuery('.<?php echo $fts_dynamic_name ?> .fts-close-media').click(function () {
                                     jQuery('a.<?php echo $fts_dynamic_name ?>.fts-close-media span.fts-show-media-text').toggle();
                                     jQuery('a.<?php echo $fts_dynamic_name ?>.fts-close-media span.fts-hide-media-text').toggle();
@@ -384,10 +472,11 @@ class FTS_Twitter_Feed extends feed_them_social_functions
                                 <?php } ?>
                                 <div class="<?php if ($fts_twitter_full_width == 'yes') { ?>fts-twitter-full-width<?php } else { ?>right<?php } ?>">
                                     <div class="uppercase bold">
-                                        <a href="<?php print $t['user_permalink']; ?>" target="_blank">@<?php print $t['screen_name']; ?></a>
+                                        <a href="<?php print $t['user_permalink']; ?>" target="_blank" class="fts-twitter-full-name"><?php print $t['name']; ?></a>
+                                        <a href="<?php print $t['user_permalink']; ?>" target="_blank" class="fts-twitter-at-name">@<?php print $t['screen_name']; ?></a>
                                     </div>
                                     <span class="time"><a href="<?php print $t['permalink'] ?>" target="_blank"><?php print $t['time']; ?></a></span><br/>
-                                        <span class="fts-twitter-text"><?php print nl2br($t['text']); ?>
+                                        <span class="fts-twitter-text"><?php print nl2br($t['full_text']); ?>
                                             <div class="fts-twitter-caption">
                                                 <a href="<?php print $t['permalink'] ?>" class="fts-view-on-twitter-link" target="_blank"><?php echo _e('View on Twitter', 'feed-them-social'); ?></a>
                                             </div>
@@ -427,10 +516,25 @@ class FTS_Twitter_Feed extends feed_them_social_functions
                                         <?php }
                                     } ?>
                                 </div>
-                                <div class="fts-twitter-reply-wrap">
-                                    <a href="<?php print $t['permalink'] ?>" target="_blank">
-                                        <div class="fts-twitter-reply"></div>
-                                    </a></div>
+                                <div class="fts-twitter-reply-wrap <?php if ($fts_twitter_full_width == 'yes') { ?>fts-twitter-full-width<?php } else { ?>fts-twitter-no-margin-left<?php } ?>">
+                                    <div class="fts-tweet-reply-left">
+                                        <a href="<?php print $t['permalink'] ?>" target="_blank">
+                                            <div class="fts-twitter-reply"></div>
+                                        </a>
+                                    </div>
+                                    <div class="fts-tweet-others-right">
+                                        <a href="https://twitter.com/intent/retweet?tweet_id=<?php print $t['id'] ?>&related=<?php print $t['name'] ?>" target="_blank" class="fts-twitter-retweet-wrap">
+                                            <div class="fts-twitter-retweet"><?php if ($t['retweet_count'] !== 0) {
+                                                    print $t['retweet_count'];
+                                                } ?></div>
+                                        </a>
+                                        <a href="https://twitter.com/intent/like?tweet_id=<?php print $t['id'] ?>&related=<?php print $t['name'] ?>" target="_blank" class="fts-twitter-favorites-wrap">
+                                            <div class="fts-twitter-favorites"><?php  if ($t['favorite_count'] !== 0) {
+                                                    print $t['favorite_count'];
+                                                } ?></div>
+                                        </a>
+                                    </div>
+                                </div>
                                 <div class="clear"></div>
                             </div>
                         </div>

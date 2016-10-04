@@ -33,6 +33,7 @@ $apss_share_settings['api_configuration']['facebook'] =  array(
 														);
 										
 $apss_share_settings['total_counter_enable_options']	= $_POST['apss_share_settings']['total_counter_enable_options'];
+$apss_share_settings['enable_http_count']				= $_POST['apss_share_settings']['enable_http_count'];
 $apss_share_settings['enable_cache']					= $_POST['apss_share_settings']['enable_cache'];
 $apss_share_settings['cache_period']					= is_numeric( $_POST['apss_share_settings']['cache_settings'] ) ? $_POST['apss_share_settings']['cache_settings'] : '24';
 $apss_share_settings['dialog_box_options']				= $_POST['apss_share_settings']['dialog_box_options'];

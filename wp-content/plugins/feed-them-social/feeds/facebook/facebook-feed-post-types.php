@@ -125,7 +125,7 @@ class FTS_Facebook_Feed_Post_Types extends FTS_Facebook_Feed
             case 'video'  :
                 $FTS_FB_OUTPUT .= '<div class="fts-jal-single-fb-post fts-fb-video-post-wrap" ';
                 if (isset($FB_Shortcode['grid']) && $FB_Shortcode['grid'] == 'yes') {
-                    $FTS_FB_OUTPUT .= 'style="width:' . $FB_Shortcode['colmn_width'] . '; margin:' . $FB_Shortcode['space_between_posts'] . '"';
+                    $FTS_FB_OUTPUT .= 'style="width:' . $FB_Shortcode['colmn_width'] . '!important; margin:' . $FB_Shortcode['space_between_posts'] . '!important"';
                 }
                 $FTS_FB_OUTPUT .= '>';
 
@@ -137,7 +137,9 @@ class FTS_Facebook_Feed_Post_Types extends FTS_Facebook_Feed
             case 'wall':
             case 'normal':
             case 'photo':
-                $FTS_FB_OUTPUT .= '<div class="fts-jal-single-fb-post fts-fb-photo-post-wrap" ';
+
+
+                $FTS_FB_OUTPUT .= "<div class='fts-fb-photo-post-wrap fts-jal-single-fb-post' ";
                 if ($FB_Shortcode['type'] == 'album_photos' || $FB_Shortcode['type'] == 'albums') {
 
                     if (isset($FB_Shortcode['scrollhorz_or_carousel']) && $FB_Shortcode['scrollhorz_or_carousel'] == 'scrollhorz') {
@@ -147,7 +149,7 @@ class FTS_Facebook_Feed_Post_Types extends FTS_Facebook_Feed
                     }
                 }
                 if (isset($FB_Shortcode['grid']) && $FB_Shortcode['grid'] == 'yes') {
-                    $FTS_FB_OUTPUT .= 'style="width:' . $FB_Shortcode['colmn_width'] . '; margin:' . $FB_Shortcode['space_between_posts'] . '"';
+                    $FTS_FB_OUTPUT .= 'style="width:' . $FB_Shortcode['colmn_width'] . '!important; margin:' . $FB_Shortcode['space_between_posts'] . '!important"';
                 }
                 $FTS_FB_OUTPUT .= '>';
 
@@ -155,9 +157,9 @@ class FTS_Facebook_Feed_Post_Types extends FTS_Facebook_Feed
                 break;
             case 'album':
             default:
-                $FTS_FB_OUTPUT .= '<div class="fts-jal-single-fb-post" ';
+                $FTS_FB_OUTPUT .= '<div class="fts-jal-single-fb-post"';
                 if (isset($FB_Shortcode['grid']) && $FB_Shortcode['grid'] == 'yes') {
-                    $FTS_FB_OUTPUT .= 'style="width:' . $FB_Shortcode['colmn_width'] . '; margin:' . $FB_Shortcode['space_between_posts'] . '"';
+                    $FTS_FB_OUTPUT .= 'style="width:' . $FB_Shortcode['colmn_width'] . '!important; margin:' . $FB_Shortcode['space_between_posts'] . '!important"';
                 }
                 $FTS_FB_OUTPUT .= '>';
                 break;
@@ -262,7 +264,22 @@ class FTS_Facebook_Feed_Post_Types extends FTS_Facebook_Feed
                         $FTS_FB_OUTPUT .= '<a href="https://graph.facebook.com/' . $FBalbum_cover . '/picture" class="fts-view-album-photos-large" target="_blank">' . __('View Photo', 'feed-them-social') . '</a></div>';
                     } elseif (isset($FB_Shortcode['video_album']) && $FB_Shortcode['video_album'] == 'yes') {
                         if ($FB_Shortcode['play_btn'] !== 'yes') {
-                            $FTS_FB_OUTPUT .= '<a href="' . $post_data->source . '"  data-poster="' . $post_data->format[3]->picture . '" id="fts-view-vid1-' . $fts_dynamic_vid_name_string . '" class="fts-jal-fb-vid-image fts-view-fb-videos-large fts-view-fb-videos-btn fb-video-popup-' . $fts_dynamic_vid_name_string . '">' . __('View Video', 'feed-them-social') . '</a>';
+                            if(isset($post_data->format[3]->picture)){
+                                $PhotoOption = $post_data->format[3]->picture;
+                            }
+                            elseif(isset($post_data->format[2]->picture)){
+                                $PhotoOption = $post_data->format[2]->picture;
+                            }
+                            elseif(isset($post_data->format[1]->picture)){
+                                $PhotoOption = $post_data->format[1]->picture;
+                            }
+                            elseif(isset($post_data->format[0]->picture)){
+                                $PhotoOption = $post_data->format[0]->picture;
+                            }
+                            else {
+                                $PhotoOption = '';
+                            }
+                            $FTS_FB_OUTPUT .= '<a href="' . $post_data->source . '"  data-poster="' . $PhotoOption .'" id="fts-view-vid1-' . $fts_dynamic_vid_name_string . '" class="fts-jal-fb-vid-image fts-view-fb-videos-large fts-view-fb-videos-btn fb-video-popup-' . $fts_dynamic_vid_name_string . '">' . __('View Video', 'feed-them-social') . '</a>';
                         }
                         $FTS_FB_OUTPUT .= '</div>';
                     } else {
@@ -360,9 +377,9 @@ class FTS_Facebook_Feed_Post_Types extends FTS_Facebook_Feed
                 $single_event_info = json_decode($single_event_array_response['event_single_' . $single_event_id . '_info']);
                 $single_event_location = json_decode($single_event_array_response['event_single_' . $single_event_id . '_location']);
                 $single_event_cover_photo = json_decode($single_event_array_response['event_single_' . $single_event_id . '_cover_photo']);
-                //echo'<pre>';
-                //print_r($single_event_info);
-                //echo'</pre>';
+                // echo'<pre>';
+                // print_r($single_event_info);
+                // echo'</pre>';
                 //Event Cover Photo
                 $event_cover_photo = isset($single_event_cover_photo->cover->source) ? $single_event_cover_photo->cover->source : "";
                 $event_description = isset($single_event_info->description) ? $single_event_info->description : "";
@@ -453,8 +470,10 @@ class FTS_Facebook_Feed_Post_Types extends FTS_Facebook_Feed
 
                 if ($host == 'www.facebook.com' and $first_dir == 'events') {
                     $FTS_FB_OUTPUT .= $FBpicture ? $this->fts_facebook_post_photo($FBlink, $FB_Shortcode, $post_data->from->name, $post_data->picture) : '';
-                } else {
+                } elseif (!empty($post_data->full_picture)) {
                     $FTS_FB_OUTPUT .= $FBpicture ? $this->fts_facebook_post_photo($FBlink, $FB_Shortcode, $post_data->from->name, $post_data->full_picture) : '';
+                } elseif (!empty($post_data->picture)) {
+                    $FTS_FB_OUTPUT .= $FBpicture ? $this->fts_facebook_post_photo($FBlink, $FB_Shortcode, $post_data->from->name, $post_data->picture) : '';
                 }
 
                 $FB_Shortcode['words'] = isset($FB_Shortcode['words']) ? $FB_Shortcode['words'] : "";

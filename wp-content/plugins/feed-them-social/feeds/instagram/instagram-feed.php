@@ -183,9 +183,9 @@ class FTS_Instagram_Feed extends feed_them_social_functions
                 echo 'To see the Instagram feed you need to add your own API Token to the Instagram Options page of our plugin.</div>';
             }
         }
-        //echo '<pre>';
-        //print_r($insta_data);
-        //echo '</pre>';
+        // echo '<pre>';
+        // print_r($insta_data);
+        // echo '</pre>';
 
         foreach ($insta_data->data as $insta_d) {
             if (isset($set_zero) && $set_zero == $pics_count)
@@ -232,6 +232,7 @@ class FTS_Instagram_Feed extends feed_them_social_functions
             }
 
             $instagram_caption_a_title = isset($insta_d->caption->text) ? $insta_d->caption->text : "";
+            $instagram_caption_a_title = htmlspecialchars($instagram_caption_a_title);
             $fts_dynamic_vid_name_string = trim($this->rand_string(10) . '_' . $type);
             //Create links from @mentions and regular links.
             $pattern = array('/http:(\S)+/', '/https:(\S)+/', '/([^a-zA-Z0-9-_&])@([0-9a-zA-Z_]+)/');
@@ -313,7 +314,7 @@ class FTS_Instagram_Feed extends feed_them_social_functions
                         print $instagram_video_standard_resolution;
                     } else {
                         print $instagram_link;
-                    } ?>" class='fts-instagram-link-target instaG-backg-link <?php if($insta_d->type == 'video'){ ?>fts-instagram-video-link<?php } else{ ?>fts-instagram-img-link<?php } ?>' target='_blank' title="<?php print $instagram_caption_a_title ?>">
+                    } ?>" class='fts-instagram-link-target instaG-backg-link <?php if($insta_d->type == 'video'){ ?>fts-instagram-video-link<?php } else{ ?>fts-instagram-img-link<?php } ?>' target='_blank' title='<?php print $instagram_caption_a_title ?>'>
                         <img src="<?php print $instagram_thumb_url ?>" class="instagram-image"/>
                         <div class='instaG-photoshadow'></div>
                     </a>
