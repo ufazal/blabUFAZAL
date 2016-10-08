@@ -567,7 +567,7 @@ if (!function_exists('minti_googlefont_function')) {
 		  
 		$google = preg_replace("/ /","+",$font);
 
-		return '<link href="//fonts.googleapis.com/css?family='.esc_attr($google).':400,700&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese" rel="stylesheet" type="text/css">
+		return '<link href="https://fonts.googleapis.com/css?family='.esc_attr($google).':400,700&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese" rel="stylesheet" type="text/css">
 		<div class="googlefont" style="font-family:\'' .esc_attr($font). '\', serif !important; font-size:' .esc_attr($size). ' !important; margin: ' .esc_attr($margin). ' !important;">' . do_shortcode($content) . '</div>';
 	}
 	add_shortcode('minti_googlefont', 'minti_googlefont_function');
