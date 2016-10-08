@@ -144,7 +144,7 @@ class ContentTimelineAdmin {
 			my_timeline_front_ajax_url="<?php echo admin_url('admin-ajax.php');?>";
 		</script>
 		<?php 
-		echo '<link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">';
+		echo '<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">';
 	}
 	function ajax_image_get() {
 		if(isset($_GET['src'])) {
