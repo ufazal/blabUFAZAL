@@ -8,6 +8,7 @@ class smg{
 
 		if(getenv("ENV") == "prod" || getenv("ENV") == "production"){
 			add_action("wp_footer", array($this, "google_analytics"), 99);
+			add_action("wp_footer", array($this, "hotjar_analytics"), 99);
 		}
 	}
 
@@ -43,6 +44,24 @@ class smg{
 			ga('send', 'pageview');
 			</script>
 			<!-- End Google Analytics -->
+		";
+
+		echo $html;
+	}
+
+	public function hotjar_analytics(){
+		$html = "
+			<!-- Hotjar Tracking Code for https://smgsafety.com -->
+			<script>
+			    (function(h,o,t,j,a,r){
+			        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+			        h._hjSettings={hjid:316504,hjsv:5};
+			        a=o.getElementsByTagName('head')[0];
+			        r=o.createElement('script');r.async=1;
+			        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+			        a.appendChild(r);
+			    })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+			</script>
 		";
 
 		echo $html;
