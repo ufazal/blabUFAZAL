@@ -3,15 +3,15 @@ Contributors: embedplus
 Plugin Name: YouTube Embed
 Tags: youtube channel, video gallery, youtube galleries, channel gallery, gallery, playlist gallery, youtube gallery, accessibility, analytics, api, blocked youtube videos, cache, caching, channel, deleted youtube videos, effects, embed youtube, embedding youtube, featured image, get_locale, i18n, internationalization, l10n, language, lazy, lazy load, locale, localization, mute, no-cookie, oembed, page speed, playlist, playlists, plugin, Reddit, responsive, seo, short code, shortcode, ssl, subtitles, thumbnail, thumbnail image, thumbnails, tinymce, translate, translator, video, video analytics, video plugin, video seo, video shortcode, video thumbnails, view count, volume, widget, wordpress security, wordpress youtube embed, youtube, youtube api, youtube analytics, youtube embed, youtube impressions, youtube player, youtube playlist, youtube plugin, youtube shortcode, youtube snippets, youtube takedowns, youtube thumbnails, youtube plugin migration
 Requires at least: 3.3
-Tested up to: 4.5
-Stable tag: 11.4
+Tested up to: 4.6
+Stable tag: 11.5
 License: GPLv3 or later
 
 YouTube Embed WordPress Plugin. Embed a responsive video, YouTube channel gallery, or playlist gallery. Add thumbnails, analytics, caching...
 
 == Description ==
 
-**WordPress YouTube embeds can be customized in a wide variety of ways with this plugin. Here are a few recently added features:**
+**WordPress YouTube embeds and galleries can be customized in a wide variety of ways with this plugin. Here are a few recently added features:**
 
 * YouTube Channel and Playlist Gallery - The ability to make playlist (and channel) embeds have a gallery layout. By default, the plugin can generate a grid-based [responsive playlist or channel gallery >>](http://www.embedplus.com/responsive-youtube-playlist-channel-gallery-for-wordpress.aspx). Your visitors can browse through pages of video thumbnails and choose from videos that are pulled from an entire YouTube channel or playlist.
 * Auto continuous play for playlist and channel gallery embeds
@@ -148,6 +148,11 @@ You can also start and end each individual video at particular times. Like the a
 9. YouTube Embed Screenshot 9: Optional YouTube channel subscription button above gallery thumbnails
 
 == Changelog ==
+
+= WordPress YouTube Embed 11.5 =
+* thumbnail stacking for mobile galleries
+* better support for ajax themes
+* alt text to images
 
 = WordPress YouTube Embed 11.4 =
 * (Free) Improved subscribe button CSS and a new migration option.

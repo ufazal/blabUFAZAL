@@ -167,7 +167,7 @@
                     setupevents: function (iframeid)
                     {
                         _EPADashboard_.log('Setting up YT API events: ' + iframeid);
-                        if (YT.loaded)
+                        if (typeof (YT) !== 'undefined' && YT !== null && YT.loaded)
                         {
                             var thisvid = document.getElementById(iframeid);
                             thisvid.epytsetupdone = true;
@@ -179,9 +179,9 @@
                             });
                         }
                     },
-                    jp: function (q)
+                     jp: function (q)
                     {
-                        // debug
+                        //debug
                     },
                     apiInit: function () {
                         setTimeout(function ()

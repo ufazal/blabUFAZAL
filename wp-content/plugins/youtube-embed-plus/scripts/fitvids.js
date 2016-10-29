@@ -71,7 +71,7 @@ var epdofitvids = epdofitvids || function ($)
         $("body").fitVidsEP();
 
         $(document).ajaxSuccess(function (e, xhr, settings) {
-            if (xhr.responseText.indexOf('<iframe ') !== -1)
+            if (xhr && xhr.responseText && xhr.responseText.indexOf('<iframe ') !== -1)
             {
                 $("body").fitVidsEP();
             }

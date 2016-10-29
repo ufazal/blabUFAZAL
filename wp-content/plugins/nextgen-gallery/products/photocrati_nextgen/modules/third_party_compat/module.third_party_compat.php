@@ -1,11 +1,4 @@
 <?php
-
-/***
-{
-Module: photocrati-third_party_compat,
-Depends: {}
-}
- ***/
 class M_Third_Party_Compat extends C_Base_Module
 {
     function define()
@@ -14,7 +7,7 @@ class M_Third_Party_Compat extends C_Base_Module
             'photocrati-third_party_compat',
             'Third Party Compatibility',
             "Adds Third party compatibility hacks, adjustments, and modifications",
-            '0.4',
+            '0.5',
             'https://www.imagely.com/wordpress-gallery-plugin/nextgen-gallery/',
             'Photocrati Media',
             'https://www.imagely.com'
@@ -104,6 +97,8 @@ class M_Third_Party_Compat extends C_Base_Module
         add_action('init', array(&$this, 'flattr'),     PHP_INT_MAX);
         add_action('wp',   array(&$this, 'bjlazyload'), PHP_INT_MAX);
 
+	add_action('admin_init', array($this, 'excellent_themes_admin'), -10);
+
         add_action('plugins_loaded', array(&$this, 'wpml'), PHP_INT_MAX);
         add_action('plugins_loaded', array(&$this, 'wpml_translation_management'), PHP_INT_MAX);
 
@@ -131,6 +126,19 @@ class M_Third_Party_Compat extends C_Base_Module
 
         // TODO: Only needed for NGG Pro 1.0.10 and lower
         add_action('the_post', array(&$this, 'add_ngg_pro_page_parameter'));
+    }
+
+    /**
+     * This style causes problems with Excellent Themes admin settings
+     */
+    function excellent_themes_admin()
+    {
+        if (is_admin()
+        &&  defined('ET_TAXONOMY_META_OPTION_KEY')
+        &&  (!empty($_GET['page']) && strpos($_GET['page'], 'et_') == 0))
+        {
+            wp_deregister_style('ngg-jquery-ui');
+        }
     }
 
     function atp_check_pro_albums($available, $display_type)
