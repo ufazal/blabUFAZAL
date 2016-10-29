@@ -1877,9 +1877,9 @@ gtc = new function () {
 
     jsScriptCode += '<script charset="utf-8" type="text/javascript">var switchTo5x='+switchTo5x+';</script>\n';
     if(selected[0].value == "https")
-      jsScriptCode += '<script charset="utf-8" type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>\n';
+      jsScriptCode += '<script charset="utf-8" type="text/javascript" id="st_insights_js" src="https://ws.sharethis.com/button/buttons.js?publisher=' + this.gtc_st_pubid + '&product=sharethis-wordpress"></script>\n';
     else
-      jsScriptCode += '<script charset="utf-8" type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>\n';
+      jsScriptCode += '<script charset="utf-8" type="text/javascript" id="st_insights_js" src="http://w.sharethis.com/button/buttons.js?publisher=' + this.gtc_st_pubid + '&product=sharethis-wordpress"></script>\n';
 
     if(this.gtc_st_current_type == '_none')
       objStlightOpt = null;

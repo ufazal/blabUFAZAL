@@ -42,6 +42,7 @@
 
 
 .epyt-gallery-thumb.hover {
+    position: relative;
     opacity: 1;
     transition: opacity ease-out .3s;
 }
@@ -95,6 +96,8 @@
     vertical-align: middle !important;
     display: inline-block !important;
     width: auto;
+    border: none;
+    box-sizing: border-box;
 }
 
 .epyt-gallery-title {
@@ -166,6 +169,7 @@
 }
 
 .epyt-gallery-thumb.epyt-listview.hover {
+    position: relative;
     background-color: #dddddd;
     color: black;
     transition: background-color ease-out .3s, color ease-out .3s;
@@ -420,3 +424,4 @@ Carousel
     content: "\f311";
     top: 2px;
 }
+

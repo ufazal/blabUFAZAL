@@ -3,7 +3,7 @@
   Plugin Name: YouTube
   Plugin URI: http://www.embedplus.com/dashboard/pro-easy-video-analytics.aspx
   Description: YouTube embed plugin. Embed a responsive YouTube video, playlist gallery, or channel gallery. Add video thumbnails, analytics, SEO, caching...
-  Version: 11.4
+  Version: 11.5
   Author: EmbedPlus Team
   Author URI: http://www.embedplus.com
  */
@@ -32,7 +32,7 @@
 class YouTubePrefs
 {
 
-    public static $version = '11.4';
+    public static $version = '11.5';
     public static $opt_version = 'version';
     public static $optembedwidth = null;
     public static $optembedheight = null;
@@ -94,6 +94,8 @@ class YouTubePrefs
     public static $opt_gallery_pagesize = 'gallery_pagesize';
     public static $opt_gallery_apikey = 'gallery_apikey';
     public static $opt_gallery_columns = 'gallery_columns';
+    public static $opt_gallery_collapse_grid = 'gallery_collapse_grid';
+    public static $opt_gallery_collapse_grid_breaks = 'gallery_collapse_grid_breaks';
     public static $opt_gallery_style = 'gallery_style';
     public static $opt_gallery_scrolloffset = 'gallery_scrolloffset';
     public static $opt_gallery_showtitle = 'gallery_showtitle';
@@ -113,6 +115,7 @@ class YouTubePrefs
     public static $opt_alloptions = 'youtubeprefs_alloptions';
     public static $alloptions = null;
     public static $yt_options = array();
+    public static $dft_bpts = array(array('bp' => array('min' => 0, 'max' => 767), 'cols' => 1));
     //public static $epbase = 'http://localhost:2346';
     public static $epbase = '//www.embedplus.com';
     public static $double_plugin = false;
@@ -185,6 +188,9 @@ class YouTubePrefs
 
         self::do_ytprefs();
         add_action('admin_menu', 'YouTubePrefs::ytprefs_plugin_menu');
+        add_filter('plugin_action_links_' . plugin_basename(__FILE__), array('YouTubePrefs', 'my_plugin_action_links'));
+
+
 
         if (self::$alloptions[self::$opt_pro] && strlen(trim(self::$alloptions[self::$opt_pro])) > 8)
         {
@@ -219,6 +225,13 @@ class YouTubePrefs
         {
             self::$min = '';
         }
+    }
+
+    public static function my_plugin_action_links($links)
+    {
+        $links[] = '<a href="' . esc_url(admin_url('admin.php?page=youtube-my-preferences')) . '">Settings</a>';
+        $links[] = '<a href="https://www.embedplus.com/dashboard/pro-easy-video-analytics.aspx" target="_blank">Pro Version</a>';
+        return $links;
     }
 
     public static function ytprefs_admin_bar_scripts()
@@ -342,7 +355,7 @@ class YouTubePrefs
                             var $accbox = $j(this).parent().children('.accbox');
                             var pid = $accbox.attr("data-postid");
 
-                            $acctitle.prepend('<img class="accloader" src="<?php echo plugins_url('images/ajax-loader.gif', __FILE__) ?>" />');
+                            $acctitle.prepend('<img alt="loading" class="accloader" src="<?php echo plugins_url('images/ajax-loader.gif', __FILE__) ?>" />');
                             jQuery.ajax({
                                 type: "post",
                                 dataType: "json",
@@ -388,7 +401,7 @@ class YouTubePrefs
             {
                 $total = $wpdb->get_var("SELECT FOUND_ROWS();");
                 global $post;
-                echo '<h2><img src="' . plugins_url('images/youtubeicon16.png', __FILE__) . '" /> 10 Latest Posts/Pages with YouTube Videos (' . $total . ' Total)</h2>';
+                echo '<h2><img alt="YouTube Plugin Icon" src="' . plugins_url('images/youtubeicon16.png', __FILE__) . '" /> 10 Latest Posts/Pages with YouTube Videos (' . $total . ' Total)</h2>';
                 ?>
 
                 We recommend using this page as an easy way to check the results of the global default settings you make (e.g. hide annotations) on your recent embeds. Or, simply use it as an index to jump right to your posts that contain YouTube embeds.
@@ -428,7 +441,7 @@ class YouTubePrefs
             $postid = intval($_REQUEST['postid']);
             $currpost = get_post($postid);
 
-            $thehtml = '<img class="accclose" onclick="accclose(this)" src="' . plugins_url('images/accclose.png', __FILE__) . '" />';
+            $thehtml = '<img alt="close" class="accclose" onclick="accclose(this)" src="' . plugins_url('images/accclose.png', __FILE__) . '" />';
 
             $matches = Array();
             $ismatch = preg_match_all(self::$justurlregex, $currpost->post_content, $matches);
@@ -468,7 +481,7 @@ class YouTubePrefs
                                 $_description = esc_attr(sanitize_text_field($odata->author_name));
                                 $_thumbnailUrl = esc_url("https://i.ytimg.com/vi/" . $vidid . "/0.jpg");
 
-                                $thehtml .= '<a target="_blank" href="' . $postlink . '" class="accthumb"><img src="' . $_thumbnailUrl . '" /></a>';
+                                $thehtml .= '<a target="_blank" href="' . $postlink . '" class="accthumb"><img alt="YouTube Video" src="' . $_thumbnailUrl . '" /></a>';
                                 $thehtml .= '<div class="accinfo">';
                                 $thehtml .= '<a target="_blank" href="' . $postlink . '" class="accvidtitle">' . $_name . '</a>';
                                 $thehtml .= '<div class="accdesc">' . (strlen($_description) > 400 ? substr($_description, 0, 400) . "..." : $_description) . '</div>';
@@ -504,7 +517,7 @@ class YouTubePrefs
                                 $_description = esc_attr(sanitize_text_field($odata->author_name));
                                 $_thumbnailUrl = esc_url($odata->thumbnail_url);
 
-                                $thehtml .= '<a target="_blank" href="' . $postlink . '" class="accthumb"><img src="' . $_thumbnailUrl . '" /></a>';
+                                $thehtml .= '<a target="_blank" href="' . $postlink . '" class="accthumb"><img alt="YouTube Video" src="' . $_thumbnailUrl . '" /></a>';
                                 $thehtml .= '<div class="accinfo">';
                                 $thehtml .= '<a target="_blank" href="' . $postlink . '" class="accvidtitle">' . $_name . '</a>';
                                 $thehtml .= '<div class="accdesc">' . (strlen($_description) > 400 ? substr($_description, 0, 400) . "..." : $_description) . '</div>';
@@ -647,7 +660,7 @@ class YouTubePrefs
                             echo '<a class="epxout">&times;</a>';
                         }
                         ?>
-                        Seems like you have two different YouTube plugins by the EmbedPlus Team installed: <b><img src="<?php echo plugins_url('images/youtubeicon16.png', __FILE__) ?>" /> YouTube</b> and <b><img src="<?php echo plugins_url('images/btn_embedpluswiz.png', __FILE__) ?>" /> Advanced YouTube Embed.</b> We strongly suggest keeping only the one you prefer, so that they don't conflict with each other while trying to create your embeds.</p>
+                        Seems like you have two different YouTube plugins by the EmbedPlus Team installed: <b><img alt="YouTube Icon" src="<?php echo plugins_url('images/youtubeicon16.png', __FILE__) ?>" /> YouTube</b> and <b><img alt="YouTube Icon" src="<?php echo plugins_url('images/btn_embedpluswiz.png', __FILE__) ?>" /> Advanced YouTube Embed.</b> We strongly suggest keeping only the one you prefer, so that they don't conflict with each other while trying to create your embeds.</p>
                 </div>
                 <iframe allowTransparency="true" src="<?php echo self::$epbase . '/both-plugins-conflict.aspx' ?>" style="width:2px; height: 2px;" ></iframe>
                 <script type="text/javascript">
@@ -780,6 +793,8 @@ class YouTubePrefs
         $_hl = '';
         $_dohl = 0;
         $_gallery_columns = 3;
+        $_gallery_collapse_grid = 0;
+        $_gallery_collapse_grid_breaks = self::$dft_bpts;
         $_gallery_scrolloffset = 20;
         $_gallery_showtitle = 1;
         $_gallery_showpaging = 1;
@@ -856,6 +871,8 @@ class YouTubePrefs
             $_apikey = self::tryget($arroptions, self::$opt_apikey, '');
             $_gallery_pagesize = self::tryget($arroptions, self::$opt_gallery_pagesize, 15);
             $_gallery_columns = self::tryget($arroptions, self::$opt_gallery_columns, 3);
+            $_gallery_collapse_grid = self::tryget($arroptions, self::$opt_gallery_collapse_grid, 0);
+            $_gallery_collapse_grid_breaks = self::tryget($arroptions, self::$opt_gallery_collapse_grid_breaks, self::$dft_bpts);
             $_gallery_scrolloffset = self::tryget($arroptions, self::$opt_gallery_scrolloffset, 20);
             $_gallery_showtitle = self::tryget($arroptions, self::$opt_gallery_showtitle, 1);
             $_gallery_showpaging = self::tryget($arroptions, self::$opt_gallery_showpaging, 1);
@@ -928,6 +945,8 @@ class YouTubePrefs
             self::$opt_vol => $_vol,
             self::$opt_apikey => $_apikey,
             self::$opt_gallery_columns => $_gallery_columns,
+            self::$opt_gallery_collapse_grid => $_gallery_collapse_grid,
+            self::$opt_gallery_collapse_grid_breaks => $_gallery_collapse_grid_breaks,
             self::$opt_gallery_scrolloffset => $_gallery_scrolloffset,
             self::$opt_gallery_showtitle => $_gallery_showtitle,
             self::$opt_gallery_showpaging => $_gallery_showpaging,
@@ -1057,7 +1076,7 @@ class YouTubePrefs
         $epvars = preg_replace('/\s/', '', $epvars);
         $epvars = preg_replace('/¬/', '&not', $epvars);
         $epvars = str_replace('&amp;', '&', $epvars);
-        
+
         $epparams = self::keyvalue($epvars, true);
 
         if (isset($epparams) && isset($epparams['ytid']))
@@ -1065,9 +1084,9 @@ class YouTubePrefs
             $start = isset($epparams['start']) && is_numeric($epparams['start']) ? '&start=' . intval($epparams['start']) : '';
             $end = isset($epparams['end']) && is_numeric($epparams['end']) ? '&end=' . intval($epparams['end']) : '';
             $end = isset($epparams['stop']) && is_numeric($epparams['stop']) ? '&end=' . intval($epparams['stop']) : '';
-            
+
             $url = 'https://www.youtube.com/watch?v=' . trim($epparams['ytid']) . $start . $end;
-            
+
             $currfilter = current_filter();
             if (preg_match(self::$justurlregex, $url))
             {
@@ -1155,7 +1174,7 @@ class YouTubePrefs
         if (is_wp_error($apiResult))
         {
             $gallobj->html = '<div>Sorry, there was a YouTube API error: <em>' . htmlspecialchars(strip_tags($apiResult->get_error_message())) . '</em>' .
-                    ' Please make sure you performed the <a href="https://www.youtube.com/watch?v=px8LvNIVblg" target="_blank">steps in this video</a> to create and save a proper API key.' .
+                    ' Please make sure you performed the <a href="https://www.youtube.com/watch?v=LpKDFT40V0U" target="_blank">steps in this video</a> to create and save a proper server API key.' .
                     '</div>';
             return $gallobj;
         }
@@ -1175,11 +1194,11 @@ class YouTubePrefs
             if (isset($jsonResult->error->message))
             {
                 $gallobj->html = '<div>Sorry, there was a YouTube API error: <em>' . htmlspecialchars(strip_tags($jsonResult->error->message)) . '</em>' .
-                        ' Please make sure you performed the <a href="https://www.youtube.com/watch?v=px8LvNIVblg" target="_blank">steps in this video</a> to create and save a proper API key.' .
+                        ' Please make sure you performed the <a href="https://www.youtube.com/watch?v=LpKDFT40V0U" target="_blank">steps in this video</a> to create and save a proper server API key.' .
                         '</div>';
                 return $gallobj;
             }
-            $gallobj->html = '<div>Sorry, there may be an issue with your YouTube API key. Please make sure you performed the <a href="https://www.youtube.com/watch?v=px8LvNIVblg" target="_blank">steps in this video</a> to create and save a proper API key.</div>';
+            $gallobj->html = '<div>Sorry, there may be an issue with your YouTube API key. Please make sure you performed the <a href="https://www.youtube.com/watch?v=LpKDFT40V0U" target="_blank">steps in this video</a> to create and save a proper server API key.</div>';
             return $gallobj;
         }
 
@@ -1319,13 +1338,13 @@ class YouTubePrefs
                 . ((self::$alloptions[self::$opt_pro] && strlen(trim(self::$alloptions[self::$opt_pro])) > 9 && !in_array($options->thumbcrop, array('box', ''))) ? '" data-thumbcrop="' . $options->thumbcrop : '')
                 . '"><div>' . $txtnext . '</div> <div class="arrow">&raquo;</div></div>';
 
-        $pagination .= '<div class="epyt-loader"><img width="16" height="11" src="' . plugins_url('images/gallery-page-loader.gif', __FILE__) . '"></div>';
+        $pagination .= '<div class="epyt-loader"><img alt="loading" width="16" height="11" src="' . plugins_url('images/gallery-page-loader.gif', __FILE__) . '"></div>';
 
         $pagination .= '</div>';
 
         if ($options->showPaging == 0)
         {
-            $pagination = '';
+            $pagination = '<div class="epyt-pagination"></div>';
         }
         $code = $pagination . $code . $pagination;
 
@@ -1367,7 +1386,7 @@ class YouTubePrefs
 
         $code .= '<div tabindex="0" role="button" data-videoid="' . $escId . '" class="epyt-gallery-thumb ' . $styleclass . '" ' . $rawstyle . '>';
         $code .= '<div class="epyt-gallery-img-box"><div class="epyt-gallery-img" style="background-image: url(' . esc_attr($thumb->img) . ')">' .
-                '<div class="epyt-gallery-playhover"><img class="epyt-play-img" width="30" height="23" src="' . plugins_url('images/playhover.png', __FILE__) . '" /><div class="epyt-gallery-playcrutch"></div></div>' .
+                '<div class="epyt-gallery-playhover"><img alt="play" class="epyt-play-img" width="30" height="23" src="' . plugins_url('images/playhover.png', __FILE__) . '" /><div class="epyt-gallery-playcrutch"></div></div>' .
                 '</div></div>';
         if ($options->style != 'carousel' && !empty($thumb->title))
         {
@@ -1625,7 +1644,7 @@ class YouTubePrefs
             if (self::$alloptions[self::$opt_gallery_channelsub] == 1)
             {
                 $subbutton = '<div class="epyt-gallery-subscribe"><a target="_blank" class="epyt-gallery-subbutton" href="' .
-                        esc_attr(self::$alloptions[self::$opt_gallery_channelsublink]) . '?sub_confirmation=1"><img src="' . plugins_url('images/play-subscribe.png', __FILE__) . '" />' .
+                        esc_attr(self::$alloptions[self::$opt_gallery_channelsublink]) . '?sub_confirmation=1"><img alt="subscribe" src="' . plugins_url('images/play-subscribe.png', __FILE__) . '" />' .
                         htmlspecialchars(self::$alloptions[self::$opt_gallery_channelsubtext], ENT_QUOTES) . '</a></div>';
             }
 
@@ -1645,7 +1664,7 @@ class YouTubePrefs
         $code1 = $beginlb . '<iframe ' . $dyntype . $centercode . ' id="_ytid_' . rand(10000, 99999) . '" width="' . self::$defaultwidth . '" height="' . self::$defaultheight .
                 '" ' . $dynsrc . 'src="https://www.' . $youtubebaseurl . '.com/embed/' . $videoseries . $videoidoutput . '?';
         $code2 = '" frameborder="0" class="__youtube_prefs__' . ($iscontent ? '' : ' __youtube_prefs_widget__') . $disptypeif .
-                '"' . $voloutput . $acctitle . $galleryid_ifm_data . ' allowfullscreen ></iframe>' . $endlb . $schemaorgoutput;
+                '"' . $voloutput . $acctitle . $galleryid_ifm_data . ' allowfullscreen data-no-lazy="1"></iframe>' . $endlb . $schemaorgoutput;
 
         $origin = '';
 
@@ -1768,7 +1787,7 @@ class YouTubePrefs
                         $_uploadDate = sanitize_text_field($json['items'][0]['snippet']['publishedAt']); // "2014-10-03T15:30:12.000Z"
 
                         $schemaorgcode = '<span itemprop="video" itemscope itemtype="http://schema.org/VideoObject">';
-                        $schemaorgcode .= '<meta itemprop="embedURL" content="https://www.youtube.com/embed/' . $vidid . '">';
+                        $schemaorgcode .= '<meta itemprop="embedUrl" content="https://www.youtube.com/embed/' . $vidid . '">';
                         $schemaorgcode .= '<meta itemprop="name" content="' . $_name . '">';
                         $schemaorgcode .= '<meta itemprop="description" content="' . $_description . '">';
                         $schemaorgcode .= '<meta itemprop="thumbnailUrl" content="' . $_thumbnailUrl . '">';
@@ -2163,98 +2182,98 @@ class YouTubePrefs
                 .orange {color: #f85d00;}
             </style>
             <br>
+            <?php
+            $thishost = (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : "");
+            $thiskey = self::$alloptions[self::$opt_pro];
+
+            $dashurl = self::$epbase . "/dashboard/pro-easy-video-analytics.aspx?ref=protab&domain=" . $thishost . "&prokey=" . $thiskey;
+
+            if (self::$alloptions[self::$opt_pro] && strlen(trim(self::$alloptions[self::$opt_pro])) > 0)
+            {
+                //// header
+                echo "<h2>" . '<img alt="YouTube Plugin Icon" src="' . plugins_url('images/epstats16.png', __FILE__) . '" /> ' . __('YouTube Analytics Dashboard') . "</h2>";
+                echo '<p><i>Logging you in below... (You can also <a class="button-primary" target="_blank" href="' . $dashurl . '">click here</a> to launch your dashboard in a new tab)</i></p>';
+            }
+            else
+            {
+                //// header
+                echo "<h2>" . '<img alt="YouTube Plugin Wizard" style="vertical-align: text-bottom;" src="' . plugins_url('images/iconwizard.png', __FILE__) . '" /> ' . __('YouTube Plugin PRO') . "</h2><p class='bold orange'>This tab is here to provide direct access to analytics. Graphs and other data about your site will show below after you activate PRO.</p><br>";
+            }
+            ?>
+            <iframe class="shadow" src="<?php echo $dashurl ?>" width="1060" height="3600" scrolling="auto"/>
+        </div>
         <?php
-        $thishost = (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : "");
-        $thiskey = self::$alloptions[self::$opt_pro];
+    }
 
-        $dashurl = self::$epbase . "/dashboard/pro-easy-video-analytics.aspx?ref=protab&domain=" . $thishost . "&prokey=" . $thiskey;
-
-        if (self::$alloptions[self::$opt_pro] && strlen(trim(self::$alloptions[self::$opt_pro])) > 0)
+    public static function my_embedplus_pro_record()
+    {
+        $result = array();
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
         {
-            //// header
-            echo "<h2>" . '<img src="' . plugins_url('images/epstats16.png', __FILE__) . '" /> ' . __('YouTube Analytics Dashboard') . "</h2>";
-            echo '<p><i>Logging you in below... (You can also <a class="button-primary" target="_blank" href="' . $dashurl . '">click here</a> to launch your dashboard in a new tab)</i></p>';
+            $tmppro = preg_replace('/[^A-Za-z0-9-]/i', '', $_REQUEST[self::$opt_pro]);
+            $new_options = array();
+            $new_options[self::$opt_pro] = $tmppro;
+            $all = get_option(self::$opt_alloptions);
+            $all = $new_options + $all;
+            update_option(self::$opt_alloptions, $all);
+
+            if (strlen($tmppro) > 0)
+            {
+                $result['type'] = 'success';
+            }
+            else
+            {
+                $result['type'] = 'error';
+            }
+            echo json_encode($result);
         }
         else
         {
-            //// header
-            echo "<h2>" . '<img style="vertical-align: text-bottom;" src="' . plugins_url('images/iconwizard.png', __FILE__) . '" /> ' . __('YouTube Plugin PRO') . "</h2><p class='bold orange'>This tab is here to provide direct access to analytics. Graphs and other data about your site will show below after you activate PRO.</p><br>";
+            $result['type'] = 'error';
+            header("Location: " . $_SERVER["HTTP_REFERER"]);
         }
+        die();
+    }
+
+    public static function my_embedplus_clearspdc()
+    {
+        $result = array();
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
+        {
+            try
+            {
+                self::spdcpurge();
+                $result['type'] = 'success';
+            }
+            catch (Exception $ex)
+            {
+                $result['type'] = 'error';
+            }
+            echo json_encode($result);
+        }
+        else
+        {
+            $result['type'] = 'error';
+            header("Location: " . $_SERVER["HTTP_REFERER"]);
+        }
+        die();
+    }
+
+    public static function custom_admin_pointers_check()
+    {
+        //return false; // ooopointer shut all off;
+        $admin_pointers = self::custom_admin_pointers();
+        foreach ($admin_pointers as $pointer => $array)
+        {
+            if ($array['active'])
+                return true;
+        }
+    }
+
+    public static function glance_script()
+    {
+        add_thickbox();
         ?>
-            <iframe class="shadow" src="<?php echo $dashurl ?>" width="1060" height="3600" scrolling="auto"/>
-        </div>
-            <?php
-        }
-
-        public static function my_embedplus_pro_record()
-        {
-            $result = array();
-            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
-            {
-                $tmppro = preg_replace('/[^A-Za-z0-9-]/i', '', $_REQUEST[self::$opt_pro]);
-                $new_options = array();
-                $new_options[self::$opt_pro] = $tmppro;
-                $all = get_option(self::$opt_alloptions);
-                $all = $new_options + $all;
-                update_option(self::$opt_alloptions, $all);
-
-                if (strlen($tmppro) > 0)
-                {
-                    $result['type'] = 'success';
-                }
-                else
-                {
-                    $result['type'] = 'error';
-                }
-                echo json_encode($result);
-            }
-            else
-            {
-                $result['type'] = 'error';
-                header("Location: " . $_SERVER["HTTP_REFERER"]);
-            }
-            die();
-        }
-
-        public static function my_embedplus_clearspdc()
-        {
-            $result = array();
-            if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
-            {
-                try
-                {
-                    self::spdcpurge();
-                    $result['type'] = 'success';
-                }
-                catch (Exception $ex)
-                {
-                    $result['type'] = 'error';
-                }
-                echo json_encode($result);
-            }
-            else
-            {
-                $result['type'] = 'error';
-                header("Location: " . $_SERVER["HTTP_REFERER"]);
-            }
-            die();
-        }
-
-        public static function custom_admin_pointers_check()
-        {
-            //return false; // ooopointer shut all off;
-            $admin_pointers = self::custom_admin_pointers();
-            foreach ($admin_pointers as $pointer => $array)
-            {
-                if ($array['active'])
-                    return true;
-            }
-        }
-
-        public static function glance_script()
-        {
-            add_thickbox();
-            ?>
         <script type="text/javascript">
             function widen_ytprefs_glance() {
                 setTimeout(function () {
@@ -2350,11 +2369,11 @@ class YouTubePrefs
         $new_pointer_content .= '<p>'; // ooopointer
         if (!(self::$alloptions[self::$opt_pro] && strlen(trim(self::$alloptions[self::$opt_pro])) > 0))
         {
-            $new_pointer_content .= __("This update adds: (Free) Improved subscribe button CSS and a new migration option. (Pro) Improved accessibility for popup lightbox galleries. (<a target=_blank href=" . self::$epbase . '/dashboard/pro-easy-video-analytics.aspx?ref=frompointer' . ">Learn more about Pro &raquo;</a>)");
+            $new_pointer_content .= __("This update adds: thumbnail stacking for mobile galleries, better support for ajax themes, and alt text to images to both the Free and Pro version. (<a target=_blank href=" . self::$epbase . '/dashboard/pro-easy-video-analytics.aspx?ref=frompointer' . ">Learn more about Pro &raquo;</a>)");
         }
         else
         {
-            $new_pointer_content .= __("This update adds: Improved subscribe button CSS and a new migration option, and improved accessibility for popup lightbox galleries.");
+            $new_pointer_content .= __("This update adds: thumbnail stacking for mobile galleries, better support for ajax themes, and alt text to images to both the Free and Pro version.");
         }
         $new_pointer_content .= '</p>';
 
@@ -2451,6 +2470,7 @@ class YouTubePrefs
             $new_options[self::$opt_gallery_channelsub] = self::postchecked(self::$opt_gallery_channelsub) ? 1 : 0;
             $new_options[self::$opt_gallery_customarrows] = self::postchecked(self::$opt_gallery_customarrows) ? 1 : 0;
             $new_options[self::$opt_gallery_showdsc] = self::postchecked(self::$opt_gallery_showdsc) ? 1 : 0;
+            $new_options[self::$opt_gallery_collapse_grid] = self::postchecked(self::$opt_gallery_collapse_grid) ? 1 : 0;
 
             $_defaultwidth = '';
             try
@@ -2518,6 +2538,20 @@ class YouTubePrefs
                 
             }
             $new_options[self::$opt_gallery_columns] = $_gallery_columns;
+
+
+            $_gallery_collapse_grid_breaks = self::$dft_bpts;
+            try
+            {
+                $_gallery_collapse_grid_breaks = is_array($_POST[self::$opt_gallery_collapse_grid_breaks]) ? $_POST[self::$opt_gallery_collapse_grid_breaks] : $_gallery_collapse_grid_breaks;
+            }
+            catch (Exception $ex)
+            {
+                
+            }
+            $new_options[self::$opt_gallery_collapse_grid_breaks] = $_gallery_collapse_grid_breaks;
+
+
 
             $_gallery_scrolloffset = 20;
             try
@@ -2719,7 +2753,7 @@ class YouTubePrefs
 
         // header
 
-        echo "<h2>" . '<img src="' . plugins_url('images/youtubeicon16.png', __FILE__) . '" /> ' . __('YouTube Settings') . "</h2>";
+        echo "<h2>" . '<img alt="YouTube Plugin Icon" src="' . plugins_url('images/youtubeicon16.png', __FILE__) . '" /> ' . __('YouTube Settings') . "</h2>";
 
         // settings form
         ?>
@@ -2773,6 +2807,7 @@ class YouTubePrefs
             #boxdefaultdims {font-weight: bold; padding: 0px 10px; <?php echo $all[self::$opt_defaultdims] ? '' : 'display: none;' ?>}
             #boxcustomarrows {font-weight: bold; padding: 0px 10px; <?php echo $all[self::$opt_gallery_customarrows] ? 'display: block;' : 'display: none;' ?>}
             #boxchannelsub {font-weight: bold; padding: 0px 10px; <?php echo $all[self::$opt_gallery_channelsub] ? 'display: block;' : 'display: none;' ?>}
+            #box_collapse_grid {font-weight: bold; padding: 0px 10px; <?php echo $all[self::$opt_gallery_collapse_grid] ? 'display: block;' : 'display: none;' ?>}
             .textinput {border-width: 2px !important;}
             h3.sect {border-radius: 10px; background-color: #D9E9F7; padding: 5px 5px 5px 10px; position: relative; font-weight: bold;}
             h3.sect a {text-decoration: none; color: #E20000;}
@@ -2802,7 +2837,7 @@ class YouTubePrefs
             .vol-seeslider {display: none;}
             input#spdcexp {width: 70px;}
             .indent-option {margin-left: 25px;}
-            #boxschemaorg {font-weight: bold; padding: 7px 0;  <?php echo $all[self::$opt_schemaorg] ? 'display: block;' : 'display: none;' ?>}
+            #boxschemaorg { padding: 7px 0;  <?php echo $all[self::$opt_schemaorg] ? 'display: block;' : 'display: none;' ?>}
             #boxmigratelist { <?php echo $all[self::$opt_migrate] ? '' : 'display: none;' ?>}
             #boxresponsive_all { <?php echo $all[self::$opt_responsive] ? '' : 'display: none;' ?> padding-left: 25px; border-left: 5px solid rgba(100, 100, 100,.1); margin-left: 5px;}
             .apikey-msg {display: inline-block; width: 45%; vertical-align: top;}
@@ -2894,12 +2929,12 @@ class YouTubePrefs
                 </p>
                 <div class="jumper" id="jumpdefaults"></div>
                 <h3 class="sect">
-        <?php _e("Default YouTube Options") ?> <a href="#top" class="totop">&#9650; top</a>
+                    <?php _e("Default YouTube Options") ?> <a href="#top" class="totop">&#9650; top</a>
                 </h3>
                 <p>
                     <?php _e("One of the benefits of using this plugin is that you can set site-wide default options for all your videos (click \"Save Changes\" when finished). However, you can also override them (and more) on a per-video basis. Directions on how to do that are in the next section.") ?>
                 </p>
-                    <?php // self::save_changes_button();            ?>
+                <?php // self::save_changes_button();            ?>
 
                 <div class="ytindent chx">
                     <p>
@@ -3032,10 +3067,7 @@ class YouTubePrefs
                         <label for="<?php echo self::$opt_cc_load_policy; ?>"><?php _e('<b class="chktitle">Closed Captions:</b> Turn on closed captions by default.') ?></label>
                     </p>
                     <p>
-                        <input name="<?php echo self::$opt_dohl; ?>" id="<?php echo self::$opt_dohl; ?>" <?php checked($all[self::$opt_dohl], 1); ?> type="checkbox" class="checkbox">                        
-        <!--                        <span id="boxdohl">
-                            Language: <input type="text" name="<?php echo self::$opt_hl; ?>" id="<?php echo self::$opt_hl; ?>" value="<?php echo trim($all[self::$opt_hl]); ?>" class="textinput" style="width: 50px;" maxlength="2">
-                        </span>-->
+                        <input name="<?php echo self::$opt_dohl; ?>" id="<?php echo self::$opt_dohl; ?>" <?php checked($all[self::$opt_dohl], 1); ?> type="checkbox" class="checkbox">
                         <label for="<?php echo self::$opt_dohl; ?>"><b class="chktitle">Player Localization / Internationalization: </b>
                             Automatically detect your site's default language (using get_locale) and set your YouTube embeds interface language so that it matches. Specifically, this will set the player's tooltips and caption track if your language is natively supported by YouTube. We suggest checking this if English is not your site's default language.  <a href="<?php echo self::$epbase ?>/youtube-iso-639-1-language-codes.aspx" target="_blank">See here for more details &raquo;</a></label>
                     </p>                    
@@ -3122,7 +3154,7 @@ class YouTubePrefs
                 <img class="ssgallery" src="<?php echo plugins_url('images/ssgallery.png', __FILE__) ?>">
                 <p>
                     <a target="_blank" href="<?php echo self::$epbase ?>/responsive-youtube-playlist-channel-gallery-for-wordpress.aspx">You can now make playlist embeds (and channel-playlist embeds) have a gallery layout &raquo;</a>. <strong>First, you must obtain your YouTube API key</strong>. 
-                    Don't worry, it's an easy process. Just <a href="https://www.youtube.com/watch?v=px8LvNIVblg" target="_blank">click this link &raquo;</a> and follow the video on that page to get your API key. Since Google updates their API Key generation directions frequently, follow the general steps shown in the video.
+                    Don't worry, it's an easy process. Just <a href="https://www.youtube.com/watch?v=LpKDFT40V0U" target="_blank">click this link &raquo;</a> and follow the video on that page to get your API key. Since Google updates their API Key generation directions frequently, follow the general steps shown in the video.
                     Then paste your API key in the "YouTube API Key" box below, and click the "Save Changes" button.
                 </p>
 
@@ -3133,17 +3165,17 @@ class YouTubePrefs
                     <p>
                         <b class="chktitle">YouTube API Key:</b> 
                         <input type="text" name="<?php echo self::$opt_gallery_apikey; ?>" id="<?php echo self::$opt_gallery_apikey; ?>" value="<?php echo trim($all[self::$opt_apikey]); ?>" class="textinput" style="width: 250px;">
-                        Required so your site can get the thumbnails, title text, and other content from YouTube's servers that used to render galleries. <a href="https://www.youtube.com/watch?v=px8LvNIVblg" target="_blank">Click this link &raquo;</a> and follow the video to the right to get your API key.
+                        Required so your site can get the thumbnails, title text, and other content from YouTube's servers that used to render galleries. <a href="https://www.youtube.com/watch?v=LpKDFT40V0U" target="_blank">Click this link &raquo;</a> and follow the video to the right to get your API key.
                     </p>
                     <p>
                         <label for="<?php echo self::$opt_gallery_pagesize; ?>"><b class="chktitle">Gallery Page Size:</b></label>
                         <select name="<?php echo self::$opt_gallery_pagesize; ?>" id="<?php echo self::$opt_gallery_pagesize; ?>" style="width: 60px;">
-        <?php
-        $gps_val = intval(trim($all[self::$opt_gallery_pagesize]));
-        $gps_val = min($gps_val, 50);
-        for ($gps = 1; $gps <= 50; $gps++)
-        {
-            ?><option <?php echo $gps_val == $gps ? 'selected' : '' ?> value="<?php echo $gps ?>"><?php echo $gps ?></option>
+                            <?php
+                            $gps_val = intval(trim($all[self::$opt_gallery_pagesize]));
+                            $gps_val = min($gps_val, 50);
+                            for ($gps = 1; $gps <= 50; $gps++)
+                            {
+                                ?><option <?php echo $gps_val == $gps ? 'selected' : '' ?> value="<?php echo $gps ?>"><?php echo $gps ?></option>
                                 <?php
                             }
                             ?>
@@ -3154,6 +3186,32 @@ class YouTubePrefs
                         <label for="<?php echo self::$opt_gallery_columns; ?>"><b class="chktitle">Number of Columns:</b></label>
                         <input name="<?php echo self::$opt_gallery_columns; ?>" id="<?php echo self::$opt_gallery_columns; ?>" type="number" class="textinput" style="width: 60px;" value="<?php echo trim($all[self::$opt_gallery_columns]); ?>">                        
                         Enter how many thumbnails can fit per row.
+                    </p>
+                    <p>
+                        <input name="<?php echo self::$opt_gallery_collapse_grid; ?>" id="<?php echo self::$opt_gallery_collapse_grid; ?>" <?php checked($all[self::$opt_gallery_collapse_grid], 1); ?> type="checkbox" class="checkbox">
+                        <label for="<?php echo self::$opt_gallery_collapse_grid; ?>">
+                            <b class="chktitle">Stack Thumbnails for Mobile:</b> <sup class="orange">NEW</sup> Check this option to responsively stack thumbnails on smaller screens, for the grid layout.
+                        </label>
+                        <span id="box_collapse_grid">
+                            <?php
+                            foreach ($all[self::$opt_gallery_collapse_grid_breaks] as $idx => $bpts)
+                            {
+                                ?>
+                                On screens up to
+                                <input type="number" name="<?php echo self::$opt_gallery_collapse_grid_breaks . '[' . $idx . '][bp][max]'; ?>"
+                                       id="<?php echo self::$opt_gallery_collapse_grid_breaks . '[' . $idx . '][bp][max]'; ?>" 
+                                       value="<?php echo intval(trim($bpts['bp']['max'])); ?>" class="textinput" style="width: 70px;">px wide, stack thumbnails to 1 column.
+                                <input type="hidden" name="<?php echo self::$opt_gallery_collapse_grid_breaks . '[' . $idx . '][cols]'; ?>"
+                                       id="<?php echo self::$opt_gallery_collapse_grid_breaks . '[' . $idx . '][cols]'; ?>"
+                                       value="<?php echo intval(trim($bpts['cols'])); ?>">
+                                <input type="hidden" name="<?php echo self::$opt_gallery_collapse_grid_breaks . '[' . $idx . '][bp][min]'; ?>"
+                                       id="<?php echo self::$opt_gallery_collapse_grid_breaks . '[' . $idx . '][bp][min]'; ?>"
+                                       value="<?php echo intval(trim($bpts['bp']['min'])); ?>">
+                                       <?php
+                                   }
+                                   ?>
+                            <span class="smallnote grey pad20"><br>Note: a common mobile screen width is 767 pixels.</span>
+                        </span>
                     </p>
                     <p>
                         <input name="<?php echo self::$opt_gallery_showpaging; ?>" id="<?php echo self::$opt_gallery_showpaging; ?>" <?php checked($all[self::$opt_gallery_showpaging], 1); ?> type="checkbox" class="checkbox">
@@ -3210,14 +3268,14 @@ class YouTubePrefs
                 <div class="jumper" id="jumpprosettings"></div>
                 <div class="upgchecks">
                     <h3 class="sect">PRO Features</h3>
-        <?php
-        if ($all[self::$opt_pro] && strlen(trim($all[self::$opt_pro])) > 9)
-        {
-            ?>
+                    <?php
+                    if ($all[self::$opt_pro] && strlen(trim($all[self::$opt_pro])) > 9)
+                    {
+                        ?>
                         <p class="smallnote orange">Below are PRO features for enhanced SEO and performance (works for even past embed links). Gallery options for PRO users will also be listed here.</p>
                         <p>
                             <img class="ssaltgallery" src="<?php echo plugins_url('images/ssaltgalleryall.jpg', __FILE__) ?>" />
-            <?php $cleanstyle = trim($all[self::$opt_gallery_style]); ?>
+                            <?php $cleanstyle = trim($all[self::$opt_gallery_style]); ?>
                             <select name="<?php echo self::$opt_gallery_style; ?>" id="<?php echo self::$opt_gallery_style; ?>" >
                                 <option value="">Gallery Style</option>
                                 <option value="grid" <?php echo 'grid' === $cleanstyle ? 'selected' : '' ?> >Grid (default)</option>
@@ -3243,7 +3301,7 @@ class YouTubePrefs
                         <div class="hr"></div>
                         <p>
                             <img class="ssaltgallery" src="<?php echo plugins_url('images/ssaltgallerycircles.jpg', __FILE__) ?>" />
-            <?php $cleancrop = trim($all[self::$opt_gallery_thumbcrop]); ?>
+                            <?php $cleancrop = trim($all[self::$opt_gallery_thumbcrop]); ?>
                             <label for="<?php echo self::$opt_gallery_thumbcrop; ?>">
                                 <b>(PRO)</b>  <b class="chktitle">Gallery Thumbnail Shape:</b></b>
                                 Differentiate your gallery by showing different thumbnail shapes.  We currently offer rectangle and circle shapes.
@@ -3258,7 +3316,7 @@ class YouTubePrefs
                         <div class="hr"></div>
                         <p>
                             <img class="sspopupplayer" src="<?php echo plugins_url('images/sspopupplayer.jpg', __FILE__) ?>" />
-            <?php $cleandisp = trim($all[self::$opt_gallery_disptype]); ?>
+                            <?php $cleandisp = trim($all[self::$opt_gallery_disptype]); ?>
                             <label for="<?php echo self::$opt_gallery_disptype; ?>">
                                 <b>(PRO)</b>  <b class="chktitle">Gallery Video Display Mode:</b> <sup class="orange">NEW</sup>
                                 Display your gallery videos simply above the thumbnails (default), or as a popup lightbox.
@@ -3311,17 +3369,13 @@ class YouTubePrefs
                             </label>
                             <span id="boxschemaorg">
                                 <span class="apikey-msg">
-                                    The video SEO tags include data like the title, description, and thumbnail information of each video you embed.  This plugin automatically extracts this data directly from YouTube using the version 3 API,
-                                    which will soon replace the version 2 API. This particular API version requires that you obtain an API key so that YouTube can authenticate the requests.  Don't worry, it's an easy process.  
-                                    Just <a href="https://developers.google.com/youtube/registering_an_application" target="_blank">click this link &raquo;</a> and follow the video to the right to get your API key. Then paste it in the box below, and click the "Save Changes" button:
+                                    The video SEO tags include data like the title, description, and thumbnail information of each video you embed. This plugin automatically extracts this data directly from YouTube using the version 3 API. This particular API version requires that you obtain an API key so that YouTube can authenticate the requests. <a href="https://www.youtube.com/watch?v=LpKDFT40V0U" target="_blank">Watch this video to see how to create your own key</a>. Then, paste it in the box below, and click the "Save Changes" button:
                                     <br>
                                     <span style="vertical-align: middle; display: inline-block;">
                                         YouTube API Key: <input type="text" name="<?php echo self::$opt_apikey; ?>" id="<?php echo self::$opt_apikey; ?>" value="<?php echo trim($all[self::$opt_apikey]); ?>" class="textinput" style="width: 200px;">
                                     </span>
                                 </span>
-                                <span class="apikey-video">
-                                    <iframe width="384" height="216" src="https://www.youtube.com/embed/px8LvNIVblg?rel=0" frameborder="0" allowfullscreen></iframe>
-                                </span>
+                                
                             </span>
                         </p>
                         <div class="hr"></div>
@@ -3334,7 +3388,7 @@ class YouTubePrefs
                             <br>
                             <span id="boxdyn">
                                 Animation:
-            <?php $cleandyn = trim($all[self::$opt_dyntype]); ?>
+                                <?php $cleandyn = trim($all[self::$opt_dyntype]); ?>
                                 <select name="<?php echo self::$opt_dyntype; ?>" id="<?php echo self::$opt_dyntype; ?>" >
                                     <option value="">Select type</option>
                                     <option value="rotateIn" <?php echo 'rotateIn' === $cleandyn ? 'selected' : '' ?> >rotate in</option>
@@ -3364,17 +3418,17 @@ class YouTubePrefs
                             <img class="ssfb" src="<?php echo plugins_url('images/youtube_thumbnail_sample.jpg', __FILE__) ?>" />
                             <input name="<?php echo self::$opt_ftpostimg; ?>" id="<?php echo self::$opt_ftpostimg; ?>" <?php checked($all[self::$opt_ftpostimg], 1); ?> type="checkbox" class="checkbox">
                             <label for="<?php echo self::$opt_ftpostimg; ?>">
-                                <b>(PRO)</b> <b class="chktitle">Automatic Video Thumbnails: </b> 
+                                <b>(PRO)</b> <b class="chktitle">Featured Thumbnail Images: </b> 
                                 Automatically grab the thumbnail image of the first video embedded in each post or page, and use it as the featured image.  If your theme can display featured images of posts on your blog home, you’ll see the thumbnails there as shown in the picture on the right.  All you have to do is click Update on a post or page and the plugin does the rest!
                                 (Example shown on the right) <a target="_blank" href="<?php echo self::$epbase ?>/add-youtube-video-thumbnails-featured-image-wordpress.aspx">Watch example here &raquo;</a>
                             </label>
                         </p>
 
-            <?php
-        }
-        else
-        {
-            ?>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
                         <p class="smallnote orange">Below are PRO features for enhanced SEO and performance (works for even past embed links). </p>
                         <p>
                             <img class="ssaltgallery" src="<?php echo plugins_url('images/ssaltgalleryall.jpg', __FILE__) ?>" />
@@ -3465,7 +3519,7 @@ class YouTubePrefs
                             <img class="ssfb" src="<?php echo plugins_url('images/youtube_thumbnail_sample.jpg', __FILE__) ?>" />
                             <input disabled type="checkbox" class="checkbox">
                             <label>
-                                <b class="chktitle">Automatic Video Thumbnails:</b>  <span class="pronon">(PRO Users)</span> 
+                                <b class="chktitle">Featured Thumbnail Images:</b>  <span class="pronon">(PRO Users)</span> 
                                 Automatically grab the thumbnail image of the first video embedded in each post or page, and use it as the featured image. 
                                 All you have to do is click Update on a post or page and the plugin does the rest! 
                                 (Example shown on the right) <a target="_blank" href="<?php echo self::$epbase ?>/add-youtube-video-thumbnails-featured-image-wordpress.aspx">Read more here &raquo;</a>
@@ -3475,12 +3529,12 @@ class YouTubePrefs
                         <p>
                             <a href="<?php echo self::$epbase ?>/dashboard/pro-easy-video-analytics.aspx" target="_blank">Activate the above and several other features &raquo;</a>
                         </p>
-            <?php
-        }
-        ?>
+                        <?php
+                    }
+                    ?>
                     <div class="clearboth"></div>
                 </div>
-                    <?php // self::save_changes_button();             ?>
+                <?php // self::save_changes_button();               ?>
 
                 <hr>
 
@@ -3488,47 +3542,47 @@ class YouTubePrefs
                 <div class="jumper" id="jumpoverride"></div>
 
                 <h3 class="sect">
-        <?php _e("How To Override Defaults / Other Options") ?> <a href="#top" class="totop">&#9650; top</a>
+                    <?php _e("How To Override Defaults / Other Options") ?> <a href="#top" class="totop">&#9650; top</a>
                 </h3>
                 <p>Suppose you have a few videos that need to be different from the above defaults. You can add options to the end of a link as displayed below to override the above defaults. Each option should begin with '&'.
                     <br><span class="smallnote orange">PRO users: You can use the big blue <a href="<?php echo self::$epbase . '/dashboard/pro-easy-video-analytics.aspx?ref=protab' ?>" target="_blank">customize</a> buttons that you will see inside the wizard, instead of memorizing the following.</span>
-        <?php
-        _e('<ul>');
-        _e("<li><strong>width</strong> - Sets the width of your player. If omitted, the default width will be the width of your theme's content.<em> Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&width=500</strong>&height=350</em></li>");
-        _e("<li><strong>height</strong> - Sets the height of your player. <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA&width=500<strong>&height=350</strong></em> </li>");
-        _e("<li><strong>autoplay</strong> - Set this to 1 to autoplay the video (or 0 to play the video once). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&autoplay=1</strong></em> </li>");
-        _e("<li><strong>cc_load_policy</strong> - Set this to 1 to turn on closed captioning (or 0 to leave them off). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&cc_load_policy=1</strong></em> </li>");
-        _e("<li><strong>iv_load_policy</strong> - Set this to 3 to turn off annotations (or 1 to show them). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&iv_load_policy=3</strong></em> </li>");
-        _e("<li><strong>loop</strong> - Set this to 1 to loop the video (or 0 to not loop). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&loop=1</strong></em> </li>");
-        _e("<li><strong>modestbranding</strong> - Set this to 1 to remove the YouTube logo while playing (or 0 to show the logo). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&modestbranding=1</strong></em> </li>");
-        _e("<li><strong>rel</strong> - Set this to 0 to not show related videos at the end of playing (or 1 to show them). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&rel=0</strong></em> </li>");
-        _e("<li><strong>showinfo</strong> - Set this to 0 to hide the video title and other info (or 1 to show it). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&showinfo=0</strong></em> </li>");
-        _e("<li><strong>theme</strong> - Set this to 'light' to make the player have the light-colored theme (or 'dark' for the dark theme). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&theme=light</strong></em> </li>");
-        _e("<li><strong>color</strong> - Set this to 'white' to make the player have a white progress bar (or 'red' for a red progress bar). Note: Using white will disable the modestbranding option. <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&color=white</strong></em> </li>");
-        _e("<li><strong>vq</strong> - Set this to 'hd720' or 'hd1080' to force the video to have HD quality. Leave blank to let YouTube decide. <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&vq=hd720</strong></em> </li>");
-        _e("<li><strong>controls</strong> - Set this to 0 to completely hide the video controls (or 2 to show it). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&controls=0</strong></em> </li>");
-        _e("<li><strong>autohide</strong> - Set this to 1 to slide away the control bar after the video starts playing. It will automatically slide back in again if you mouse over the video. (Set to  2 to always show it). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&autohide=1</strong></em> </li>");
-        _e("<li><strong>playsinline</strong> - Set this to 1 to allow videos play inline with the page on iOS browsers. (Set to 0 to have iOS launch videos in fullscreen instead). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&playsinline=1</strong></em> </li>");
-        _e("<li><strong>origin</strong> - Set this to 1 to add the 'origin' parameter for extra JavaScript security. <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&origin=1</strong></em> </li>");
-        _e('</ul>');
+                    <?php
+                    _e('<ul>');
+                    _e("<li><strong>width</strong> - Sets the width of your player. If omitted, the default width will be the width of your theme's content.<em> Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&width=500</strong>&height=350</em></li>");
+                    _e("<li><strong>height</strong> - Sets the height of your player. <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA&width=500<strong>&height=350</strong></em> </li>");
+                    _e("<li><strong>autoplay</strong> - Set this to 1 to autoplay the video (or 0 to play the video once). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&autoplay=1</strong></em> </li>");
+                    _e("<li><strong>cc_load_policy</strong> - Set this to 1 to turn on closed captioning (or 0 to leave them off). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&cc_load_policy=1</strong></em> </li>");
+                    _e("<li><strong>iv_load_policy</strong> - Set this to 3 to turn off annotations (or 1 to show them). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&iv_load_policy=3</strong></em> </li>");
+                    _e("<li><strong>loop</strong> - Set this to 1 to loop the video (or 0 to not loop). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&loop=1</strong></em> </li>");
+                    _e("<li><strong>modestbranding</strong> - Set this to 1 to remove the YouTube logo while playing (or 0 to show the logo). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&modestbranding=1</strong></em> </li>");
+                    _e("<li><strong>rel</strong> - Set this to 0 to not show related videos at the end of playing (or 1 to show them). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&rel=0</strong></em> </li>");
+                    _e("<li><strong>showinfo</strong> - Set this to 0 to hide the video title and other info (or 1 to show it). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&showinfo=0</strong></em> </li>");
+                    _e("<li><strong>theme</strong> - Set this to 'light' to make the player have the light-colored theme (or 'dark' for the dark theme). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&theme=light</strong></em> </li>");
+                    _e("<li><strong>color</strong> - Set this to 'white' to make the player have a white progress bar (or 'red' for a red progress bar). Note: Using white will disable the modestbranding option. <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&color=white</strong></em> </li>");
+                    _e("<li><strong>vq</strong> - Set this to 'hd720' or 'hd1080' to force the video to have HD quality. Leave blank to let YouTube decide. <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&vq=hd720</strong></em> </li>");
+                    _e("<li><strong>controls</strong> - Set this to 0 to completely hide the video controls (or 2 to show it). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&controls=0</strong></em> </li>");
+                    _e("<li><strong>autohide</strong> - Set this to 1 to slide away the control bar after the video starts playing. It will automatically slide back in again if you mouse over the video. (Set to  2 to always show it). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&autohide=1</strong></em> </li>");
+                    _e("<li><strong>playsinline</strong> - Set this to 1 to allow videos play inline with the page on iOS browsers. (Set to 0 to have iOS launch videos in fullscreen instead). <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&playsinline=1</strong></em> </li>");
+                    _e("<li><strong>origin</strong> - Set this to 1 to add the 'origin' parameter for extra JavaScript security. <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA<strong>&origin=1</strong></em> </li>");
+                    _e('</ul>');
 
-        _e("<p>You can also start and end each individual video at particular times. Like the above, each option should begin with '&'</p>");
-        _e('<ul>');
-        _e("<li><strong>start</strong> - Sets the time (in seconds) to start the video. <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA&width=500&height=350<strong>&start=20</strong></em> </li>");
-        _e("<li><strong>end</strong> - Sets the time (in seconds) to stop the video. <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA&width=500&height=350<strong>&end=100</strong></em> </li>");
-        _e('</ul>');
-        ?>
+                    _e("<p>You can also start and end each individual video at particular times. Like the above, each option should begin with '&'</p>");
+                    _e('<ul>');
+                    _e("<li><strong>start</strong> - Sets the time (in seconds) to start the video. <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA&width=500&height=350<strong>&start=20</strong></em> </li>");
+                    _e("<li><strong>end</strong> - Sets the time (in seconds) to stop the video. <em>Example: http://www.youtube.com/watch?v=quwebVjAEJA&width=500&height=350<strong>&end=100</strong></em> </li>");
+                    _e('</ul>');
+                    ?>
                 <div class="save-changes-follow"> <?php self::save_changes_button(isset($_POST[$ytprefs_submitted]) && $_POST[$ytprefs_submitted] == 'Y'); ?> </div>
             </form>
             <div class="jumper" id="jumppro"></div>
             <div id="goprobox">
-        <?php
-        if ($all[self::$opt_pro] && strlen(trim($all[self::$opt_pro])) > 0)
-        {
-            echo "<h3>" . __('Thank you for going PRO.');
-            echo ' &nbsp;<input type="submit" name="showkey" class="button-primary" style="vertical-align: 15%;" id="showprokey" value="View my PRO key" />';
-            echo "</h3>";
-            ?>
+                <?php
+                if ($all[self::$opt_pro] && strlen(trim($all[self::$opt_pro])) > 0)
+                {
+                    echo "<h3>" . __('Thank you for going PRO.');
+                    echo ' &nbsp;<input type="submit" name="showkey" class="button-primary" style="vertical-align: 15%;" id="showprokey" value="View my PRO key" />';
+                    echo "</h3>";
+                    ?>
                     <?php
                 }
                 else
@@ -3576,7 +3630,7 @@ class YouTubePrefs
                         <ul class="gopro">
                             <li>
                                 <img src="<?php echo plugins_url('images/videothumbs.png', __FILE__) ?>">
-                                Automatic video thumbnail images (just click 'Update')  
+                                Featured thumbnail images (just click 'Update')  
                             </li>       
                             <li>
                                 <img src="<?php echo plugins_url('images/prioritysupport.png', __FILE__) ?>">
@@ -3617,20 +3671,20 @@ class YouTubePrefs
                     <div style="clear: both;"></div>
                     <br>
                     <h3 class="bold">Enter and save your PRO key (emailed to you):</h3>
-        <?php } ?>
+                <?php } ?>
                 <form name="form2" method="post" action="" id="epform2" class="submitpro" <?php
-        if ($all[self::$opt_pro] && strlen(trim($all[self::$opt_pro])) > 0)
-        {
-            echo 'style="display: none;"';
-        }
-        ?>>
+                if ($all[self::$opt_pro] && strlen(trim($all[self::$opt_pro])) > 0)
+                {
+                    echo 'style="display: none;"';
+                }
+                ?>>
 
                     <input name="<?php echo self::$opt_pro; ?>" id="opt_pro" value="<?php echo $all[self::$opt_pro]; ?>" type="text">
                     <input type="submit" name="Submit" class="button-primary" id="prokeysubmit" value="<?php _e('Save Key') ?>" />
-        <?php
-        if (!($all[self::$opt_pro] && strlen(trim($all[self::$opt_pro])) > 0))
-        {
-            ?>                    
+                    <?php
+                    if (!($all[self::$opt_pro] && strlen(trim($all[self::$opt_pro])) > 0))
+                    {
+                        ?>                    
                         &nbsp; &nbsp; &nbsp; <span style="font-size: 25px; color: #cccccc;">|</span> &nbsp; &nbsp; &nbsp; <a href="<?php echo self::$epbase ?>/dashboard/pro-easy-video-analytics.aspx" class="button-primary brightpro" target="_blank">Click here to go PRO &raquo;</a>
                         <?php
                     }
@@ -3661,6 +3715,7 @@ class YouTubePrefs
                         <code>[embedyt]http://www.youtube.com/watch?v=ABCDEF&width=400&height=250[/embedyt] [embedyt]http://www.youtube.com/watch?v=GHIJK&width=400&height=250[/embedyt]</code>
                         <br> TIP: As shown above, decrease the size of each video so that they fit together on the same line (See the "How To Override Defaults" section for height and width instructions)
                     </li>
+                    <li>If you upload a new video to a playlist or channel and that video is not yet showing up on a gallery you embedded, you should clear/reset any caching plugins you have. This will force your site to retrieve the freshest version of your playlist and/or channel video listing.  If you don't reset you cache, then you'll have to wait until cache lifetime expires.</li>                       
                     <li>Finally, there's a slight chance your custom theme is the issue, if you have one. To know for sure, we suggest temporarily switching to one of the default WordPress themes (e.g., "Twenty Fourteen") just to see if your video does appear. If it suddenly works, then your custom theme is the issue. You can switch back when done testing.</li>
                     <li>If your videos always appear full size, try turning off "Responsive video sizing."</li>
                     <li>If none of the above work, you can contact us here if you still have issues: ext@embedplus.com. We'll try to respond within a week. PRO users should use the priority form below for faster replies.</li>                        
@@ -3683,15 +3738,15 @@ class YouTubePrefs
 
             <iframe src="<?php echo self::$epbase ?>/dashboard/prosupport.aspx?simple=1&prokey=<?php echo $all[self::$opt_pro]; ?>&domain=<?php echo site_url(); ?>" width="500" height="<?php echo ($all[self::$opt_pro] && strlen(trim($all[self::$opt_pro])) > 0) ? "500" : "140"; ?>"></iframe>
 
-        <?php
-        if (!($all[self::$opt_pro] && strlen(trim($all[self::$opt_pro])) > 0))
-        {
-            ?>
+            <?php
+            if (!($all[self::$opt_pro] && strlen(trim($all[self::$opt_pro])) > 0))
+            {
+                ?>
                 <br>
                 <br>
                 <iframe src="<?php echo self::$epbase ?>/dashboard/likecoupon.aspx" width="600" height="500"></iframe>
-        <?php }
-        ?>
+            <?php }
+            ?>
             <div class="ytnav">
                 <a href="#jumphowto">How To Embed</a>
                 <a href="#jumpwiz">Visual Wizard</a>
@@ -3744,6 +3799,28 @@ class YouTubePrefs
                             valid = false;
                         }
                     }
+
+
+                    if (jQuery("#<?php echo self::$opt_gallery_collapse_grid; ?>").is(":checked"))
+                    {
+                        var emptyStacks = [];
+                        jQuery("#box_collapse_grid input").each(function () {
+                            var val = jQuery(this).val();
+                            if (jQuery.trim(val) === '' || !jQuery.isNumeric(val))
+                            {
+                                emptyStacks.push(this);
+                                jQuery(this).css("background-color", "#ffcccc").css("outline", "2px solid #000000");
+                            }
+                        });
+
+                        if (emptyStacks.length)
+                        {
+                            alertmessage += "Please enter a valid number for the gallery stacking screen width.";
+                            valid = false;
+                        }
+                    }
+
+
 
                     if (jQuery("#<?php echo self::$opt_defaultvol; ?>").is(":checked"))
                     {
@@ -3837,6 +3914,18 @@ class YouTubePrefs
                             jQuery("#boxcustomarrows").hide(500);
                         }
 
+                    });
+
+                    jQuery('#<?php echo self::$opt_gallery_collapse_grid; ?>').change(function ()
+                    {
+                        if (jQuery(this).is(":checked"))
+                        {
+                            jQuery("#box_collapse_grid").show(500);
+                        }
+                        else
+                        {
+                            jQuery("#box_collapse_grid").hide(500);
+                        }
                     });
 
                     jQuery('#<?php echo self::$opt_gallery_channelsub; ?>').change(function ()
@@ -4095,12 +4184,12 @@ class YouTubePrefs
 
                 });
             </script>
-        <?php
-        if (function_exists('add_thickbox'))
-        {
-            add_thickbox();
-        }
-        ?>
+            <?php
+            if (function_exists('add_thickbox'))
+            {
+                add_thickbox();
+            }
+            ?>
 
             <?php
         }
@@ -4120,258 +4209,276 @@ class YouTubePrefs
                     });
 
                 </script>
-            <?php
-        }
-        ?>
+                <?php
+            }
+            ?>
             <p class="submit">
                 <input type="submit" onclick="return savevalidate();" name="Submit" class="button-primary ytprefs-submit" value="<?php _e($button_label) ?>" />
                 <em>If you're using a separate caching plugin and you do not see your changes after saving, you might want to reset your cache.</em>
             </p>
-        <?php
-    }
+            <?php
+        }
 
-    public static function ytprefsscript()
-    {
-        $loggedin = current_user_can('edit_posts');
-        if (!($loggedin && self::$alloptions[self::$opt_admin_off_scripts]))
+        public static function ytprefsscript()
         {
-            wp_enqueue_style(
-                    '__EPYT__style', plugins_url('styles/ytprefs' . self::$min . '.css', __FILE__)
-            );
-            $cols = floatval(self::$alloptions[self::$opt_gallery_columns]);
-            $cols = $cols == 0 ? 3.0 : $cols;
-            $colwidth = 100.0 / $cols;
-            $custom_css = "
+            $loggedin = current_user_can('edit_posts');
+            if (!($loggedin && self::$alloptions[self::$opt_admin_off_scripts]))
+            {
+                wp_enqueue_style(
+                        '__EPYT__style', plugins_url('styles/ytprefs' . self::$min . '.css', __FILE__)
+                );
+                $cols = floatval(self::$alloptions[self::$opt_gallery_columns]);
+                $cols = $cols == 0 ? 3.0 : $cols;
+                $colwidth = 100.0 / $cols;
+                $custom_css = "
                 .epyt-gallery-thumb {
                         width: " . round($colwidth, 3) . "%;
-                }";
-            wp_add_inline_style('__EPYT__style', $custom_css);
+                }
+                ";
+
+                if (self::$alloptions[self::$opt_gallery_collapse_grid] == 1)
+                {
+                    foreach (self::$alloptions[self::$opt_gallery_collapse_grid_breaks] as $idx => $bpts)
+                    {
+                        $custom_css .= "
+                         @media (min-width:" . $bpts['bp']['min'] . "px) and (max-width: " . $bpts['bp']['max'] . "px) {
+                            .epyt-gallery-rowbreak {
+                                display: none;
+                            }
+                            .epyt-gallery-allthumbs[class*=\"epyt-cols\"] .epyt-gallery-thumb {
+                                width: " . round(100.0 / intval($bpts['cols']), 3) . "% !important;
+                            }
+                          }";
+                    }
+                }
+
+                wp_add_inline_style('__EPYT__style', $custom_css);
 
 
-            if (!is_admin() && (self::$alloptions[self::$opt_pro] && strlen(trim(self::$alloptions[self::$opt_pro])) > 8))
-            {
-                wp_enqueue_style('__disptype__', plugins_url('scripts/lity' . self::$min . '.css', __FILE__));
-                wp_enqueue_script('__dispload__', plugins_url('scripts/lity' . self::$min . '.js', __FILE__), array('jquery'));
-            }
+                if (!is_admin() && (self::$alloptions[self::$opt_pro] && strlen(trim(self::$alloptions[self::$opt_pro])) > 8))
+                {
+                    wp_enqueue_style('__disptype__', plugins_url('scripts/lity' . self::$min . '.css', __FILE__));
+                    wp_enqueue_script('__dispload__', plugins_url('scripts/lity' . self::$min . '.js', __FILE__), array('jquery'));
+                }
 
-            wp_enqueue_script('__ytprefs__', plugins_url('scripts/ytprefs' . self::$min . '.js', __FILE__), array('jquery'));
+                wp_enqueue_script('__ytprefs__', plugins_url('scripts/ytprefs' . self::$min . '.js', __FILE__), array('jquery'));
 
-            if (self::$alloptions[self::$opt_old_script_method] != 1)
-            {
-                wp_localize_script('__ytprefs__', '_EPYT_', array(
-                    'ajaxurl' => admin_url('admin-ajax.php'),
-                    'security' => wp_create_nonce('embedplus-nonce'),
-                    'gallery_scrolloffset' => intval(self::$alloptions[self::$opt_gallery_scrolloffset]),
-                    'eppathtoscripts' => plugins_url('scripts/', __FILE__),
-                    'epresponsiveselector' => self::get_responsiveselector(),
-                    'epdovol' => true,
-                    'version' => self::$alloptions[self::$opt_version],
-                    'evselector' => self::get_evselector()
-                ));
-            }
+                if (self::$alloptions[self::$opt_old_script_method] != 1)
+                {
+                    wp_localize_script('__ytprefs__', '_EPYT_', array(
+                        'ajaxurl' => admin_url('admin-ajax.php'),
+                        'security' => wp_create_nonce('embedplus-nonce'),
+                        'gallery_scrolloffset' => intval(self::$alloptions[self::$opt_gallery_scrolloffset]),
+                        'eppathtoscripts' => plugins_url('scripts/', __FILE__),
+                        'epresponsiveselector' => self::get_responsiveselector(),
+                        'epdovol' => true,
+                        'version' => self::$alloptions[self::$opt_version],
+                        'evselector' => self::get_evselector()
+                    ));
+                }
 
-            ////////////////////// cloudflare accomodation
-            //add_filter('script_loader_tag', 'YouTubePrefs::set_cfasync', 10, 3);
+                ////////////////////// cloudflare accomodation
+                //add_filter('script_loader_tag', 'YouTubePrefs::set_cfasync', 10, 3);
 
-            if (!is_admin() && (self::$alloptions[self::$opt_pro] && strlen(trim(self::$alloptions[self::$opt_pro])) > 0) && self::$alloptions[self::$opt_dynload] == 1)
-            {
-                wp_enqueue_style('__dyntype__', plugins_url('scripts/embdyn.min.css', __FILE__));
-                wp_enqueue_script('__dynload__', plugins_url('scripts/embdyn' . self::$min . '.js', __FILE__), array('jquery'));
+                if (!is_admin() && (self::$alloptions[self::$opt_pro] && strlen(trim(self::$alloptions[self::$opt_pro])) > 0) && self::$alloptions[self::$opt_dynload] == 1)
+                {
+                    wp_enqueue_style('__dyntype__', plugins_url('scripts/embdyn.min.css', __FILE__));
+                    wp_enqueue_script('__dynload__', plugins_url('scripts/embdyn' . self::$min . '.js', __FILE__), array('jquery'));
+                }
             }
         }
+
+        public static function set_cfasync($tag, $handle, $src)
+        {
+            if ('__ytprefs__' !== $handle)
+            {
+                return $tag;
+            }
+            return str_replace('<script', '<script data-cfasync="false" ', $tag);
+        }
+
+        public static function get_evselector()
+        {
+            $evselector = 'iframe.__youtube_prefs__[src], iframe[src*="youtube.com/embed/"], iframe[src*="youtube-nocookie.com/embed/"]';
+
+            if (self::$alloptions[self::$opt_evselector_light] == 1)
+            {
+                $evselector = 'iframe.__youtube_prefs__[src]';
+            }
+
+            return $evselector;
+        }
+
+        public static function get_responsiveselector()
+        {
+            $responsiveselector = '[]';
+            if (self::$alloptions[self::$opt_widgetfit] == 1)
+            {
+                $responsiveselector = '["iframe.__youtube_prefs_widget__"]';
+            }
+            if (self::$alloptions[self::$opt_responsive] == 1)
+            {
+                if (self::$alloptions[self::$opt_responsive_all] == 1)
+                {
+                    $responsiveselector = '["iframe[src*=\'youtube.com\']","iframe[src*=\'youtube-nocookie.com\']","iframe[data-ep-src*=\'youtube.com\']","iframe[data-ep-src*=\'youtube-nocookie.com\']","iframe[data-ep-gallerysrc*=\'youtube.com\']"]';
+                }
+                else
+                {
+                    $responsiveselector = '["iframe.__youtube_prefs__"]';
+                }
+            }
+            return $responsiveselector;
+        }
+
+        public static function get_blogwidth()
+        {
+            $blogwidth = null;
+            try
+            {
+                $embed_size_w = intval(get_option('embed_size_w'));
+
+                global $content_width;
+                if (empty($content_width))
+                {
+                    $content_width = $GLOBALS['content_width'];
+                }
+
+                $blogwidth = $embed_size_w ? $embed_size_w : ($content_width ? $content_width : 450);
+            }
+            catch (Exception $ex)
+            {
+                
+            }
+
+            $blogwidth = preg_replace('/\D/', '', $blogwidth); //may have px
+
+            return $blogwidth;
+        }
+
     }
-
-    public static function set_cfasync($tag, $handle, $src)
-    {
-        if ('__ytprefs__' !== $handle)
-        {
-            return $tag;
-        }
-        return str_replace('<script', '<script data-cfasync="false" ', $tag);
-    }
-
-    public static function get_evselector()
-    {
-        $evselector = 'iframe.__youtube_prefs__[src], iframe[src*="youtube.com/embed/"], iframe[src*="youtube-nocookie.com/embed/"]';
-
-        if (self::$alloptions[self::$opt_evselector_light] == 1)
-        {
-            $evselector = 'iframe.__youtube_prefs__[src]';
-        }
-
-        return $evselector;
-    }
-
-    public static function get_responsiveselector()
-    {
-        $responsiveselector = '[]';
-        if (self::$alloptions[self::$opt_widgetfit] == 1)
-        {
-            $responsiveselector = '["iframe.__youtube_prefs_widget__"]';
-        }
-        if (self::$alloptions[self::$opt_responsive] == 1)
-        {
-            if (self::$alloptions[self::$opt_responsive_all] == 1)
-            {
-                $responsiveselector = '["iframe[src*=\'youtube.com\']","iframe[src*=\'youtube-nocookie.com\']","iframe[data-ep-src*=\'youtube.com\']","iframe[data-ep-src*=\'youtube-nocookie.com\']","iframe[data-ep-gallerysrc*=\'youtube.com\']"]';
-            }
-            else
-            {
-                $responsiveselector = '["iframe.__youtube_prefs__"]';
-            }
-        }
-        return $responsiveselector;
-    }
-
-    public static function get_blogwidth()
-    {
-        $blogwidth = null;
-        try
-        {
-            $embed_size_w = intval(get_option('embed_size_w'));
-
-            global $content_width;
-            if (empty($content_width))
-            {
-                $content_width = $GLOBALS['content_width'];
-            }
-
-            $blogwidth = $embed_size_w ? $embed_size_w : ($content_width ? $content_width : 450);
-        }
-        catch (Exception $ex)
-        {
-            
-        }
-
-        $blogwidth = preg_replace('/\D/', '', $blogwidth); //may have px
-
-        return $blogwidth;
-    }
-
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //class start
-class Add_new_tinymce_btn_Youtubeprefs
-{
-
-    public $btn_arr;
-    public $js_file;
-
-    /*
-     * call the constructor and set class variables
-     * From the constructor call the functions via wordpress action/filter
-     */
-
-    function __construct($seperator, $btn_name, $javascrip_location)
+    class Add_new_tinymce_btn_Youtubeprefs
     {
-        $this->btn_arr = array("Seperator" => $seperator, "Name" => $btn_name);
-        $this->js_file = $javascrip_location;
-        add_action('init', array($this, 'add_tinymce_button'));
-        add_filter('tiny_mce_version', array($this, 'refresh_mce_version'));
-    }
 
-    /*
-     * create the buttons only if the user has editing privs.
-     * If so we create the button and add it to the tinymce button array
-     */
+        public $btn_arr;
+        public $js_file;
 
-    function add_tinymce_button()
-    {
-        if (!current_user_can('edit_posts') && !current_user_can('edit_pages'))
-            return;
-        if (get_user_option('rich_editing') == 'true')
+        /*
+         * call the constructor and set class variables
+         * From the constructor call the functions via wordpress action/filter
+         */
+
+        function __construct($seperator, $btn_name, $javascrip_location)
         {
-            //the function that adds the javascript
-            add_filter('mce_external_plugins', array($this, 'add_new_tinymce_plugin'));
-            //adds the button to the tinymce button array
-            add_filter('mce_buttons', array($this, 'register_new_button'));
+            $this->btn_arr = array("Seperator" => $seperator, "Name" => $btn_name);
+            $this->js_file = $javascrip_location;
+            add_action('init', array($this, 'add_tinymce_button'));
+            add_filter('tiny_mce_version', array($this, 'refresh_mce_version'));
         }
+
+        /*
+         * create the buttons only if the user has editing privs.
+         * If so we create the button and add it to the tinymce button array
+         */
+
+        function add_tinymce_button()
+        {
+            if (!current_user_can('edit_posts') && !current_user_can('edit_pages'))
+                return;
+            if (get_user_option('rich_editing') == 'true')
+            {
+                //the function that adds the javascript
+                add_filter('mce_external_plugins', array($this, 'add_new_tinymce_plugin'));
+                //adds the button to the tinymce button array
+                add_filter('mce_buttons', array($this, 'register_new_button'));
+            }
+        }
+
+        /*
+         * add the new button to the tinymce array
+         */
+
+        function register_new_button($buttons)
+        {
+            array_push($buttons, $this->btn_arr["Seperator"], $this->btn_arr["Name"]);
+            return $buttons;
+        }
+
+        /*
+         * Call the javascript file that loads the
+         * instructions for the new button
+         */
+
+        function add_new_tinymce_plugin($plugin_array)
+        {
+            $plugin_array[$this->btn_arr['Name']] = $this->js_file;
+            return $plugin_array;
+        }
+
+        /*
+         * This function tricks tinymce in thinking
+         * it needs to refresh the buttons
+         */
+
+        function refresh_mce_version($ver)
+        {
+            $ver += 3;
+            return $ver;
+        }
+
     }
-
-    /*
-     * add the new button to the tinymce array
-     */
-
-    function register_new_button($buttons)
-    {
-        array_push($buttons, $this->btn_arr["Seperator"], $this->btn_arr["Name"]);
-        return $buttons;
-    }
-
-    /*
-     * Call the javascript file that loads the
-     * instructions for the new button
-     */
-
-    function add_new_tinymce_plugin($plugin_array)
-    {
-        $plugin_array[$this->btn_arr['Name']] = $this->js_file;
-        return $plugin_array;
-    }
-
-    /*
-     * This function tricks tinymce in thinking
-     * it needs to refresh the buttons
-     */
-
-    function refresh_mce_version($ver)
-    {
-        $ver += 3;
-        return $ver;
-    }
-
-}
 
 //class end
 
 
-register_activation_hook(__FILE__, array('YouTubePrefs', 'initoptions'));
-$youtubeplgplus = new YouTubePrefs();
+    register_activation_hook(__FILE__, array('YouTubePrefs', 'initoptions'));
+    $youtubeplgplus = new YouTubePrefs();
 
 
-add_action("wp_ajax_my_embedplus_pro_record", array('YouTubePrefs', 'my_embedplus_pro_record'));
-add_action("wp_ajax_my_embedplus_clearspdc", array('YouTubePrefs', 'my_embedplus_clearspdc'));
-add_action("wp_ajax_my_embedplus_glance_vids", array('YouTubePrefs', 'my_embedplus_glance_vids'));
-add_action("wp_ajax_my_embedplus_glance_count", array('YouTubePrefs', 'my_embedplus_glance_count'));
-add_action("wp_ajax_my_embedplus_dismiss_double_plugin_warning", array('YouTubePrefs', 'my_embedplus_dismiss_double_plugin_warning'));
-add_action("wp_ajax_my_embedplus_gallery_page", array('YouTubePrefs', 'my_embedplus_gallery_page'));
-add_action("wp_ajax_nopriv_my_embedplus_gallery_page", array('YouTubePrefs', 'my_embedplus_gallery_page'));
+    add_action("wp_ajax_my_embedplus_pro_record", array('YouTubePrefs', 'my_embedplus_pro_record'));
+    add_action("wp_ajax_my_embedplus_clearspdc", array('YouTubePrefs', 'my_embedplus_clearspdc'));
+    add_action("wp_ajax_my_embedplus_glance_vids", array('YouTubePrefs', 'my_embedplus_glance_vids'));
+    add_action("wp_ajax_my_embedplus_glance_count", array('YouTubePrefs', 'my_embedplus_glance_count'));
+    add_action("wp_ajax_my_embedplus_dismiss_double_plugin_warning", array('YouTubePrefs', 'my_embedplus_dismiss_double_plugin_warning'));
+    add_action("wp_ajax_my_embedplus_gallery_page", array('YouTubePrefs', 'my_embedplus_gallery_page'));
+    add_action("wp_ajax_nopriv_my_embedplus_gallery_page", array('YouTubePrefs', 'my_embedplus_gallery_page'));
 
-add_action('admin_enqueue_scripts', 'youtubeprefs_admin_enqueue_scripts');
+    add_action('admin_enqueue_scripts', 'youtubeprefs_admin_enqueue_scripts');
 
-function youtubeprefs_admin_enqueue_scripts()
-{
-    wp_enqueue_style('embedplusyoutube', plugins_url() . '/youtube-embed-plus/scripts/embedplus_mce.css');
-    add_action('wp_print_scripts', 'youtubeprefs_output_scriptvars');
-    wp_enqueue_script('__ytprefs_admin__', plugins_url('scripts/ytprefs-admin.min.js', __FILE__), array('jquery'));
-
-    if (
-    //(!(isset(YouTubePrefs::$alloptions[YouTubePrefs::$opt_pro]) && strlen(trim(YouTubePrefs::$alloptions[YouTubePrefs::$opt_pro])) > 0)) && // display only if not pro ooopointer
-            (get_bloginfo('version') >= '3.3') && YouTubePrefs::custom_admin_pointers_check()
-    )
+    function youtubeprefs_admin_enqueue_scripts()
     {
-        add_action('admin_print_footer_scripts', 'YouTubePrefs::custom_admin_pointers_footer');
+        wp_enqueue_style('embedplusyoutube', plugins_url() . '/youtube-embed-plus/scripts/embedplus_mce.css');
+        add_action('wp_print_scripts', 'youtubeprefs_output_scriptvars');
+        wp_enqueue_script('__ytprefs_admin__', plugins_url('scripts/ytprefs-admin.min.js', __FILE__), array('jquery'));
 
-        wp_enqueue_script('wp-pointer');
-        wp_enqueue_style('wp-pointer');
+        if (
+        //(!(isset(YouTubePrefs::$alloptions[YouTubePrefs::$opt_pro]) && strlen(trim(YouTubePrefs::$alloptions[YouTubePrefs::$opt_pro])) > 0)) && // display only if not pro ooopointer
+                (get_bloginfo('version') >= '3.3') && YouTubePrefs::custom_admin_pointers_check()
+        )
+        {
+            add_action('admin_print_footer_scripts', 'YouTubePrefs::custom_admin_pointers_footer');
+
+            wp_enqueue_script('wp-pointer');
+            wp_enqueue_style('wp-pointer');
+        }
+
+        if (YouTubePrefs::$alloptions['glance'] == 1)
+        {
+            add_action('admin_print_footer_scripts', 'YouTubePrefs::glance_script');
+        }
     }
 
-    if (YouTubePrefs::$alloptions['glance'] == 1)
+    function youtubeprefs_output_scriptvars()
     {
-        add_action('admin_print_footer_scripts', 'YouTubePrefs::glance_script');
-    }
-}
-
-function youtubeprefs_output_scriptvars()
-{
-    YouTubePrefs::$scriptsprinted++;
-    if (YouTubePrefs::$scriptsprinted == 1)
-    {
-        $blogwidth = YouTubePrefs::get_blogwidth();
-        $epprokey = YouTubePrefs::$alloptions[YouTubePrefs::$opt_pro];
-        $myytdefaults = http_build_query(YouTubePrefs::$alloptions);
-        ?>
+        YouTubePrefs::$scriptsprinted++;
+        if (YouTubePrefs::$scriptsprinted == 1)
+        {
+            $blogwidth = YouTubePrefs::get_blogwidth();
+            $epprokey = YouTubePrefs::$alloptions[YouTubePrefs::$opt_pro];
+            $myytdefaults = http_build_query(YouTubePrefs::$alloptions);
+            ?>
             <script type="text/javascript">
                 var wpajaxurl = "<?php echo admin_url('admin-ajax.php') ?>";
                 if (window.location.toString().indexOf('https://') == 0)
@@ -4449,9 +4556,9 @@ function youtubeprefs_output_scriptvars()
 
 
             </script>
-        <?php
+            <?php
+        }
     }
-}
 
 //    function embedplus_strip_shortcode_from_excerpt($content)
 //    {
