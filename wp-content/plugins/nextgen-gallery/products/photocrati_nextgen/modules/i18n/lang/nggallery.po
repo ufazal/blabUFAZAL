@@ -350,8 +350,12 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
+#: products/photocrati_nextgen/modules/nextgen_addgallery_page/templates/import_folder.php:7
+msgid "Leave blank for folder name"
+msgstr ""
+
 #: products/photocrati_nextgen/modules/nextgen_addgallery_page/adapter.import_folder_form.php:7
-#: products/photocrati_nextgen/modules/nextgen_addgallery_page/templates/import_folder.php:6
+#: products/photocrati_nextgen/modules/nextgen_addgallery_page/templates/import_folder.php:12
 msgid "Import Folder"
 msgstr ""
 
@@ -404,7 +408,7 @@ msgstr ""
 msgid "Select a folder to import. The folder name will be used as the title of the gallery."
 msgstr ""
 
-#: products/photocrati_nextgen/modules/nextgen_addgallery_page/templates/import_folder.php:5
+#: products/photocrati_nextgen/modules/nextgen_addgallery_page/templates/import_folder.php:11
 msgid "Keep images in original location."
 msgstr ""
 

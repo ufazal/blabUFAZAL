@@ -1,11 +1,5 @@
 <?php
 
-/***
-{
-	Module:	photocrati-nextgen_settings
-}
-***/
-
 class M_NextGen_Settings extends C_Base_Module
 {
 	/**
