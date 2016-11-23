@@ -3,7 +3,7 @@
 * This Template is used for displaying system information.
 *
 * @author  Tech Banker
-* @package wp-mail-bank-business-edition/views/system-information
+* @package wp-mail-bank/views/system-information
 * @version 2.0.0
 */
 if(!defined("ABSPATH")) exit; // Exit if accessed directly
@@ -59,15 +59,15 @@ else
 							<div class="portlet-body form">
 								<form id="ux_frm_system_information">
 									<div class="form-body">
-										<?php
-										if(isset($extension_not_found) && count($extension_not_found) > 0)
-										{
-											?>
-											<div class="note note-danger">
-												<h4 class="block">
-													<?php echo $mb_important_disclaimer; ?>
-												</h4>
-												<ul>
+										<div class="note note-danger">
+											<h4 class="block">
+												<?php echo $mb_important_disclaimer; ?>
+											</h4>
+											<ul>
+												<?php
+												if(isset($extension_not_found) && count($extension_not_found) > 0)
+												{
+													?>
 													<li><?php echo $mb_contact_to_host; ?></li>
 													<?php
 													foreach($extension_not_found as $extension)
@@ -76,12 +76,20 @@ else
 														<li>* <?php echo $extension; ?></li>
 														<?php
 													}
-													?>
-												</ul>
-											</div>
+												}
+												?>
+												<li><?php echo $mb_demos_disclaimer ?><a href="http://beta.tech-banker.com/products/mail-bank/demos/" target="_blank" class="custom_links"><?php echo $mb_here_disclaimer ?></a>.</li>
+												<li><?php echo $mb_manual_disclaimer ?><a href="http://beta.tech-banker.com/products/mail-bank/user-guide/system-information/" target="_blank" class="custom_links"><?php echo $mb_here_disclaimer ?></a>.</li>
+											</ul>
 											<?php
-										}
-										?>
+												if($mb_message_translate_help != "")
+												{
+													?>
+													<strong><?php echo $mb_message_translate_help;?><a href="javascript:void(0);" data-popup-open="ux_open_popup" class="custom_links" onclick="show_pop_up_mail_bank();"><?php echo $mb_message_translate_here; ?></a></strong>
+													<?php
+												}
+											?>
+										</div>
 										<div class="layout-system-report" id="ux_system_information">
 											<textarea id="ux_txtarea_system_information" name="ux_txtarea_system_information" readonly="readonly"></textarea>
 										</div>
@@ -434,9 +442,12 @@ else
 													<td>
 														<span>
 															<?php
-															foreach(get_loaded_extensions() as $extension)
+															if(function_exists("get_loaded_extensions"))
 															{
-																echo $extension.", ";
+																foreach(get_loaded_extensions() as $extension)
+																{
+																	echo $extension.", ";
+																}
 															}
 															?>
 														</span>
@@ -449,9 +460,12 @@ else
 													<td>
 														<span>
 															<?php
-															foreach(apache_get_modules() as $module)
+															if(function_exists("apache_get_modules"))
 															{
-																echo $module.", ";
+																foreach(apache_get_modules() as $module)
+																{
+																	echo $module.", ";
+																}
 															}
 															?>
 														</span>

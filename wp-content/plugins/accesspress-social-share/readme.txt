@@ -4,7 +4,7 @@ Tags: social share counter, social share, social media share, social network sha
 Donate link: http://accesspressthemes.com/donation/
 Requires at least: 3.8
 Tested up to: 4.6
-Stable tag: 4.2.1
+Stable tag: 4.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,12 @@ Yes. You can use the AccessPress social share by using shortcode anywhere you wa
 6. Backend Miscellaneous Settings Section
 
 == Changelog ==
+= 4.2.3 =
+* Made the plugin object global to remove the content filter hook by other.
+
+= 4.2.2 =
+* Done the css modifications for the miscelleneous setting's facebook APP settings.
+
 = 4.2.1 =
 * Done the bug fixings for the slashes appearing in the plugin's miscelleneous settings.
 

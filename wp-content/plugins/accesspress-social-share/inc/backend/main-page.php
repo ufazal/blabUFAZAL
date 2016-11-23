@@ -206,10 +206,14 @@
 
 								<div class="apss_counter-api">
 									<h4>If facebook counter is not working. Please setup the facebook APP and enter required details below.</h4>
-									<label for=apss_facebook_app_id"">APP ID: </label><input type='text' id="apss_facebook_app_id" name='apss_share_settings[api_configuration][facebook][app_id]' value="<?php if ( isset( $options['api_configuration']['facebook']['app_id'] ) ) { echo $options['api_configuration']['facebook']['app_id']; } ?>" />
-									<div class="apss_notes_cache_settings">Please go to <a href="https://developers.facebook.com/" target="_blank">https://developers.facebook.com/</a> and create an app and get the App ID</div>
-									<label for=apss_facebook_app_secret"">APP Secret: </label><input type='text' id="apss_facebook_app_secret" name='apss_share_settings[api_configuration][facebook][app_secret]' value="<?php if ( isset( $options['api_configuration']['facebook']['app_secret'] ) ) { echo $options['api_configuration']['facebook']['app_secret']; } ?>" />
-									<div class="apss_notes_cache_settings">Please go to <a href="https://developers.facebook.com/" target="_blank">https://developers.facebook.com/</a> and create an app and get the App Secret</div>
+									<div class='apss_input_wrapper'>
+										<label for=apss_facebook_app_id"">APP ID: </label><input type='text' id="apss_facebook_app_id" name='apss_share_settings[api_configuration][facebook][app_id]' value="<?php if ( isset( $options['api_configuration']['facebook']['app_id'] ) ) { echo $options['api_configuration']['facebook']['app_id']; } ?>" />
+										<div class="apss_notes_cache_settings">Please go to <a href="https://developers.facebook.com/" target="_blank">https://developers.facebook.com/</a> and create an app and get the App ID.</div>
+									</div>
+									<div class='apss_input_wrapper'>
+										<label for=apss_facebook_app_secret"">APP Secret: </label><input type='text' id="apss_facebook_app_secret" name='apss_share_settings[api_configuration][facebook][app_secret]' value="<?php if ( isset( $options['api_configuration']['facebook']['app_secret'] ) ) { echo $options['api_configuration']['facebook']['app_secret']; } ?>" />
+										<div class="apss_notes_cache_settings">Please go to <a href="https://developers.facebook.com/" target="_blank">https://developers.facebook.com/</a> and create an app and get the App Secret.</div>
+									</div>
 									<div class="apss_notes_cache_settings">
 									<b>Please note that you should make your APP live.</b>
 									You can get the details instruction for creating facebook app <a href='http://demo.accesspressthemes.com/wordpress-plugins/accesspress-social-share/?p=89' target="_blank">here</a>.

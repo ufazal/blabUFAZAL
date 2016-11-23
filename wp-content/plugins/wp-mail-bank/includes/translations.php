@@ -54,7 +54,6 @@ else
 		$wp_langs["ca"] = "Català";
 		$wp_langs["bal"] = "Català (Balear)";
 		$wp_langs["ceb"] = "Cebuano";
-		$wp_langs["zh_cn"] = "简体中文";
 		$wp_langs["zh_hk"] = "香港中文版 ";
 		$wp_langs["zh_tw"] = "繁體中文";
 		$wp_langs["co"] = "Corsu";
@@ -62,7 +61,6 @@ else
 		$wp_langs["cs_cz"] = "Čeština‎";
 		$wp_langs["da_dk"] = "Dansk";
 		$wp_langs["dv"] = "ދިވެހި";
-		$wp_langs["nl_nl"] = "Nederlands";
 		$wp_langs["nl_be"] = "Nederlands (België)";
 		$wp_langs["dzo"] = "རྫོང་ཁ";
 		$wp_langs["en_au"] = "English (Australia)";
@@ -76,7 +74,6 @@ else
 		$wp_langs["fi"] = "Suomi";
 		$wp_langs["fr_be"] = "Français de Belgique";
 		$wp_langs["fr_ca"] = "Français du Canada";
-		$wp_langs["fr_fr"] = "Français";
 		$wp_langs["fy"] = "Frysk";
 		$wp_langs["fur"] = "Friulian";
 		$wp_langs["fuc"] = "Pulaar";
@@ -134,13 +131,10 @@ else
 		$wp_langs["fa_ir"] = "فارسی";
 		$wp_langs["fa_af"] = "(فارسی (افغانستان";
 		$wp_langs["pl_pl"] = "Polski";
-		$wp_langs["pt_br"] = "Português do Brasil";
 		$wp_langs["pt_pt"] = "Português";
 		$wp_langs["pa_in"] = "ਪੰਜਾਬੀ";
 		$wp_langs["rhg"] = "Ruáinga";
-		$wp_langs["ro_ro"] = "Română";
 		$wp_langs["roh"] = "Rumantsch Vallader";
-		$wp_langs["ru_ru"] = "Русский";
 		$wp_langs["rue"] = "Русиньскый";
 		$wp_langs["sah"] = "Сахалыы";
 		$wp_langs["sa_in"] = "भारतम्";

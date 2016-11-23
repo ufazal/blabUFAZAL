@@ -482,6 +482,11 @@ class A_Styles_Form extends Mixin
     {
         // Ensure that we have
         if ($settings = $this->object->param('style_settings')) {
+            // TODO: C_Page's add_error() doesn't seem to work here so we should report that we aren't saving
+            // the desired file, but users shouldn't use this to write files that don't end in .css anyway
+            if (strpos($settings['CSSfile'], '.css', -0) == FALSE) {
+                return FALSE;
+            }
             $this->object->get_model()->set($settings)->save();
             // Are we to modify the CSS file?
             if ($contents = $this->object->param('cssfile_contents')) {
@@ -510,7 +515,8 @@ class A_Stylesheet_Ajax_Actions extends Mixin
         $retval = array();
         if ($this->object->_authorized_for_stylesheet_action()) {
             $styles = C_NextGen_Style_Manager::get_instance();
-            $abspath = $styles->find_selected_stylesheet_abspath($this->object->param('cssfile'));
+            $cssfile = str_replace('..', '', $this->object->param('cssfile'));
+            $abspath = $styles->find_selected_stylesheet_abspath($cssfile);
             $writepath = $styles->get_selected_stylesheet_saved_abspath($this->object->param('cssfile'));
             if (is_readable($abspath)) {
                 $retval['contents'] = file_get_contents($abspath);
