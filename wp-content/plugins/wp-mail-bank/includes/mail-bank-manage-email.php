@@ -67,7 +67,7 @@ if(!class_exists("mail_bank_manage_email"))
 
 			$body = $this->mb_get_body();
 			$content_type = $this->mb_get_content_type();
-			if(empty($content_type) || substr($content_type,0,9) === "text/html")
+			if(substr($content_type,0,9) === "text/html")
 			{
 				$this->mb_set_body_htmlPart($body);
 			}

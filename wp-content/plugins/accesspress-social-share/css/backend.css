@@ -397,3 +397,14 @@
     float: right;
     margin-top: 5px;
 }
+
+.apss_input_wrapper {
+    position: relative;
+    padding-left: 160px;
+}
+
+.apss_input_wrapper label {
+    position: absolute;
+    left: 0;
+    top: 5px;
+}

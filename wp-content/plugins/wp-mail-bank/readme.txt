@@ -3,7 +3,7 @@ Contributors: contact-banker, Gallery-Bank, wordpress-empire
 Tags: email, gmail, mail, mail smtp, mailer, outgoing mail, phpmailer, sendmail, smtp, ssl, tls, WordPress smtp, wp smtp, wp-phpmailer, wp_mail, wp mail, mailer, mail bank
 Requires at least: 2.7
 Tested up to: 4.6.1
-Stable tag: 2.0.6
+Stable tag: 2.0.10
 
 Mail Bank reconfigures the Mail Function and provides sophisticated SMTP settings to send and log emails from your WordPress site.
 
@@ -364,6 +364,34 @@ If any problem occurs, please contact us at [support@tech-banker.com](mailto:sup
 10. System Information Screen
 
 == Changelog ==
+
+= 2.0.10 =
+
+* New Language Added - Portuguese
+* New Language Added - Russian
+* Translations File updated
+
+= 2.0.9 =
+
+* Major Bug Fixed for Multisite Installations
+* Major Bug Fixed for Uninstall Script
+* Minor Bugs Related to DB Version
+
+= 2.0.8 =
+
+* Js Code Optimized
+* Dutch Language Added
+* French Language Added
+* Minor Bugs Related to DB Version
+
+= 2.0.7 =
+
+* Major Bug Fixed Related to Email Mime Types
+* Js Code Optimized
+* Chinese Language Added
+* Romanian Language Added
+* Arabic Language Added
+* English(Australian) Language Added
 
 = 2.0.6 =
 
